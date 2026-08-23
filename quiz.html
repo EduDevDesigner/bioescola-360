@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Quiz – Museu virtual</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+/* ===== MOBILE PADRÃO ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #001c40ff;
+  color: #ffffff;
+}
+
+/* ===== APP WRAPPER ===== */
+.app-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background: #001c40ff;
+
+  background-image: url("Imagens/papel_Fundo.jpg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #001c40ff;
+}
+
+/* ===== DESKTOP CENTRALIZADO ===== */
+@media (min-width: 868px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #001c40ff;
+  }
+
+  .app-wrapper {
+    width: 490px;
+    height: 844px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+  }
+}
+
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 59, 92, 0);
+  z-index: 1;
+}
+
+.main-content {
+  position: relative;
+  z-index: 2;
+  min-height: 100%;
+}
+
+header {
+  background: rgba(81, 41, 4, 0);
+  padding: 13px;
+  text-align: center;
+  margin-top: 14vh;
+}
+
+header h1 {
+  margin: 40;
+  font-size: 55px;
+}
+
+header p {
+  margin-top: 1px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #9c7000;
+  text-shadow: 1px 1px 10px rgba(190, 135, 0, 0);
+}
+
+/* =====================================================
+FORMULÁRIO DO ALUNO
+===================================================== */
+
+#studentForm{
+  padding: 20px 50px 0 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#studentForm input{
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000000;
+  font-weight: bold;
+}
+
+#startQuizBtn{
+  margin-top: 20px;
+  margin-left: 80px;
+  width: 60%;
+  padding: 12px;
+  background: #000000;
+  border: none;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+}
+
+/* ===================================================== */
+
+#quizBox {
+  padding: 50px;
+  max-width: 800px;
+  margin: 0.1px auto 0 auto;
+  box-sizing: border-box;
+}
+
+#moduleTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom:20px;
+  color: #1e1600;
+  text-align: center;
+  text-shadow: 1px 1px 1px rgba(97, 97, 97, 0);
+}
+
+#question {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 1px 1px 1px rgba(43, 29, 2, 0.53);
+}
+
+.option {
+  background: rgba(114, 74, 1, 0.58);
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.option:hover {
+  background: rgba(189, 136, 2, 0.5);
+}
+
+.option.correct { background: #00ff6b; }
+.option.wrong { background: #ff1800; }
+.option.disabled { pointer-events: none; opacity: 0.8; }
+
+#nextBtn {
+  margin-top: 35px;
+  margin-left: 80px;
+  width: 60%;
+  padding: 12px;
+  background: #ffa800;
+  border: none;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: none;
+}
+
+#scoreBox {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgb(0, 0, 0);
+  background: rgb(51, 30, 0);
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  width: 380px;
+  max-width: 90%;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+#scoreBox h2 {
+  font-size: 20px;
+  color: #efb900;
+  text-shadow: 1px 1px 1px rgb(0, 0, 0);
+}
+
+.report-line {
+  margin: 2px 0;
+}
+
+#generatePdf {
+  margin-top: 20px;
+  padding: 10px 20px;
+  color: #905604;
+  font-size: 16px;
+  font-weight: bold;
+  background: rgb(255, 181, 4);
+  cursor: pointer;
+  border: none;
+  border-radius: 18px;
+}
+
+.dados-aluno {
+  margin-bottom: 0px;
+  font-size: 14px;
+  color: #ffcb48;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app-wrapper">  
+  
+  <div id="overlay"></div>
+
+  <div class="main-content">
+
+    <audio id="audioAcerto" src="Audios/acerto.mp3"></audio>
+    <audio id="audioErro" src="Audios/erro.mp3"></audio>      
+
+    <header>
+      <h1>Quiz</h1>
+    </header>
+
+<!-- =====================================================
+FORMULÁRIO DO ALUNO
+===================================================== -->
+
+<div id="studentForm">
+
+<input 
+type="text" 
+id="nomeAluno" 
+placeholder="Nome do aluno">
+
+<input 
+type="text" 
+id="turmaAluno" 
+placeholder="Digite a turma">
+
+<button id="startQuizBtn">
+Iniciar Quiz
+</button>
+
+</div>
+
+<!-- ===================================================== -->
+
+    <div id="quizBox" style="display:none;">
+      <div id="moduleTitle"></div>
+      <div id="question"></div>
+      <div id="options"></div>
+      <button id="nextBtn">Próxima Pergunta</button>
+    </div>
+
+    <div id="scoreBox" style="display:none;">
+      <h2>Relatório do Aluno</h2>
+      <div id="studentInfo" class="dados-aluno"></div>
+      <p id="scoreText"></p>
+      <div id="moduleReport"></div>
+      <button id="generatePdf">Gerar PDF</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+// =====================================================
+// DADOS DO ALUNO
+// =====================================================
+
+let nomeAluno = "";
+let turmaAluno = "";
+
+// =====================================================
+// INICIAR QUIZ
+// =====================================================
+
+document
+.getElementById("startQuizBtn")
+.onclick = function(){
+
+nomeAluno =
+document.getElementById("nomeAluno").value;
+
+turmaAluno =
+document.getElementById("turmaAluno").value;
+
+if(nomeAluno.trim()==="" || turmaAluno.trim()===""){
+
+alert("Preencha nome e turma.");
+
+return;
+
+}
+
+document
+.getElementById("studentForm")
+.style.display="none";
+
+document
+.getElementById("quizBox")
+.style.display="block";
+
+loadQuestion();
+
+};
+
+// ===== FUNÇÃO DE EMBARALHAMENTO =====
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// ===== QUIZ =====
+const quizData = [
+
+{
+  modulo: "Revolução dos Transportes – Santos Dumont",
+  perguntas: [
+    { q: "Quem foi Santos Dumont?", o: ["Um navegador português","Um pioneiro da aviação brasileira","Um imperador do Brasil"], c: 1 },
+    { q: "Em que país ocorreram os voos do 14-Bis?", o: ["Brasil","França","Estados Unidos"], c: 1 },
+    { q: "Quais materiais foram usados no 14-Bis?", o: ["Pedra e ferro","Bambu e seda","Madeira e concreto"], c: 1 }
+  ]
+},
+
+{
+  modulo: "Renascimento – Leonardo da Vinci e Mona Lisa",
+  perguntas: [
+    { q: "Quem foi Leonardo da Vinci?", o: ["Um pintor e inventor renascentista","Um rei francês","Um navegador espanhol"], c: 0 },
+    { q: "Qual é a obra mais famosa de Leonardo da Vinci?", o: ["A Noite Estrelada","Mona Lisa","Guernica"], c: 1 },
+    { q: "O que é a técnica sfumato?", o: ["Escultura em mármore","Sombras suaves na pintura","Pintura em metal"], c: 1 }
+  ]
+},
+
+{
+  modulo: "Patrimônio Pernambucano – Torre Malakoff",
+  perguntas: [
+    { q: "Onde fica a Torre Malakoff?", o: ["Recife","Salvador","Rio de Janeiro"], c: 0 },
+    { q: "Qual era uma função da Torre Malakoff?", o: ["Observatório astronômico","Palácio imperial","Fortaleza romana"], c: 0 },
+    { q: "Hoje a Torre Malakoff funciona como:", o: ["Fábrica","Espaço cultural","Shopping"], c: 1 }
+  ]
+},
+
+{
+  modulo: "Primeiros Símbolos Humanos – Vênus de Willendorf",
+  perguntas: [
+    { q: "O que é a Vênus de Willendorf?", o: ["Uma escultura pré-histórica","Um templo antigo","Uma pintura medieval"], c: 0 },
+    { q: "Qual possível significado da Vênus de Willendorf?", o: ["Fertilidade","Guerra","Comércio"], c: 0 },
+    { q: "Em qual país a Vênus foi encontrada?", o: ["Alemanha","Áustria","França"], c: 1 }
+  ]
+},
+
+{
+  modulo: "Era Glacial – Megafauna",
+  perguntas: [
+    { q: "O que é megafauna?", o: ["Animais gigantes da Pré-História","Insetos pré-históricos","Plantas gigantes"], c: 0 },
+    { q: "Qual destes fazia parte da megafauna?", o: ["Mamute","Cachorro","Gato"], c: 0 },
+    { q: "Uma das causas da extinção da megafauna foi:", o: ["Mudanças climáticas","Internet","Energia elétrica"], c: 0 }
+  ]
+},
+
+{
+  modulo: "História de Pernambuco – Henrique Dias",
+  perguntas: [
+    { q: "Quem foi Henrique Dias?", o: ["Líder militar contra os holandeses","Pintor renascentista","Imperador brasileiro"], c: 0 },
+    { q: "Contra quem Henrique Dias lutou?", o: ["Franceses","Holandeses","Romanos"], c: 1 },
+    { q: "Em quais batalhas Henrique Dias participou?", o: ["Montes Guararapes","Guerra do Paraguai","Revolução Francesa"], c: 0 }
+  ]
+},
+
+{
+  modulo: "História do Brasil – Dom Pedro I",
+  perguntas: [
+    { q: "Quem proclamou a independência do Brasil?", o: ["Tiradentes","Dom Pedro I","Getúlio Vargas"], c: 1 },
+    { q: "Onde aconteceu o grito da independência?", o: ["Riacho do Ipiranga","Praia de Copacabana","Brasília"], c: 0 },
+    { q: "Dom Pedro I também foi:", o: ["Rei de Portugal","Presidente da França","Imperador Romano"], c: 0 }
+  ]
+},
+
+{
+  modulo: "As Grandes Navegações – Cristóvão Colombo",
+  perguntas: [
+    { q: "Quem foi Cristóvão Colombo?", o: ["Explorador e navegador","Cientista","Imperador"], c: 0 },
+    { q: "Qual era o objetivo de sua viagem?", o: ["Chegar às Índias","Descobrir a Antártica","Viajar para a Lua"], c: 0 },
+    { q: "Em qual continente Colombo chegou em 1492?", o: ["África","América","Oceania"], c: 1 }
+  ]
+},
+
+{
+  modulo: "Era dos Dinossauros – Dinossauros e Velociraptor",
+  perguntas: [
+    { q: "O que foi o período Cretáceo?", o: ["Última fase da Era dos Dinossauros","Idade Média","Era do Bronze"], c: 0 },
+    { q: "Qual característica real do Velociraptor surpreendeu os cientistas?", o: ["Possuía penas","Vivia na água","Era gigante"], c: 0 },
+    { q: "Qual evento contribuiu para a extinção dos dinossauros?", o: ["Queda de um asteroide","Construção de cidades","Navegações"], c: 0 }
+  ]
+},
+
+{
+  modulo: "Arte Paleolítica – Cavalo e Mamute de Vogelherd",
+  perguntas: [
+    { q: "Onde foram encontradas as esculturas de Vogelherd?", o: ["Caverna de Vogelherd","Egito","Machu Picchu"], c: 0 },
+    { q: "De que material eram feitas as esculturas?", o: ["Marfim de mamute","Bronze","Madeira"], c: 0 },
+    { q: "O que essas esculturas representam?", o: ["Arte pré-histórica","Arquitetura romana","Arte medieval"], c: 0 }
+  ]
+}
+
+];
+
+// ===== RANDOMIZAÇÃO DAS RESPOSTAS =====
+
+quizData.forEach(mod => {
+  mod.perguntas.forEach(pergunta => {
+    const respostas = pergunta.o.map((texto, index) => ({
+      texto,
+      correta: index === pergunta.c
+    }));
+
+    shuffleArray(respostas);
+
+    pergunta.o = respostas.map(r => r.texto);
+
+    pergunta.c = respostas.findIndex(r => r.correta);
+  });
+});
+
+let moduleIndex = 0;
+let questionIndex = 0;
+let score = 0;
+let questionNumber = 1;
+let moduleScores = new Array(quizData.length).fill(0);
+let respostasAluno = [];  
+
+const moduleTitle = document.getElementById("moduleTitle");
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const nextBtn = document.getElementById("nextBtn");
+
+function loadQuestion() {
+
+  const current = quizData[moduleIndex].perguntas[questionIndex];
+
+  moduleTitle.innerText = quizData[moduleIndex].modulo;
+
+  questionEl.innerText = questionNumber + ") " + current.q;
+
+  optionsEl.innerHTML = "";
+
+  nextBtn.style.display = "none";
+
+  const letters = ["A", "B", "C"];
+
+  current.o.forEach((opt, i) => {
+
+    const div = document.createElement("div");
+
+    div.className = "option";
+
+    div.innerText = letters[i] + ") " + opt;
+
+    div.onclick = () => selectOption(div, i);
+
+    optionsEl.appendChild(div);
+
+  });
+
+}
+
+function selectOption(el, index) {
+
+  const correct = quizData[moduleIndex].perguntas[questionIndex].c;
+  const perguntaAtual = quizData[moduleIndex].perguntas[questionIndex];
+
+respostasAluno.push({
+
+ modulo: quizData[moduleIndex].modulo,
+
+ pergunta: perguntaAtual.q,
+
+ respostaAluno: perguntaAtual.o[index],
+
+ respostaCorreta: perguntaAtual.o[correct],
+
+ acertou: index === correct
+
+});
+
+  const options = document.querySelectorAll(".option");
+
+  options.forEach((opt, i) => {
+
+    opt.classList.add("disabled");
+
+    if (i === correct) opt.classList.add("correct");
+
+    if (i === index && i !== correct) opt.classList.add("wrong");
+
+  });
+
+  if (index === correct) {
+
+    score++;
+
+    moduleScores[moduleIndex]++;
+
+    audioAcerto.play();
+
+  } else {
+
+    audioErro.play();
+
+  }
+
+  nextBtn.style.display = "block";
+
+}
+
+nextBtn.onclick = () => {
+
+  questionIndex++;
+  questionNumber++;
+
+  if (questionIndex >= quizData[moduleIndex].perguntas.length) {
+
+    moduleIndex++;
+    questionIndex = 0;
+
+  }
+
+  if (moduleIndex >= quizData.length) {
+
+    document.getElementById("quizBox").style.display = "none";
+
+    document.getElementById("scoreBox").style.display = "block";
+
+    document.getElementById("studentInfo").innerHTML = `
+      Nome: ${nomeAluno}<br>
+      Turma: ${turmaAluno}
+    `;
+
+    document.getElementById("scoreText").innerText =
+      `Você acertou ${score} de ${quizData.length * 3} perguntas.`;
+
+    const reportDiv = document.getElementById("moduleReport");
+
+    reportDiv.innerHTML = "";
+
+    quizData.forEach((mod, i) => {
+
+      reportDiv.innerHTML += `
+      <div class="report-line">
+      ${mod.modulo}: ${moduleScores[i]} de 3 acertos
+      </div>`;
+
+    });
+
+  } else {
+
+    loadQuestion();
+
+  }
+
+};
+
+document.getElementById("generatePdf").onclick = function() {
+
+  const { jsPDF } = window.jspdf;
+
+  const doc = new jsPDF();
+
+  const agora = new Date();
+
+  const dataHora =
+    agora.toLocaleDateString("pt-BR") +
+    " " +
+    agora.toLocaleTimeString("pt-BR");
+
+  let y = 20;
+
+  doc.setFontSize(16);
+  doc.text("Relatório do Quiz", 20, y);
+
+  y += 10;
+
+  doc.setFontSize(12);
+
+  doc.text("Aluno: " + nomeAluno, 20, y);
+  y += 8;
+
+  doc.text("Turma: " + turmaAluno, 20, y);
+  y += 8;
+
+  doc.text("Data/Hora: " + dataHora, 20, y);
+  y += 8;
+
+  doc.text(
+    `Resultado: ${score} de ${quizData.length * 3}`,
+    20,
+    y
+  );
+
+  y += 15;
+
+  doc.setFontSize(14);
+  doc.text("Desempenho por módulo", 20, y);
+
+  y += 10;
+
+  doc.setFontSize(11);
+
+  quizData.forEach((mod, i) => {
+
+    doc.text(
+      `${mod.modulo}: ${moduleScores[i]} de 3 acertos`,
+      20,
+      y
+    );
+
+    y += 8;
+
+  });
+
+  y += 10;
+
+  doc.setFontSize(14);
+  doc.text("Detalhamento das respostas", 20, y);
+
+  y += 10;
+
+  doc.setFontSize(10);
+
+  respostasAluno.forEach((resp, index) => {
+
+    if (y > 260) {
+      doc.addPage();
+      y = 20;
+    }
+
+    doc.text(
+      `${index + 1}) ${resp.pergunta}`,
+      10,
+      y
+    );
+
+    y += 6;
+
+    const respostaAlunoTexto =
+      doc.splitTextToSize(
+        "Resposta do aluno: " + resp.respostaAluno,
+        180
+      );
+
+    doc.text(
+      respostaAlunoTexto,
+      15,
+      y
+    );
+
+    y += respostaAlunoTexto.length * 5;
+
+    const respostaCorretaTexto =
+      doc.splitTextToSize(
+        "Resposta correta: " + resp.respostaCorreta,
+        180
+      );
+
+    doc.text(
+      respostaCorretaTexto,
+      15,
+      y
+    );
+
+    y += respostaCorretaTexto.length * 5;
+
+    doc.text(
+      resp.acertou
+        ? "Resultado: ACERTOU"
+        : "Resultado: ERROU",
+      15,
+      y
+    );
+
+    y += 10;
+
+  });
+
+  doc.save("relatorio_quiz.pdf");
+
+};
+</script>
+
+</body>
+</html>
