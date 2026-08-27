@@ -1,383 +1,684 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<title>MUSEU VIRTUAL</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="style.css">
 
-<script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
-  <!-- Postprocessing -->
-<script src="https://unpkg.com/aframe-effects@1.0.1/dist/aframe-effects.min.js"></script>
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>BIOESCOLA 360</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <!-- A-FRAME -->
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+
+
+    <!-- MINDAR -->
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+
+    <!-- A-FRAME EXTRAS -->
+    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+
+
+    <!-- POSTPROCESSING -->
+    <script src="https://unpkg.com/aframe-effects@1.0.1/dist/aframe-effects.min.js"></script>
+
 </head>
+
 
 <body>
 
+
+<!-- =====================================================
+MENSAGEM DE TRACKING
+===================================================== -->
+
 <div id="track-message">
-APONTE A CÂMERA
-DO DISPOSITIVO
-PARA UMA DAS
-IMAGENS NO
-AMBIENTE.
+
+    APONTE A CÂMERA
+    <br>
+    DO DISPOSITIVO
+    <br>
+    PARA UMA DAS
+    <br>
+    IMAGENS NO
+    <br>
+    AMBIENTE.
+
 </div>
-    
 
-<!-- ================= BOTÃO QUIZ ================= -->
-<button id="finalButtonTop" class="next-top-btn">
-  📝
-</button>
 
-<!-- MENU HAMBURGER -->
-<button id="menuToggleButton">☰</button>  
-  
-<!-- ================= TRACK 0 VELOCIRAPTOR ================= -->
-<button id="velociPlayButton" class="fly-btn">
-  INTERAÇÃO
-</button>
 
-<button id="velociAudioLeftButton" class="audio-left-fly-btn">
-  CONHEÇA
+<!-- =====================================================
+BOTÃO QUIZ
+===================================================== -->
+
+<button
+    id="finalButtonTop"
+    class="next-top-btn"
+>
+
+    📝
+
 </button>
 
-<button id="velociAudioRightButton" class="audio-right-fly-btn">
-  ESPÉCIES
-</button>  
-  
-<!-- ================= TRACK 1 BOTÕES MEGAFAUNA ================= -->
-<button id="faunaPlayButton" class="fly-btn">
-  INTERAÇÃO
-</button>
-<button id="faunaAudioLeftButton" class="audio-left-fly-btn">
-  HISTÓRIA
-</button>
-<button id="faunaAudioRightButton" class="audio-right-fly-btn">
-  CURIOSIDADE
-</button>
-  
-<!-- ================= TRACK 2 BOTÕES VENUS ================= -->
-<button id="venusPlayButton" class="fly-btn">
-  INTERAÇÃO
-</button>
-<button id="venusAudioLeftButton" class="audio-left-fly-btn">
-  HISTÓRIA
-</button>
-<button id="venusAudioRightButton" class="audio-right-fly-btn">
-  CURIOSIDADE
-</button>
- 
-<!-- ================= TRACK 3 VOGELHERD ================= -->
-<button id="vogelPlayButton" class="fly-btn">
-  INTERAÇÃO
+
+
+<!-- =====================================================
+MENU HAMBURGER
+===================================================== -->
+
+<button
+    id="menuToggleButton"
+>
+
+    ☰
+
 </button>
 
-<button id="vogelAudioLeftButton" class="audio-left-fly-btn">
-  HISTÓRIA
+
+
+<!-- =====================================================
+TRACK 0 — FOLHOSAS
+===================================================== -->
+
+<button id="folhosaAudioLeftButton" class="audio-left-fly-btn">CONHEÇA</button>
+
+<button id="folhosaAudioRightButton" class="audio-right-fly-btn dropdown-btn">ESPÉCIES ▼</button>
+
+<div id="folhosaSpeciesMenu" class="species-dropdown">
+    <button>Alface</button>
+    <button>Couve-Manteiga</button>
+    <button>Rúcula</button>
+</div>
+
+<!-- =====================================================
+TRACK 1 — TEMPEROS E ERVAS AROMÁTICAS
+===================================================== -->
+
+<button id="temperoAudioLeftButton" class="audio-left-fly-btn">CONHEÇA</button>
+
+
+<button id="temperoAudioRightButton" class="audio-right-fly-btn dropdown-btn">ESPÉCIES ▼</button>
+
+<div id="temperoSpeciesMenu" class="species-dropdown">
+
+    <button>Opção 1</button>
+    <button>Opção 2</button>
+    <button>Opção 3</button>
+
+</div>
+
+
+
+<!-- =====================================================
+TRACK 2 — FRUTOS
+===================================================== -->
+
+<button
+    id="frutoAudioLeftButton"
+    class="audio-left-fly-btn"
+>
+
+    CONHEÇA
+
 </button>
 
-<button id="vogelAudioRightButton" class="audio-right-fly-btn">
-  CURIOSIDADE
+
+<button
+    id="frutoAudioRightButton"
+    class="audio-right-fly-btn dropdown-btn"
+>
+
+    ESPÉCIES ▼
+
 </button>
 
-<!-- ================= TRACK 4 COLOMBO ================= -->
-<button id="colomboPlayButton" class="fly-btn">
-  INTERAÇÃO
+
+<div
+    id="frutoSpeciesMenu"
+    class="species-dropdown"
+>
+
+    <button>Opção 1</button>
+    <button>Opção 2</button>
+    <button>Opção 3</button>
+
+</div>
+
+
+
+<!-- =====================================================
+TRACK 3 — FRUTAS
+===================================================== -->
+
+<button
+    id="frutaAudioLeftButton"
+    class="audio-left-fly-btn"
+>
+
+    CONHEÇA
+
 </button>
 
-<button id="colomboAudioLeftButton" class="audio-left-fly-btn">
-  HISTÓRIA
+
+<button
+    id="frutaAudioRightButton"
+    class="audio-right-fly-btn dropdown-btn"
+>
+
+    ESPÉCIES ▼
+
 </button>
 
-<button id="colomboAudioRightButton" class="audio-right-fly-btn">
-  CURIOSIDADE
-</button>  
 
-<!-- ================= TRACK 5 BOTÕES MONALISA ================= -->
-<button id="monaPlayButton" class="fly-btn">
-  INTERAÇÃO
-</button>
-<button id="monaAudioLeftButton" class="audio-left-fly-btn">
-  HISTÓRIA
-</button>
-<button id="monaAudioRightButton" class="audio-right-fly-btn">
-  CURIOSIDADE
-</button>
+<div
+    id="frutaSpeciesMenu"
+    class="species-dropdown"
+>
 
-<!-- ================= TRACK 6 DIAS ================= -->
-<button id="diasPlayButton" class="fly-btn">
-  INTERAÇÃO
-</button>
+    <button>Opção 1</button>
+    <button>Opção 2</button>
+    <button>Opção 3</button>
 
-<button id="diasAudioLeftButton" class="audio-left-fly-btn">
-  HISTÓRIA
-</button>
+</div>
 
-<button id="diasAudioRightButton" class="audio-right-fly-btn">
-  CURIOSIDADE
-</button>
 
-<!-- ================= TRACK 7 DOM PEDRO I ================= -->
-<button id="dpedroPlayButton" class="fly-btn">
-  INTERAÇÃO
+
+<!-- =====================================================
+TRACK 4 — MEDICINAIS E AROMÁTICAS
+===================================================== -->
+
+<button
+    id="medicinalAudioLeftButton"
+    class="audio-left-fly-btn"
+>
+
+    CONHEÇA
+
 </button>
 
-<button id="dpedroAudioLeftButton" class="audio-left-fly-btn">
-  HISTÓRIA
-</button>
-  
-<button id="dpedroAudioRightButton" class="audio-right-fly-btn">
-  CURIOSIDADE
-</button>   
-  
-<!-- ================= TRACK 8 BOTÕES 14 BIS ================= -->
-<button id="flyButton" class="fly-btn">
-  INTERAÇÃO
-</button>
-<button id="audioLeftButton" class="audio-left-fly-btn">
-  HISTÓRIA
-</button>
-<button id="audioRightButton" class="audio-right-fly-btn">
-  CURIOSIDADE
+
+<button
+    id="medicinalAudioRightButton"
+    class="audio-right-fly-btn dropdown-btn"
+>
+
+    ESPÉCIES ▼
+
 </button>
 
-<!-- ================= TRACK 9 BOTÕES TORRE ================= -->
-<button id="torrePlayButton" class="fly-btn">
-  INTERAÇÃO
-</button>
-<button id="torreAudioLeftButton" class="audio-left-fly-btn">
-  HISTÓRIA
-</button>
-<button id="torreAudioRightButton" class="audio-right-fly-btn">
-  CURIOSIDADE
+
+<div
+    id="medicinalSpeciesMenu"
+    class="species-dropdown"
+>
+
+    <button>Opção 1</button>
+    <button>Opção 2</button>
+    <button>Opção 3</button>
+
+</div>
+
+
+
+<!-- =====================================================
+TRACK 5 — PANC
+===================================================== -->
+
+<button
+    id="pancAudioLeftButton"
+    class="audio-left-fly-btn"
+>
+
+    CONHEÇA
+
 </button>
 
-<!-- ================= ÁUDIOS ================= -->
+
+<button
+    id="pancAudioRightButton"
+    class="audio-right-fly-btn dropdown-btn"
+>
+
+    ESPÉCIES ▼
+
+</button>
+
+
+<div
+    id="pancSpeciesMenu"
+    class="species-dropdown"
+>
+
+    <button>Opção 1</button>
+    <button>Opção 2</button>
+    <button>Opção 3</button>
+
+</div>
+
+
+
+<!-- =====================================================
+ÁUDIOS
+===================================================== -->
+
 
 <!-- TRACK 0 -->
-<audio id="audioVeloci1" src="Audios/Narrativa_Raptor.mp3"></audio>
-<audio id="audioVeloci2" src="Audios/Narrativa_Curiosidades_Raptor.mp3"></audio> 
-<audio id="audioVelociRoar" src="Audios/raptor_audio.mp3" loop></audio>  
-  
+
+<audio
+    id="audioVeloci1"
+    src="Audios/Narrativa_Raptor.mp3"
+></audio>
+
+
+<audio
+    id="audioVeloci2"
+    src="Audios/Narrativa_Curiosidades_Raptor.mp3"
+></audio>
+
+
+<audio
+    id="audioVelociRoar"
+    src="Audios/raptor_audio.mp3"
+    loop
+></audio>
+
+
+
 <!-- TRACK 1 -->
-<audio id="audioFauna1" src="Audios/Narrativa_Megafauna.mp3"></audio>
-<audio id="audioFauna2" src="Audios/Narrativa_Curiosidades_Megafauna.mp3"></audio>
-<audio id="audioElefante" src="Audios/elefante_audio.mp3" loop></audio>   
+
+<audio
+    id="audioFauna1"
+    src="Audios/Narrativa_Megafauna.mp3"
+></audio>
+
+
+<audio
+    id="audioFauna2"
+    src="Audios/Narrativa_Curiosidades_Megafauna.mp3"
+></audio>
+
+
+<audio
+    id="audioElefante"
+    src="Audios/elefante_audio.mp3"
+    loop
+></audio>
+
+
+
 <!-- TRACK 2 -->
-<audio id="audioVenus1" src="Audios/Narrativa_Venus_Willendorf.mp3"></audio>
-<audio id="audioVenus2" src="Audios/Narrativa_Curiosidades_Venus.mp3"></audio>  
+
+<audio
+    id="audioVenus1"
+    src="Audios/Narrativa_Venus_Willendorf.mp3"
+></audio>
+
+
+<audio
+    id="audioVenus2"
+    src="Audios/Narrativa_Curiosidades_Venus.mp3"
+></audio>
+
+
 
 <!-- TRACK 3 -->
-<audio id="audioVogel1" src="Audios/Narrativa_Vogelherd.mp3"></audio>
-<audio id="audioVogel2" src="Audios/Narrativa_Curiosidade_Vogelherd.mp3"></audio>
+
+<audio
+    id="audioVogel1"
+    src="Audios/Narrativa_Vogelherd.mp3"
+></audio>
+
+
+<audio
+    id="audioVogel2"
+    src="Audios/Narrativa_Curiosidade_Vogelherd.mp3"
+></audio>
+
+
 
 <!-- TRACK 4 -->
-<audio id="audioColombo1" src="Audios/Narrativa_Colombo.mp3"></audio>
-<audio id="audioColombo2" src="Audios/Narrativa_Curiosidade_Colombo.mp3"></audio>
 
-<!-- TRACK 6 -->
-<audio id="audioDias1" src="Audios/Narrativa_Henrique_Dias.mp3"></audio>
-<audio id="audioDias2" src="Audios/Narrativa_Curiosidade_Henrique_Dias.mp3"></audio>
+<audio
+    id="audioColombo1"
+    src="Audios/Narrativa_Colombo.mp3"
+></audio>
 
-<!-- TRACK 7 -->
-<audio id="audioDPedro1" src="Audios/Narrativa_Pedro_I.mp3"></audio>
-<audio id="audioDPedro2" src="Audios/Narrativa_Curiosidade_Pedro_I.mp3"></audio>
-  
+
+<audio
+    id="audioColombo2"
+    src="Audios/Narrativa_Curiosidade_Colombo.mp3"
+></audio>
+
+
+
 <!-- TRACK 5 -->
-<audio id="audioMona1" src="Audios/Narrativa_Leonardo_da_Vinci.mp3"></audio>
-<audio id="audioMona2" src="Audios/Narrativa_Monalisa.mp3"></audio>
 
-<!-- TRACK 8 -->
-<audio id="audioFly1" src="Audios/Narrativa_Santos_Dumont.mp3"></audio>
-<audio id="audioFly2" src="Audios/Narrativa_14_Bis.mp3"></audio>
-<audio id="audioHelice" src="Audios/Motos_Helice.mp3" loop></audio>
+<audio
+    id="audioMona1"
+    src="Audios/Narrativa_Mona.mp3"
+></audio>
 
-<!-- TRACK 9 -->
-<audio id="audioTorre1" src="cNarrativa_Torre_Malakoff.mp3"></audio>
-<audio id="audioTorre2" src="Audios/Narrativa_Curiosidades_Torre.mp3"></audio>
 
-<!-- CLICK BOTÕES -->
-<audio id="clickSound" src="Audios/acerto.mp3"></audio>
-  
+<audio
+    id="audioMona2"
+    src="Audios/Narrativa_Curiosidade_Mona.mp3"
+></audio>
+
+
+
+<!-- SOM DOS BOTÕES -->
+
+<audio
+    id="clickSound"
+    src="Audios/acerto.mp3"
+></audio>
+
+
+
+<!-- =====================================================
+CENA AR
+===================================================== -->
+
 <a-scene
-mindar-image="imageTargetSrc: Imagens/targets.mind;"
-color-space="sRGB"
-renderer="colorManagement:true;
-physicallyCorrectLights:true;
-shadowMap.enabled:true;
-shadowMap.type:PCFSoftShadowMap"
-xr-mode-ui="enabled:false"
-device-orientation-permission-ui="enabled:false"
 
-effects="
-fxaa:true;
-bloom:strength:1.2;
-bloom:radius:1;
-bloom:threshold:0.8;
-">
+    mindar-image="
+        imageTargetSrc: Imagens/targets.mind;
+    "
+
+    color-space="sRGB"
+
+    renderer="
+        colorManagement: true;
+        physicallyCorrectLights: true;
+        shadowMap.enabled: true;
+        shadowMap.type: PCFSoftShadowMap;
+    "
+
+    xr-mode-ui="enabled: false"
+
+    device-orientation-permission-ui="enabled: false"
+
+    effects="
+        fxaa: true;
+        bloom: strength: 1.2;
+        bloom: radius: 1;
+        bloom: threshold: 0.8;
+    "
+>
+
 
 <a-assets>
-  <!-- ASSETs DE MODELOS 3D -->
-<a-asset-item id="base" src="Modelos/base.glb"></a-asset-item>
-<a-asset-item id="baseEscultura" src="Modelos/base2.glb"></a-asset-item>
-<a-asset-item id="anel" src="Modelos/Anel.glb"></a-asset-item>   
-<a-asset-item id="mamute" src="Modelos/Mamute2.glb"></a-asset-item>
-<a-asset-item id="smilodon" src="Modelos/Smilodon.glb"></a-asset-item>
-<a-asset-item id="14bis" src="Modelos/14_Bis.glb"></a-asset-item>
-<a-asset-item id="torre" src="Modelos/Torre_Malakoff.glb"></a-asset-item>
-<a-asset-item id="venus" src="Modelos/Venus_Willendorf.glb"></a-asset-item>
-<a-asset-item id="raptor" src="Modelos/Raptor.glb"></a-asset-item>
-<a-asset-item id="c_vogelherd" src="Modelos/%20Cavalo_Vogelherd.glb"></a-asset-item>
-<a-asset-item id="m_vogelherd" src="Modelos/Manute_Vogelherd.glb"></a-asset-item>
-<a-asset-item id="pedestal" src="Modelos/Pedestal.glb"></a-asset-item>
-<a-asset-item id="moldura" src="Modelos/Moldura.glb"></a-asset-item>   
-<!-- ASSETs DE VÍDEOS -->
-<video id="terrenoVideoAsset" src="Video/Terreno_Final.mp4" loop muted playsinline preload="auto"></video>
-<video id="monalisaVideo" src="Video/Monalisa.mp4" playsinline preload="auto"></video>
-<video id="colomboVideo" src="Video/Cristovao_Colombo.mp4" playsinline preload="auto"></video>
-<video id="diasVideo" src="Video/Henrique_Dias.mp4" playsinline preload="auto"></video>
-<video id="dpedroIVideo" src="Video/Pedro_I.mp4" playsinline preload="auto"></video>
+
+    <a-asset-item id="base" src="Modelos/base.glb"></a-asset-item>
+
 </a-assets>
 
-<a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
+<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-<!-- ================= TRACK 0 O MUNDO DOS GIGANTES - VELOCIRAPTOR ================= -->
-<a-entity mindar-image-target="targetIndex:0">
-  <a-entity id="velociGroup" rotation="0 0 180">
-    <a-gltf-model id="velociBase" rotation="90 0 0" position="0 0 0" scale="0.3 0.3 0.3" src="#base" material="shader:shadow" shadow="receive:true"></a-gltf-model>
-    <a-gltf-model id="anelBase" rotation="90 0 0" position="0 0 0" scale="0.3 0.3 0.3" src="#anel" material=" color:#00ffff; emissive:#00ffff; emissiveIntensity:3; metalness:0.8; roughness:0.2;"></a-gltf-model>
-    <a-gltf-model id="velociModel" rotation="90 0 0" position="0 0 0.1" scale="0.4 0.4 0.4" src="#raptor" shadow="cast:true" ></a-gltf-model>    
-  </a-entity>
-  <a-plane id="velociFog" color="#d9f1ff" opacity="0" width="2.8" height="2.8" rotation="-90 0 0" position="0 -0.15 0"></a-plane>
-  <a-light type="ambient" color="#ffffff" intensity="5.4"></a-light>
-  <a-light type="hemisphere" color="#ffffff" groundColor="#b5b5b5" intensity="4.2"></a-light>
-  <a-light type="directional" color="#fff8e5" intensity="1.8" position="-2 -4 3"></a-light>
-  <a-light type="directional" color="#d6ecff" intensity="0.8" position="-3 2 -2" castShadow="true" shadowMapWidth="1024" shadowMapHeight="1024"
-  shadowCameraTop="5" shadowCameraBottom="-5" shadowCameraLeft="-5" shadowCameraRight="5"></a-light>
-</a-entity>
-  
-<!-- ================= TRACK 1 ERA GLACIAL - MEGAFAUNA ================= -->
-<a-entity mindar-image-target="targetIndex:1">
-  <a-entity id="faunaGroup" rotation="0 0 -90">
-    <a-gltf-model id="faunaBase" rotation="90 0 0" position="0 0 0" scale="0.4 0.4 0.4" src="#base"></a-gltf-model>
-    <a-gltf-model id="anelBase2" rotation="90 0 0" position="0 0 0" scale="0.4 0.4 0.4" src="#anel" material=" color:#00ffff; emissive:#00ffff; emissiveIntensity:3; metalness:0.8; roughness:0.2;"></a-gltf-model>
-    <a-gltf-model id="mamuteModel" rotation="90 0 0" position="0 0.3 0.08" scale="0.4 0.4 0.4" src="#mamute"></a-gltf-model>
-    <a-gltf-model id="smilodonModel" rotation="90 0 0" position="0 0 0" scale="0.4 0.4 0.4" src="#smilodon"></a-gltf-model>
-  </a-entity>
-  <a-plane id="faunaFog" color="#d9f1ff" opacity="0" width="2.8" height="2.8" rotation="-90 0 0" position="0 -0.15 0"></a-plane>
-  <a-light type="ambient" color="#ffffff" intensity="5.4"></a-light>
-  <a-light type="hemisphere" color="#ffffff" groundColor="#b5b5b5" intensity="4.2"></a-light>
-  <a-light type="directional" color="#fff8e5" intensity="1.8" position="-2 -4 3"></a-light>
-  <a-light type="directional" color="#d6ecff" intensity="0.8" position="-3 2 -2"></a-light>
+
+<!-- =====================================================
+TRACK 0 — FOLHOSAS
+===================================================== -->
+
+<a-entity
+    mindar-image-target="targetIndex: 0">
+
+    <a-entity id="velociGroup" rotation="0 0 180">
+
+        <a-gltf-model id="velociBase" rotation="90 0 0" position="0 0 0" scale="0.3 0.3 0.3" src="#base" material="shader: shadow" shadow="receive: true"></a-gltf-model>
+
+    </a-entity>
+
+    <a-plane id="velociFog" color="#d9f1ff" opacity="0" width="2.8" height="2.8" rotation="-90 0 0"  position="0 -0.15 0"></a-plane>
+
 </a-entity>
 
-<!-- ================= TRACK 2 OS PRIMEIROS SÍMBOLOS HUMANOS - VENUS ================= -->
-<a-entity mindar-image-target="targetIndex:2">
-  <a-entity id="venusGroup" rotation="0 0 0">
-     <a-gltf-model id="venusModel" rotation="90 0 0" position="0 0 0" scale="0.3 0.3 0.3" src="#venus"></a-gltf-model>    
-  </a-entity>   
-  <a-gltf-model id="baseEsculturas" rotation="90 0 0" position="0 0 0" scale="0.3 0.3 0.3" src="#baseEscultura"></a-gltf-model>
-  <a-gltf-model id="anelBase3" rotation="90 0 0" position="0 0 0" scale="0.3 0.3 0.3" src="#anel" material=" color:#00ffff; emissive:#00ffff; emissiveIntensity:3; metalness:0.8; roughness:0.2;"></a-gltf-model>
-  <a-light type="ambient" color="#ffffff" intensity="1.4"></a-light>
-  <a-light type="hemisphere" color="#ffffff" groundColor="#b5b5b5" intensity="1.2"></a-light>
-  <a-light type="directional" color="#fff8e5" intensity="2.8" position="-2 -4 3"></a-light>
-  <a-light type="directional" color="#d6ecff" intensity="0.8" position="-3 2 -2"></a-light>
-  
-</a-entity>
-  
-<!-- ================= TRACK 3 ARTE E SOBREVIVÊNCIA NO PALEOLÍTICO - Cavalo e Mamute de Vogelherd ================= -->
-<a-entity mindar-image-target="targetIndex:3">
-  <a-entity id="vogelherdGroup" rotation="0 0 0">
-     <a-gltf-model id="cavaloModel" rotation="90 0 0" position="0.3 0 0.2" scale="0.8 0.8 0.8" src="#c_vogelherd"></a-gltf-model>
-     <a-gltf-model id="mamutevModel" rotation="90 0 0" position="-0.3 0 0.2" scale="0.8 0.8 0.8" src="#m_vogelherd"></a-gltf-model>
-  </a-entity>   
-  <a-gltf-model id="baseEsculturas2" rotation="90 0 0" position="0 0 0" scale="0.3 0.3 0.3" src="#baseEscultura"></a-gltf-model>
-  <a-gltf-model id="anelBase4" rotation="90 0 0" position="0 0 0" scale="0.3 0.3 0.3" src="#anel" material=" color:#00ffff; emissive:#00ffff; emissiveIntensity:3; metalness:0.8; roughness:0.2;"></a-gltf-model>
-  <a-light type="ambient" color="#ffffff" intensity="1.4"></a-light>
-  <a-light type="hemisphere" color="#ffffff" groundColor="#b5b5b5" intensity="1.2"></a-light>
-  <a-light type="directional" color="#fff8e5" intensity="2.8" position="-2 -4 3"></a-light>
-  <a-light type="directional" color="#d6ecff" intensity="0.8" position="-3 2 -2"></a-light>
-  
-</a-entity>
-  
-<!-- ================= TRACK 4 As Grandes Navegações — Cristóvão Colombo ================= -->
-<a-entity mindar-image-target="targetIndex:4">
-  <a-plane id="colomboPlane" material="src:#colomboVideo; shader:flat" position="0 0 0" width="1.6" height="2.4"></a-plane>
-  <a-gltf-model id="moldura1" rotation="90 0 0" position="0 0 -0.03" width="1.6" height="2.4" src="#moldura"></a-gltf-model>
-  <a-light type="ambient" color="#ffffff" intensity="1.4"></a-light>
-  <a-light type="hemisphere" color="#ffffff" groundColor="#b5b5b5" intensity="1.2"></a-light>
-  <a-light type="directional" color="#fff8e5" intensity="2.8" position="-2 -4 3"></a-light>
-  <a-light type="directional" color="#d6ecff" intensity="0.8" position="-3 2 -2"></a-light>
+
+<!-- =====================================================
+TRACK 1 — TEMPEROS E ERVAS AROMÁTICAS
+===================================================== -->
+
+<a-entity mindar-image-target="targetIndex: 1">
+
+    <a-entity id="faunaGroup" rotation="0 0 -90" >
+
+        <a-gltf-model id="faunaBase" rotation="90 0 0" position="0 0 0" scale="0.4 0.4 0.4" src="#base"></a-gltf-model>
+      
+    </a-entity>
+
+    <a-plane
+        id="faunaFog"
+        color="#d9f1ff"
+        opacity="0"
+        width="2.8"
+        height="2.8"
+        rotation="-90 0 0"
+        position="0 -0.15 0"
+    ></a-plane>
+
+    <a-light
+        type="ambient"
+        color="#ffffff"
+        intensity="5.4"
+    ></a-light>
+
+    <a-light
+        type="hemisphere"
+        color="#ffffff"
+        groundColor="#b5b5b5"
+        intensity="4.2"
+    ></a-light>
+
+    <a-light
+        type="directional"
+        color="#fff8e5"
+        intensity="1.8"
+        position="-2 -4 3"
+    ></a-light>
+
+    <a-light
+        type="directional"
+        color="#d6ecff"
+        intensity="0.8"
+        position="-3 2 -2"
+    ></a-light>
+
 </a-entity>
 
-  
-<!-- ================= TRACK 5 O RENASCIMENTO - LEONARDO E MONALISA ================= -->
-<a-entity mindar-image-target="targetIndex:5">
-  <a-plane id="monalisaPlane" material="src:#monalisaVideo; shader:flat" position="0 0 0" width="1.6" height="2.4"></a-plane>
-  <a-gltf-model id="moldura2" rotation="90 0 0" position="0 0 -0.03" width="1.6" height="2.4" src="#moldura"></a-gltf-model>
-  <a-light type="ambient" color="#ffffff" intensity="1.4"></a-light>
-  <a-light type="hemisphere" color="#ffffff" groundColor="#b5b5b5" intensity="1.2"></a-light>
-  <a-light type="directional" color="#fff8e5" intensity="2.8" position="-2 -4 3"></a-light>
-  <a-light type="directional" color="#d6ecff" intensity="0.8" position="-3 2 -2"></a-light>
-</a-entity>
-  
-<!-- ================= TRACK 6 HENRIQUE DIAS ================= -->
-<a-entity mindar-image-target="targetIndex:6">
-  <a-plane id="diasPlane" material="src:#diasVideo; shader:flat" position="0 0 0" width="1.6" height="2.4"></a-plane>
-  <a-gltf-model id="moldura3" rotation="90 0 0" position="0 0 -0.03" width="1.6" height="2.4" src="#moldura"></a-gltf-model>
-  <a-light type="ambient" color="#ffffff" intensity="1.4"></a-light>
-  <a-light type="hemisphere" color="#ffffff" groundColor="#b5b5b5" intensity="1.2"></a-light>
-  <a-light type="directional" color="#fff8e5" intensity="2.8" position="-2 -4 3"></a-light>
-  <a-light type="directional" color="#d6ecff" intensity="0.8" position="-3 2 -2"></a-light>
-</a-entity>  
 
-<!-- ================= TRACK 7 História do Brasil — Dom Pedro I ================= -->
-<a-entity mindar-image-target="targetIndex:7">
-  <a-plane id="dpedroIPlane" material="src:#dpedroIVideo; shader:flat" position="0 0 0" width="1.6" height="2.4"></a-plane>
-  <a-gltf-model id="moldura4" rotation="90 0 0" position="0 0 -0.03" width="1.6" height="2.4" src="#moldura"></a-gltf-model>
-  <a-light type="ambient" color="#ffffff" intensity="1.4"></a-light>
-  <a-light type="hemisphere" color="#ffffff" groundColor="#b5b5b5" intensity="1.2"></a-light>
-  <a-light type="directional" color="#fff8e5" intensity="2.8" position="-2 -4 3"></a-light>
-  <a-light type="directional" color="#d6ecff" intensity="0.8" position="-3 2 -2"></a-light>
-</a-entity>    
-  
-<!-- ================= TRACK 8 REVOLUÇÃO DOS TRANSPORTES - SANTOS DUMONT E 14 BIS ================= -->
-<a-entity mindar-image-target="targetIndex:8">
-  <a-plane id="terrenoPlane" material="src:#terrenoVideoAsset; shader:flat" position="0 0.03 0" height="2" width="3" rotation="0 0 -90"></a-plane>
-  <a-gltf-model id="aviao14bis" rotation="90 0 0" position="0 0 0" scale="0.8 0.8 0.8" src="#14bis"></a-gltf-model>
-  <a-gltf-model id="moldura5" rotation="90 0 0" position="0 0 -0.05" scale="1.3 1.3 1.3" src="#moldura"></a-gltf-model>
-  <a-light type="ambient" color="#ffffff" intensity="1.4"></a-light>
-  <a-light type="hemisphere" color="#ffffff" groundColor="#b5b5b5" intensity="1.2"></a-light>
-  <a-light type="directional" color="#fff8e5" intensity="2.8" position="-2 -4 3"></a-light>
-  <a-light type="directional" color="#d6ecff" intensity="0.8" position="-3 2 -2"></a-light>
+<!-- =====================================================
+TRACK 2 — FRUTOS
+===================================================== -->
+
+<a-entity
+    mindar-image-target="targetIndex: 2"
+>
+
+    <a-entity
+        id="venusGroup"
+        rotation="0 0 0"
+    >
+
+        <a-gltf-model
+            id="venusModel"
+            rotation="90 0 0"
+            position="0 0 0"
+            scale="0.3 0.3 0.3"
+            src="#base"
+        ></a-gltf-model>
+
+    </a-entity>
+
+    <a-light
+        type="ambient"
+        color="#ffffff"
+        intensity="1.4"
+    ></a-light>
+
+    <a-light
+        type="hemisphere"
+        color="#ffffff"
+        groundColor="#b5b5b5"
+        intensity="1.2"
+    ></a-light>
+
+    <a-light
+        type="directional"
+        color="#fff8e5"
+        intensity="2.8"
+        position="-2 -4 3"
+    ></a-light>
+
 </a-entity>
 
-<!-- ================= TRACK 9 PATRIMÔNIO URBANO E CULTURAL DE PERNAMBUCO - TORRE MALAKOFF ================= -->
-<a-entity mindar-image-target="targetIndex:9">
-  <a-entity id="torreGroup" rotation="0 0 0">
-     <a-gltf-model id="torreModel" rotation="90 0 0" position="0 0 0" scale="0.8 0.8 0.8" src="#torre"></a-gltf-model>
-  </a-entity>  
-  <a-light type="ambient" color="#ffffff" intensity="1.4"></a-light>
-  <a-light type="hemisphere" color="#ffffff" groundColor="#b5b5b5" intensity="1.2"></a-light>
-  <a-light type="directional" color="#fff8e5" intensity="2.8" position="-2 -4 3"></a-light>
-  <a-light type="directional" color="#d6ecff" intensity="0.8" position="-3 2 -2"></a-light>
+<!-- =====================================================
+TRACK 3 — FRUTAS
+===================================================== -->
+
+<a-entity
+    mindar-image-target="targetIndex: 3"
+>
+
+    <a-entity
+        id="vogelherdGroup"
+        rotation="0 0 0"
+    >
+
+        <a-gltf-model
+            id="cavaloModel"
+            rotation="90 0 0"
+            position="0.3 0 0.2"
+            scale="0.8 0.8 0.8"
+            src="#base"
+        ></a-gltf-model>
+
+    </a-entity>
+
+    <a-light
+        type="ambient"
+        color="#ffffff"
+        intensity="1.4"
+    ></a-light>
+
+    <a-light
+        type="hemisphere"
+        color="#ffffff"
+        groundColor="#b5b5b5"
+        intensity="1.2"
+    ></a-light>
+
+    <a-light
+        type="directional"
+        color="#fff8e5"
+        intensity="2.8"
+        position="-2 -4 3"
+    ></a-light>
+
+</a-entity>
+
+
+<!-- =====================================================
+TRACK 4 — MEDICINAIS
+===================================================== -->
+
+<a-entity
+    mindar-image-target="targetIndex: 4"
+>
+
+    <a-plane
+        id="colomboPlane"
+        position="0 0 0"
+        width="1.6"
+        height="2.4"
+    ></a-plane>
+
+    <a-light
+        type="ambient"
+        color="#ffffff"
+        intensity="1.4"
+    ></a-light>
+
+    <a-light
+        type="hemisphere"
+        color="#ffffff"
+        groundColor="#b5b5b5"
+        intensity="1.2"
+    ></a-light>
+
+    <a-light
+        type="directional"
+        color="#fff8e5"
+        intensity="2.8"
+        position="-2 -4 3"
+    ></a-light>
+
+</a-entity>
+
+<!-- =====================================================
+TRACK 5 — PANC
+===================================================== -->
+
+<a-entity
+    mindar-image-target="targetIndex: 5"
+>
+
+    <a-plane
+        id="monalisaPlane"
+        position="0 0 0"
+        width="1.6"
+        height="2.4"
+    ></a-plane>
+
+    <a-light
+        type="ambient"
+        color="#ffffff"
+        intensity="1.4"
+    ></a-light>
+
+    <a-light
+        type="hemisphere"
+        color="#ffffff"
+        groundColor="#b5b5b5"
+        intensity="1.2"
+    ></a-light>
+  
+    <a-light
+        type="directional"
+        color="#fff8e5"
+        intensity="2.8"
+        position="-2 -4 3"
+    ></a-light>
+
 </a-entity>
 
 </a-scene>
 
-<!-- ================= SISTEMA DE PROGRESSO ================= -->
+<!-- =====================================================
+SISTEMA DE PROGRESSO
+===================================================== -->
 
 <div id="progressContainer">
 
-  <div id="progressText">
-    Temas Visitados:
-    <span id="progressCount">0</span>/10
-  </div>
+    <div id="progressText">
+
+        Temas Visitados:
+
+        <span id="progressCount">0</span>
+        /6
+    </div>
 
 </div>
 
-  
-<!-- SCRIPTS -->
 <script src="main.js"></script>
-
+  
 </body>
 </html>
