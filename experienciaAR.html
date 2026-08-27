@@ -4,37 +4,22 @@
 <head>
 
     <meta charset="UTF-8">
-
     <title>BIOESCOLA 360</title>
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="style.css">
 
-
     <!-- A-FRAME -->
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
-
-
     <!-- MINDAR -->
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-
-
     <!-- A-FRAME EXTRAS -->
     <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
-
-
     <!-- POSTPROCESSING -->
     <script src="https://unpkg.com/aframe-effects@1.0.1/dist/aframe-effects.min.js"></script>
 
 </head>
-
-
 <body>
-
 
 <!-- =====================================================
 MENSAGEM DE TRACKING
@@ -54,21 +39,11 @@ MENSAGEM DE TRACKING
 
 </div>
 
-
-
 <!-- =====================================================
 BOTÃO QUIZ
 ===================================================== -->
 
-<button
-    id="finalButtonTop"
-    class="next-top-btn"
->
-
-    📝
-
-</button>
-
+<button id="finalButtonTop" class="next-top-btn">📝</button>
 
 <!-- =====================================================
 TRACK 0 — FOLHOSAS
@@ -251,149 +226,49 @@ TRACK 5 — PANC
 ===================================================== -->
 
 
-<!-- TRACK 0 -->
+<!-- TRACK 0 FOLHOSAS -->
 
-<audio
-    id="audioVeloci1"
-    src="Audios/Narrativa_Raptor.mp3"
-></audio>
-
-
-<audio
-    id="audioVeloci2"
-    src="Audios/Narrativa_Curiosidades_Raptor.mp3"
-></audio>
-
-
-<audio
-    id="audioVelociRoar"
-    src="Audios/raptor_audio.mp3"
-    loop
-></audio>
+<audio id="audioVeloci1" src="Audios/Narrativa_Raptor.mp3"></audio>
 
 
 
-<!-- TRACK 1 -->
+<!-- TRACK 1 TEMPEROS E ERVAS AROMÁTICAS -->
 
-<audio
-    id="audioFauna1"
-    src="Audios/Narrativa_Megafauna.mp3"
-></audio>
+<audio id="audioFauna1" src="Audios/Narrativa_Megafauna.mp3"></audio>
 
 
-<audio
-    id="audioFauna2"
-    src="Audios/Narrativa_Curiosidades_Megafauna.mp3"
-></audio>
+<!-- TRACK 2 FRUTOS -->
 
+<audio id="audioVenus1" src="Audios/Narrativa_Venus_Willendorf.mp3"></audio>
 
-<audio
-    id="audioElefante"
-    src="Audios/elefante_audio.mp3"
-    loop
-></audio>
+<!-- TRACK 3  FRUTAS -->
 
+<audio id="audioVogel1" src="Audios/Narrativa_Vogelherd.mp3"></audio>
 
+<!-- TRACK 4 MEDICINAIS E AROMÁTICAS -->
 
-<!-- TRACK 2 -->
+<audio id="audioColombo1" src="Audios/Narrativa_Colombo.mp3" ></audio>
 
-<audio
-    id="audioVenus1"
-    src="Audios/Narrativa_Venus_Willendorf.mp3"
-></audio>
+<!-- TRACK 5 PANC -->
 
-
-<audio
-    id="audioVenus2"
-    src="Audios/Narrativa_Curiosidades_Venus.mp3"
-></audio>
-
-
-
-<!-- TRACK 3 -->
-
-<audio
-    id="audioVogel1"
-    src="Audios/Narrativa_Vogelherd.mp3"
-></audio>
-
-
-<audio
-    id="audioVogel2"
-    src="Audios/Narrativa_Curiosidade_Vogelherd.mp3"
-></audio>
-
-
-
-<!-- TRACK 4 -->
-
-<audio
-    id="audioColombo1"
-    src="Audios/Narrativa_Colombo.mp3"
-></audio>
-
-
-<audio
-    id="audioColombo2"
-    src="Audios/Narrativa_Curiosidade_Colombo.mp3"
-></audio>
-
-
-
-<!-- TRACK 5 -->
-
-<audio
-    id="audioMona1"
-    src="Audios/Narrativa_Mona.mp3"
-></audio>
-
-
-<audio
-    id="audioMona2"
-    src="Audios/Narrativa_Curiosidade_Mona.mp3"
-></audio>
-
-
+<audio  id="audioMona1" src="Audios/Narrativa_Mona.mp3" ></audio>
 
 <!-- SOM DOS BOTÕES -->
 
-<audio
-    id="clickSound"
-    src="Audios/acerto.mp3"
-></audio>
-
-
+<audio id="clickSound" src="Audios/acerto.mp3" ></audio>
 
 <!-- =====================================================
 CENA AR
 ===================================================== -->
 
-<a-scene
-
-    mindar-image="
-        imageTargetSrc: Imagens/targets.mind;
-    "
-
-    color-space="sRGB"
-
-    renderer="
-        colorManagement: true;
+<a-scene mindar-image="imageTargetSrc: Imagens/targets.mind;" color-space="sRGB" 
+        renderer=" colorManagement: true;
         physicallyCorrectLights: true;
         shadowMap.enabled: true;
-        shadowMap.type: PCFSoftShadowMap;
-    "
-
-    xr-mode-ui="enabled: false"
-
-    device-orientation-permission-ui="enabled: false"
-
-    effects="
-        fxaa: true;
-        bloom: strength: 1.2;
-        bloom: radius: 1;
-        bloom: threshold: 0.8;
-    "
->
+        shadowMap.type: PCFSoftShadowMap;"
+        xr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: false"
+    effects=" fxaa: true; bloom: strength: 1.2; bloom: radius: 1; bloom: threshold: 0.8;">
 
 
 <a-assets>
@@ -403,7 +278,6 @@ CENA AR
 </a-assets>
 
 <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
 
 <!-- =====================================================
 TRACK 0 — FOLHOSAS
