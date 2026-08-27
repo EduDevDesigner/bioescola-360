@@ -1,1377 +1,1199 @@
-const message=document.getElementById("track-message");
+const message = document.getElementById("track-message");
 
-/* ================= SOM CLICK ================= */
 
-const clickSound=document.getElementById("clickSound");
+/* =====================================================
+SOM CLICK
+===================================================== */
 
-function tocarClick(){
+const clickSound =
+    document.getElementById("clickSound");
 
-clickSound.pause();
 
-clickSound.currentTime=0;
+function tocarClick() {
 
-clickSound.play().catch(()=>{});
+    if (!clickSound) return;
+
+    clickSound.pause();
+    clickSound.currentTime = 0;
+
+    clickSound.play().catch(() => {});
 
 }
 
-/* =====================================================
-TRACK 0 — VELOCIRAPTOR
-===================================================== */
-
-const velociPlayButton=document.getElementById("velociPlayButton");
-const velociAudioLeftButton=document.getElementById("velociAudioLeftButton");
-const velociAudioRightButton=document.getElementById("velociAudioRightButton");
-
-const velociModel=document.getElementById("velociModel");
-
-const audioVeloci1=document.getElementById("audioVeloci1");
-const audioVeloci2=document.getElementById("audioVeloci2");
-const audioVelociRoar=document.getElementById("audioVelociRoar");
-
-const velociGroup=document.getElementById("velociGroup");
 
 /* =====================================================
-TRACK 1 — MEGAFAUNA
+TRACK 0 — FOLHOSAS
 ===================================================== */
 
-const faunaPlayButton=document.getElementById("faunaPlayButton");
-const faunaAudioLeftButton=document.getElementById("faunaAudioLeftButton");
-const faunaAudioRightButton=document.getElementById("faunaAudioRightButton");
+const folhosaAudioLeftButton =
+    document.getElementById("folhosaAudioLeftButton");
 
-const audioFauna1=document.getElementById("audioFauna1");
-const audioFauna2=document.getElementById("audioFauna2");
+const folhosaAudioRightButton =
+    document.getElementById("folhosaAudioRightButton");
 
-const mamuteModel=document.getElementById("mamuteModel");
+const audioVeloci1 =
+    document.getElementById("audioVeloci1");
 
-const faunaFog=document.getElementById("faunaFog");
-const faunaGroup=document.getElementById("faunaGroup");
+const audioVeloci2 =
+    document.getElementById("audioVeloci2");
 
-const audioElefante=document.getElementById("audioElefante");
+const audioVelociRoar =
+    document.getElementById("audioVelociRoar");
+
+const velociGroup =
+    document.getElementById("velociGroup");
+
 
 /* =====================================================
-TRACK 2 — VENUS
+TRACK 1 — TEMPEROS E ERVAS AROMÁTICAS
 ===================================================== */
 
-const venusPlayButton=document.getElementById("venusPlayButton");
-const venusAudioLeftButton=document.getElementById("venusAudioLeftButton");
-const venusAudioRightButton=document.getElementById("venusAudioRightButton");
+const temperoAudioLeftButton =
+    document.getElementById("temperoAudioLeftButton");
 
-const audioVenus1=document.getElementById("audioVenus1");
-const audioVenus2=document.getElementById("audioVenus2");
+const temperoAudioRightButton =
+    document.getElementById("temperoAudioRightButton");
 
-const venusGroup=document.getElementById("venusGroup");
-const venusLight=document.getElementById("venusLight");
+const audioFauna1 =
+    document.getElementById("audioFauna1");
+
+const audioFauna2 =
+    document.getElementById("audioFauna2");
+
+const audioElefante =
+    document.getElementById("audioElefante");
+
+const faunaGroup =
+    document.getElementById("faunaGroup");
+
+const mamuteModel =
+    document.getElementById("mamuteModel");
+
 
 /* =====================================================
-TRACK 3 — VOGELHERD
+TRACK 2 — FRUTOS
 ===================================================== */
 
-const vogelPlayButton=document.getElementById("vogelPlayButton");
-const vogelAudioLeftButton=document.getElementById("vogelAudioLeftButton");
-const vogelAudioRightButton=document.getElementById("vogelAudioRightButton");
+const frutoAudioLeftButton =
+    document.getElementById("frutoAudioLeftButton");
 
-const audioVogel1=document.getElementById("audioVogel1");
-const audioVogel2=document.getElementById("audioVogel2");
+const frutoAudioRightButton =
+    document.getElementById("frutoAudioRightButton");
 
-const vogelherdGroup=document.getElementById("vogelherdGroup");
+const audioVenus1 =
+    document.getElementById("audioVenus1");
+
+const audioVenus2 =
+    document.getElementById("audioVenus2");
+
+const venusGroup =
+    document.getElementById("venusGroup");
+
 
 /* =====================================================
-TRACK 4 — COLOMBO
+TRACK 3 — FRUTAS
 ===================================================== */
 
-const colomboPlayButton=document.getElementById("colomboPlayButton");
-const colomboAudioLeftButton=document.getElementById("colomboAudioLeftButton");
-const colomboAudioRightButton=document.getElementById("colomboAudioRightButton");
+const frutaAudioLeftButton =
+    document.getElementById("frutaAudioLeftButton");
 
-const audioColombo1=document.getElementById("audioColombo1");
-const audioColombo2=document.getElementById("audioColombo2");
+const frutaAudioRightButton =
+    document.getElementById("frutaAudioRightButton");
 
-const colomboVideo=document.querySelector("#colomboVideo");
+const audioVogel1 =
+    document.getElementById("audioVogel1");
+
+const audioVogel2 =
+    document.getElementById("audioVogel2");
+
+const vogelherdGroup =
+    document.getElementById("vogelherdGroup");
+
 
 /* =====================================================
-TRACK 5 — MONALISA
+TRACK 4 — MEDICINAIS E AROMÁTICAS
 ===================================================== */
 
-const monaPlayButton=document.getElementById("monaPlayButton");
-const monaAudioLeftButton=document.getElementById("monaAudioLeftButton");
-const monaAudioRightButton=document.getElementById("monaAudioRightButton");
+const medicinalAudioLeftButton =
+    document.getElementById("medicinalAudioLeftButton");
 
-const audioMona1=document.getElementById("audioMona1");
-const audioMona2=document.getElementById("audioMona2");
+const medicinalAudioRightButton =
+    document.getElementById("medicinalAudioRightButton");
 
-const monalisaVideo=document.querySelector("#monalisaVideo");
+const audioColombo1 =
+    document.getElementById("audioColombo1");
+
+const audioColombo2 =
+    document.getElementById("audioColombo2");
+
+const colomboVideo =
+    document.querySelector("#colomboVideo");
+
 
 /* =====================================================
-TRACK 6 — HENRIQUE DIAS
+TRACK 5 — PANC
 ===================================================== */
 
-const diasPlayButton=document.getElementById("diasPlayButton");
-const diasAudioLeftButton=document.getElementById("diasAudioLeftButton");
-const diasAudioRightButton=document.getElementById("diasAudioRightButton");
+const pancAudioLeftButton =
+    document.getElementById("pancAudioLeftButton");
 
-const audioDias1=document.getElementById("audioDias1");
-const audioDias2=document.getElementById("audioDias2");
+const pancAudioRightButton =
+    document.getElementById("pancAudioRightButton");
 
-const diasVideo=document.querySelector("#diasVideo");
+const audioMona1 =
+    document.getElementById("audioMona1");
 
-/* =====================================================
-TRACK 7 — DOM PEDRO
-===================================================== */
+const audioMona2 =
+    document.getElementById("audioMona2");
 
-const dpedroPlayButton=document.getElementById("dpedroPlayButton");
-const dpedroAudioLeftButton=document.getElementById("dpedroAudioLeftButton");
-const dpedroAudioRightButton=document.getElementById("dpedroAudioRightButton");
+const monalisaVideo =
+    document.querySelector("#monalisaVideo");
 
-const audioDPedro1=document.getElementById("audioDPedro1");
-const audioDPedro2=document.getElementById("audioDPedro2");
-
-const dpedroIVideo=document.querySelector("#dpedroIVideo");
-
-/* =====================================================
-TRACK 8 — 14 BIS
-===================================================== */
-
-const flyButton=document.getElementById("flyButton");
-
-const audioLeftButton=document.getElementById("audioLeftButton");
-const audioRightButton=document.getElementById("audioRightButton");
-
-const aviao14bis=document.getElementById("aviao14bis");
-
-const audioFly1=document.getElementById("audioFly1");
-const audioFly2=document.getElementById("audioFly2");
-
-const audioHelice=document.getElementById("audioHelice");
-
-const terrenoVideo=document.querySelector("#terrenoVideoAsset");
-
-/* =====================================================
-TRACK 9 — TORRE
-===================================================== */
-
-const torrePlayButton=document.getElementById("torrePlayButton");
-const torreAudioLeftButton=document.getElementById("torreAudioLeftButton");
-const torreAudioRightButton=document.getElementById("torreAudioRightButton");
-
-const audioTorre1=document.getElementById("audioTorre1");
-const audioTorre2=document.getElementById("audioTorre2");
-
-const torreGroup=document.getElementById("torreGroup");
-const torreLight=document.getElementById("torreLight");
 
 /* =====================================================
 MENU HAMBURGER
 ===================================================== */
 
-const menuToggleButton=
-document.getElementById("menuToggleButton");
+const menuToggleButton =
+    document.getElementById("menuToggleButton");
 
-let menuOpen=false;
+let menuOpen = false;
+
 
 /* =====================================================
 VARIÁVEIS
 ===================================================== */
 
-let activeTrack=-1;
+let activeTrack = -1;
 
-let flyActive=false;
-let faunaActive=false;
-let velociActive=false;
-let venusActive=false;
-let vogelActive=false;
-let torreActive=false;
+let folhosaActive = false;
+let temperoActive = false;
+let frutoActive = false;
+let frutaActive = false;
+let medicinalActive = false;
+let pancActive = false;
 
-let alturaAtual=0;
-let velocidadeTerreno=0;
-
-let delayDecolagem=null;
-
-audioHelice.volume=0.1;
 
 /* =====================================================
-ILUMINAÇÃO
+FUNÇÕES DOS BOTÕES
 ===================================================== */
 
-function ativarBotao(botao){
+function ativarBotao(botao) {
 
-botao.classList.add("btn-active");
+    if (!botao) return;
 
-}
-
-function desativarBotao(botao){
-
-botao.classList.remove("btn-active");
+    botao.classList.add("btn-active");
 
 }
 
-function resetarBotoesTrack(
-botaoCentral,
-botaoEsquerdo,
-botaoDireito
-){
 
-desativarBotao(botaoCentral);
-desativarBotao(botaoEsquerdo);
-desativarBotao(botaoDireito);
+function desativarBotao(botao) {
+
+    if (!botao) return;
+
+    botao.classList.remove("btn-active");
 
 }
 
-/* =====================================================
-ÁUDIO BOTÕES
-===================================================== */
-
-function controlarAudio(
-audioAtual,
-audioOposto,
-botaoAtual,
-botaoOposto
-){
-
-audioOposto.pause();
-audioOposto.currentTime=0;
-
-desativarBotao(botaoOposto);
-
-if(audioAtual.paused){
-
-audioAtual.play();
-
-ativarBotao(botaoAtual);
-
-}else{
-
-audioAtual.pause();
-audioAtual.currentTime=0;
-
-desativarBotao(botaoAtual);
-
-}
-
-audioAtual.onended=function(){
-
-desativarBotao(botaoAtual);
-
-};
-
-}
-
-/* =====================================================
-BOTÃO CENTRAL
-===================================================== */
-
-function controlarBotaoCentral(
-estadoAtual,
-botaoCentral
-){
-
-estadoAtual=!estadoAtual;
-
-if(estadoAtual){
-
-ativarBotao(botaoCentral);
-
-}else{
-
-desativarBotao(botaoCentral);
-
-}
-
-return estadoAtual;
-
-}
 
 /* =====================================================
 RESET BOTÕES
 ===================================================== */
 
-function hideAllButtons(){
+function resetarBotoesTrack(
+    botaoEsquerdo,
+    botaoDireito
+) {
 
-document.querySelectorAll("button").forEach(btn=>{
-
-if(
-btn.id==="menuToggleButton" ||
-btn.id==="finalButtonTop"
-){
-return;
-}
-
-btn.style.display="none";
-
-});
+    desativarBotao(botaoEsquerdo);
+    desativarBotao(botaoDireito);
 
 }
+
+
+/* =====================================================
+CONTROLE DOS ÁUDIOS
+===================================================== */
+
+function controlarAudio(
+    audioAtual,
+    audioOposto,
+    botaoAtual,
+    botaoOposto
+) {
+
+    if (!audioAtual || !audioOposto) return;
+
+
+    audioOposto.pause();
+
+    audioOposto.currentTime = 0;
+
+    desativarBotao(botaoOposto);
+
+
+    if (audioAtual.paused) {
+
+        audioAtual.play().catch(() => {});
+
+        ativarBotao(botaoAtual);
+
+    }
+
+    else {
+
+        audioAtual.pause();
+
+        audioAtual.currentTime = 0;
+
+        desativarBotao(botaoAtual);
+
+    }
+
+
+    audioAtual.onended = function () {
+
+        desativarBotao(botaoAtual);
+
+    };
+
+}
+
+
+/* =====================================================
+TODOS OS BOTÕES DE INTERAÇÃO
+===================================================== */
+
+const interactionButtons = [
+
+    folhosaAudioLeftButton,
+    folhosaAudioRightButton,
+
+    temperoAudioLeftButton,
+    temperoAudioRightButton,
+
+    frutoAudioLeftButton,
+    frutoAudioRightButton,
+
+    frutaAudioLeftButton,
+    frutaAudioRightButton,
+
+    medicinalAudioLeftButton,
+    medicinalAudioRightButton,
+
+    pancAudioLeftButton,
+    pancAudioRightButton
+
+];
+
+
+/* =====================================================
+ESCONDER BOTÕES DE INTERAÇÃO
+===================================================== */
+
+function esconderBotoesInteracao() {
+
+    interactionButtons.forEach(botao => {
+
+        if (!botao) return;
+
+        botao.style.display = "none";
+
+    });
+
+}
+
+
+/* =====================================================
+MOSTRAR BOTÕES DA TRACK
+===================================================== */
+
+function mostrarBotoesTrack(index) {
+
+    /* Primeiro esconde todos */
+
+    esconderBotoesInteracao();
+
+
+    /* =============================================
+    TRACK 0 — FOLHOSAS
+    ============================================= */
+
+    if (index === 0) {
+
+        if (folhosaAudioLeftButton) {
+
+            folhosaAudioLeftButton.style.display = "block";
+
+        }
+
+        if (folhosaAudioRightButton) {
+
+            folhosaAudioRightButton.style.display = "block";
+
+        }
+
+    }
+
+
+    /* =============================================
+    TRACK 1 — TEMPEROS
+    ============================================= */
+
+    if (index === 1) {
+
+        if (temperoAudioLeftButton) {
+
+            temperoAudioLeftButton.style.display = "block";
+
+        }
+
+        if (temperoAudioRightButton) {
+
+            temperoAudioRightButton.style.display = "block";
+
+        }
+
+    }
+
+
+    /* =============================================
+    TRACK 2 — FRUTOS
+    ============================================= */
+
+    if (index === 2) {
+
+        if (frutoAudioLeftButton) {
+
+            frutoAudioLeftButton.style.display = "block";
+
+        }
+
+        if (frutoAudioRightButton) {
+
+            frutoAudioRightButton.style.display = "block";
+
+        }
+
+    }
+
+
+    /* =============================================
+    TRACK 3 — FRUTAS
+    ============================================= */
+
+    if (index === 3) {
+
+        if (frutaAudioLeftButton) {
+
+            frutaAudioLeftButton.style.display = "block";
+
+        }
+
+        if (frutaAudioRightButton) {
+
+            frutaAudioRightButton.style.display = "block";
+
+        }
+
+    }
+
+
+    /* =============================================
+    TRACK 4 — MEDICINAIS
+    ============================================= */
+
+    if (index === 4) {
+
+        if (medicinalAudioLeftButton) {
+
+            medicinalAudioLeftButton.style.display = "block";
+
+        }
+
+        if (medicinalAudioRightButton) {
+
+            medicinalAudioRightButton.style.display = "block";
+
+        }
+
+    }
+
+
+    /* =============================================
+    TRACK 5 — PANC
+    ============================================= */
+
+    if (index === 5) {
+
+        if (pancAudioLeftButton) {
+
+            pancAudioLeftButton.style.display = "block";
+
+        }
+
+        if (pancAudioRightButton) {
+
+            pancAudioRightButton.style.display = "block";
+
+        }
+
+    }
+
+}
+
 
 /* =====================================================
 SOM EM TODOS OS BOTÕES
 ===================================================== */
 
-document.querySelectorAll("button").forEach(botao=>{
+document.querySelectorAll("button").forEach(botao => {
 
-botao.addEventListener("click",()=>{
+    botao.addEventListener("click", () => {
 
-tocarClick();
+        tocarClick();
+
+    });
 
 });
 
-});
 
 /* =====================================================
-TARGETS
+DROPDOWN — ESPÉCIES
 ===================================================== */
 
-const targets=document.querySelectorAll("[mindar-image-target]");
+const dropdowns = [
 
-targets.forEach((target,index)=>{
+    {
+        button: folhosaAudioRightButton,
+        menu: document.getElementById(
+            "folhosaSpeciesMenu"
+        )
+    },
 
-target.addEventListener("targetFound",()=>{
+    {
+        button: temperoAudioRightButton,
+        menu: document.getElementById(
+            "temperoSpeciesMenu"
+        )
+    },
 
-registrarTrack(index);
+    {
+        button: frutoAudioRightButton,
+        menu: document.getElementById(
+            "frutoSpeciesMenu"
+        )
+    },
 
-activeTrack=index;
+    {
+        button: frutaAudioRightButton,
+        menu: document.getElementById(
+            "frutaSpeciesMenu"
+        )
+    },
 
-message.classList.add("hidden");
+    {
+        button: medicinalAudioRightButton,
+        menu: document.getElementById(
+            "medicinalSpeciesMenu"
+        )
+    },
 
-menuToggleButton.style.display="block";
+    {
+        button: pancAudioRightButton,
+        menu: document.getElementById(
+            "pancSpeciesMenu"
+        )
 
-hideAllButtons();
+    }
 
-if(index===0){
+];
 
-velociPlayButton.style.display="block";
-velociAudioLeftButton.style.display="block";
-velociAudioRightButton.style.display="block";
 
-}
+/* =====================================================
+ABRIR DROPDOWN
+===================================================== */
 
-if(index===1){
+dropdowns.forEach(dropdown => {
 
-faunaPlayButton.style.display="block";
-faunaAudioLeftButton.style.display="block";
-faunaAudioRightButton.style.display="block";
+    if (!dropdown.button || !dropdown.menu) return;
 
-}
 
-if(index===2){
+    dropdown.button.addEventListener(
+        "click",
+        function (event) {
 
-venusPlayButton.style.display="block";
-venusAudioLeftButton.style.display="block";
-venusAudioRightButton.style.display="block";
+            event.stopPropagation();
 
-}
 
-if(index===3){
+            /* =========================================
+            FECHA OS OUTROS DROPDOWNS
+            ========================================= */
 
-vogelPlayButton.style.display="block";
-vogelAudioLeftButton.style.display="block";
-vogelAudioRightButton.style.display="block";
+            dropdowns.forEach(outro => {
 
-}
+                if (outro !== dropdown && outro.menu) {
 
-if(index===4){
+                    outro.menu.classList.remove("open");
 
-colomboPlayButton.style.display="block";
-colomboAudioLeftButton.style.display="block";
-colomboAudioRightButton.style.display="block";
+                }
 
-}
+            });
 
-if(index===5){
 
-monaPlayButton.style.display="block";
-monaAudioLeftButton.style.display="block";
-monaAudioRightButton.style.display="block";
+            /* =========================================
+            ABRE / FECHA O DROPDOWN ATUAL
+            ========================================= */
 
-}
+            dropdown.menu.classList.toggle("open");
 
-if(index===6){
-
-diasPlayButton.style.display="block";
-diasAudioLeftButton.style.display="block";
-diasAudioRightButton.style.display="block";
-
-}
-
-if(index===7){
-
-dpedroPlayButton.style.display="block";
-dpedroAudioLeftButton.style.display="block";
-dpedroAudioRightButton.style.display="block";
-
-}
-
-if(index===8){
-
-flyButton.style.display="block";
-
-audioLeftButton.style.display="block";
-audioRightButton.style.display="block";
-
-audioHelice.play();
-
-}
-
-if(index===9){
-
-torrePlayButton.style.display="block";
-torreAudioLeftButton.style.display="block";
-torreAudioRightButton.style.display="block";
-
-}
+        }
+    );
 
 });
 
-target.addEventListener("targetLost",()=>{
 
-activeTrack=-1;
+/* =====================================================
+FECHAR DROPDOWN AO CLICAR FORA
+===================================================== */
 
-message.classList.remove("hidden");
+document.addEventListener("click", () => {
 
-hideAllButtons();
+    dropdowns.forEach(dropdown => {
 
-menuOpen=false;
+        if (dropdown.menu) {
 
-document.body.classList.remove("menu-open");
+            dropdown.menu.classList.remove("open");
 
-menuToggleButton.innerHTML="☰";
+        }
 
-menuToggleButton.style.display="none";
-
-flyActive=false;
-faunaActive=false;
-velociActive=false;
-venusActive=false;
-vogelActive=false;
-torreActive=false;
-
-resetarBotoesTrack(
-flyButton,
-audioLeftButton,
-audioRightButton
-);
-
-resetarBotoesTrack(
-faunaPlayButton,
-faunaAudioLeftButton,
-faunaAudioRightButton
-);
-
-resetarBotoesTrack(
-velociPlayButton,
-velociAudioLeftButton,
-velociAudioRightButton
-);
-
-resetarBotoesTrack(
-venusPlayButton,
-venusAudioLeftButton,
-venusAudioRightButton
-);
-
-resetarBotoesTrack(
-vogelPlayButton,
-vogelAudioLeftButton,
-vogelAudioRightButton
-);
-
-resetarBotoesTrack(
-torrePlayButton,
-torreAudioLeftButton,
-torreAudioRightButton
-);
-
-document.querySelectorAll("audio").forEach(a=>{
-
-a.pause();
-a.currentTime=0;
+    });
 
 });
 
-if(colomboVideo){
 
-colomboVideo.pause();
-colomboVideo.currentTime=0;
+/* =====================================================
+TARGETS MINDAR
+===================================================== */
 
-}
+const targets =
+    document.querySelectorAll(
+        "[mindar-image-target]"
+    );
 
-if(monalisaVideo){
 
-monalisaVideo.pause();
-monalisaVideo.currentTime=0;
+targets.forEach((target, index) => {
 
-}
 
-if(diasVideo){
+    /* =================================================
+    TARGET ENCONTRADO
+    ================================================= */
 
-diasVideo.pause();
-diasVideo.currentTime=0;
+    target.addEventListener(
+        "targetFound",
+        () => {
 
-}
 
-if(dpedroIVideo){
+            /* =========================================
+            REGISTRA O TRACK
+            ========================================= */
 
-dpedroIVideo.pause();
-dpedroIVideo.currentTime=0;
+            registrarTrack(index);
 
-}
 
-alturaAtual=0;
+            activeTrack = index;
 
-velocidadeTerreno=0;
 
-clearTimeout(delayDecolagem);
+            /* =========================================
+            ESCONDE MENSAGEM DE TRACKING
+            ========================================= */
 
-aviao14bis.setAttribute(
-"position",
-"0 0 0"
-);
+            if (message) {
+
+                message.classList.add("hidden");
+
+            }
+
+
+            /* =========================================
+            MOSTRA MENU HAMBURGER
+            ========================================= */
+
+            if (menuToggleButton) {
+
+                menuToggleButton.style.display = "block";
+
+            }
+
+
+            /* =========================================
+            MOSTRA OS BOTÕES DA TRACK
+            ========================================= */
+
+            mostrarBotoesTrack(index);
+
+
+            /* =========================================
+            FECHA TODOS OS DROPDOWNS
+            ========================================= */
+
+            dropdowns.forEach(dropdown => {
+
+                if (dropdown.menu) {
+
+                    dropdown.menu.classList.remove("open");
+
+                }
+
+            });
+
+        }
+    );
+
+
+    /* =================================================
+    TARGET PERDIDO
+    ================================================= */
+
+    target.addEventListener(
+        "targetLost",
+        () => {
+
+
+            activeTrack = -1;
+
+
+            /* =========================================
+            MOSTRA MENSAGEM DE TRACKING
+            ========================================= */
+
+            if (message) {
+
+                message.classList.remove("hidden");
+
+            }
+
+
+            /* =========================================
+            ESCONDE BOTÕES
+            ========================================= */
+
+            esconderBotoesInteracao();
+
+
+            /* =========================================
+            FECHA DROPDOWNS
+            ========================================= */
+
+            dropdowns.forEach(dropdown => {
+
+                if (dropdown.menu) {
+
+                    dropdown.menu.classList.remove("open");
+
+                }
+
+            });
+
+
+            /* =========================================
+            FECHA MENU HAMBURGER
+            ========================================= */
+
+            menuOpen = false;
+
+
+            document.body.classList.remove(
+                "menu-open"
+            );
+
+
+            if (menuToggleButton) {
+
+                menuToggleButton.innerHTML = "☰";
+
+                menuToggleButton.style.display = "none";
+
+            }
+
+
+            /* =========================================
+            RESET ESTADOS
+            ========================================= */
+
+            folhosaActive = false;
+            temperoActive = false;
+            frutoActive = false;
+            frutaActive = false;
+            medicinalActive = false;
+            pancActive = false;
+
+
+            /* =========================================
+            RESET BOTÕES
+            ========================================= */
+
+            resetarBotoesTrack(
+                folhosaAudioLeftButton,
+                folhosaAudioRightButton
+            );
+
+
+            resetarBotoesTrack(
+                temperoAudioLeftButton,
+                temperoAudioRightButton
+            );
+
+
+            resetarBotoesTrack(
+                frutoAudioLeftButton,
+                frutoAudioRightButton
+            );
+
+
+            resetarBotoesTrack(
+                frutaAudioLeftButton,
+                frutaAudioRightButton
+            );
+
+
+            resetarBotoesTrack(
+                medicinalAudioLeftButton,
+                medicinalAudioRightButton
+            );
+
+
+            resetarBotoesTrack(
+                pancAudioLeftButton,
+                pancAudioRightButton
+            );
+
+
+            /* =========================================
+            PARA TODOS OS ÁUDIOS
+            ========================================= */
+
+            document
+                .querySelectorAll("audio")
+                .forEach(audio => {
+
+                    audio.pause();
+
+                    audio.currentTime = 0;
+
+                });
+
+        }
+    );
 
 });
 
-});
 
 /* =====================================================
 MENU HAMBURGER
 ===================================================== */
 
-menuToggleButton.addEventListener("click",()=>{
+if (menuToggleButton) {
 
-menuOpen=!menuOpen;
+    menuToggleButton.addEventListener(
+        "click",
+        () => {
 
-if(menuOpen){
 
-document.body.classList.add("menu-open");
+            menuOpen = !menuOpen;
 
-menuToggleButton.innerHTML="✕";
 
-}else{
+            if (menuOpen) {
 
-document.body.classList.remove("menu-open");
+                document.body.classList.add(
+                    "menu-open"
+                );
 
-menuToggleButton.innerHTML="☰";
+                menuToggleButton.innerHTML = "✕";
+
+            }
+
+            else {
+
+                document.body.classList.remove(
+                    "menu-open"
+                );
+
+                menuToggleButton.innerHTML = "☰";
+
+            }
+
+        }
+    );
 
 }
 
-});
 
 /* =====================================================
-TRACK 0 — VELOCIRAPTOR
+TRACK 0 — FOLHOSAS
 ===================================================== */
 
-velociPlayButton.addEventListener("click",function(){
+if (folhosaAudioLeftButton) {
 
-if(activeTrack!==0){return;}
+    folhosaAudioLeftButton.addEventListener(
+        "click",
+        () => {
 
-velociActive=controlarBotaoCentral(
-velociActive,
-velociPlayButton
-);
+            if (activeTrack !== 0) return;
 
-if(velociActive){
 
-velociModel.setAttribute(
-"animation-mixer",
-"loop: pingpong"
-);
+            controlarAudio(
+                audioVeloci1,
+                audioVeloci2,
+                folhosaAudioLeftButton,
+                folhosaAudioRightButton
+            );
 
-audioVelociRoar.currentTime=0;
-audioVelociRoar.play();
-
-girarVeloci();
-
-}else{
-
-velociModel.removeAttribute(
-"animation-mixer"
-);
-
-audioVelociRoar.pause();
-audioVelociRoar.currentTime=0;
+        }
+    );
 
 }
 
-});
 
-velociAudioLeftButton.addEventListener("click",function(){
+if (folhosaAudioRightButton) {
 
-controlarAudio(
-audioVeloci1,
-audioVeloci2,
-velociAudioLeftButton,
-velociAudioRightButton
-);
+    folhosaAudioRightButton.addEventListener(
+        "click",
+        () => {
 
-});
+            if (activeTrack !== 0) return;
 
-velociAudioRightButton.addEventListener("click",function(){
 
-controlarAudio(
-audioVeloci2,
-audioVeloci1,
-velociAudioRightButton,
-velociAudioLeftButton
-);
+            controlarAudio(
+                audioVeloci2,
+                audioVeloci1,
+                folhosaAudioRightButton,
+                folhosaAudioLeftButton
+            );
 
-});
-
-function girarVeloci(){
-
-let rot=180;
-
-let giro=setInterval(function(){
-
-if(!velociActive || activeTrack!==0){
-
-clearInterval(giro);
-return;
+        }
+    );
 
 }
 
-rot+=1;
-
-velociGroup.setAttribute(
-"rotation",
-"0 0 "+rot
-);
-
-},30);
-
-}
 
 /* =====================================================
-TRACK 1 — FAUNA
+TRACK 1 — TEMPEROS
 ===================================================== */
 
-faunaPlayButton.addEventListener("click",function(){
+if (temperoAudioLeftButton) {
 
-if(activeTrack!==1){return;}
+    temperoAudioLeftButton.addEventListener(
+        "click",
+        () => {
 
-faunaActive=controlarBotaoCentral(
-faunaActive,
-faunaPlayButton
-);
+            if (activeTrack !== 1) return;
 
-if(faunaActive){
 
-mamuteModel.setAttribute(
-"animation-mixer",
-"loop: pingpong"
-);
+            controlarAudio(
+                audioFauna1,
+                audioFauna2,
+                temperoAudioLeftButton,
+                temperoAudioRightButton
+            );
 
-audioElefante.currentTime=0;
-audioElefante.play();
-
-girarFauna();
-
-}else{
-
-mamuteModel.removeAttribute(
-"animation-mixer"
-);
-
-audioElefante.pause();
-audioElefante.currentTime=0;
+        }
+    );
 
 }
 
-});
 
-faunaAudioLeftButton.addEventListener("click",function(){
+if (temperoAudioRightButton) {
 
-controlarAudio(
-audioFauna1,
-audioFauna2,
-faunaAudioLeftButton,
-faunaAudioRightButton
-);
+    temperoAudioRightButton.addEventListener(
+        "click",
+        () => {
 
-});
+            if (activeTrack !== 1) return;
 
-faunaAudioRightButton.addEventListener("click",function(){
 
-controlarAudio(
-audioFauna2,
-audioFauna1,
-faunaAudioRightButton,
-faunaAudioLeftButton
-);
+            controlarAudio(
+                audioFauna2,
+                audioFauna1,
+                temperoAudioRightButton,
+                temperoAudioLeftButton
+            );
 
-});
-
-function girarFauna(){
-
-let rot=-90;
-
-let giro=setInterval(function(){
-
-if(!faunaActive || activeTrack!==1){
-
-clearInterval(giro);
-return;
+        }
+    );
 
 }
 
-rot-=1;
-
-faunaGroup.setAttribute(
-"rotation",
-"0 0 "+rot
-);
-
-},30);
-
-}
 
 /* =====================================================
-TRACK 2 — VENUS
+TRACK 2 — FRUTOS
 ===================================================== */
 
-venusPlayButton.addEventListener("click",function(){
+if (frutoAudioLeftButton) {
 
-if(activeTrack!==2){return;}
+    frutoAudioLeftButton.addEventListener(
+        "click",
+        () => {
 
-venusActive=controlarBotaoCentral(
-venusActive,
-venusPlayButton
-);
+            if (activeTrack !== 2) return;
 
-if(venusActive){
 
-girarVenus();
+            controlarAudio(
+                audioVenus1,
+                audioVenus2,
+                frutoAudioLeftButton,
+                frutoAudioRightButton
+            );
 
-}else{
-
-venusLight.setAttribute("intensity","0");
-
-}
-
-});
-
-venusAudioLeftButton.addEventListener("click",function(){
-
-controlarAudio(
-audioVenus1,
-audioVenus2,
-venusAudioLeftButton,
-venusAudioRightButton
-);
-
-});
-
-venusAudioRightButton.addEventListener("click",function(){
-
-controlarAudio(
-audioVenus2,
-audioVenus1,
-venusAudioRightButton,
-venusAudioLeftButton
-);
-
-});
-
-function girarVenus(){
-
-let rot=0;
-
-let giro=setInterval(function(){
-
-if(!venusActive || activeTrack!==2){
-
-clearInterval(giro);
-return;
+        }
+    );
 
 }
 
-rot+=1;
 
-venusGroup.setAttribute(
-"rotation",
-"0 0 "+rot
-);
+if (frutoAudioRightButton) {
 
-},30);
+    frutoAudioRightButton.addEventListener(
+        "click",
+        () => {
+
+            if (activeTrack !== 2) return;
+
+
+            controlarAudio(
+                audioVenus2,
+                audioVenus1,
+                frutoAudioRightButton,
+                frutoAudioLeftButton
+            );
+
+        }
+    );
 
 }
+
 
 /* =====================================================
-TRACK 3 — VOGELHERD
+TRACK 3 — FRUTAS
 ===================================================== */
 
-vogelPlayButton.addEventListener("click",function(){
+if (frutaAudioLeftButton) {
 
-if(activeTrack!==3){return;}
+    frutaAudioLeftButton.addEventListener(
+        "click",
+        () => {
 
-vogelActive=controlarBotaoCentral(
-vogelActive,
-vogelPlayButton
-);
+            if (activeTrack !== 3) return;
 
-if(vogelActive){
 
-girarVogel();
+            controlarAudio(
+                audioVogel1,
+                audioVogel2,
+                frutaAudioLeftButton,
+                frutaAudioRightButton
+            );
 
-}
-
-});
-
-vogelAudioLeftButton.addEventListener("click",function(){
-
-controlarAudio(
-audioVogel1,
-audioVogel2,
-vogelAudioLeftButton,
-vogelAudioRightButton
-);
-
-});
-
-vogelAudioRightButton.addEventListener("click",function(){
-
-controlarAudio(
-audioVogel2,
-audioVogel1,
-vogelAudioRightButton,
-vogelAudioLeftButton
-);
-
-});
-
-function girarVogel(){
-
-let rot=0;
-
-let giro=setInterval(function(){
-
-if(!vogelActive || activeTrack!==3){
-
-clearInterval(giro);
-return;
+        }
+    );
 
 }
 
-rot+=1;
 
-vogelherdGroup.setAttribute(
-"rotation",
-"0 0 "+rot
-);
+if (frutaAudioRightButton) {
 
-},30);
+    frutaAudioRightButton.addEventListener(
+        "click",
+        () => {
+
+            if (activeTrack !== 3) return;
+
+
+            controlarAudio(
+                audioVogel2,
+                audioVogel1,
+                frutaAudioRightButton,
+                frutaAudioLeftButton
+            );
+
+        }
+    );
 
 }
+
 
 /* =====================================================
-TRACK 4 — COLOMBO
+TRACK 4 — MEDICINAIS
 ===================================================== */
 
-colomboPlayButton.addEventListener("click",function(){
+if (medicinalAudioLeftButton) {
 
-if(colomboVideo.paused){
+    medicinalAudioLeftButton.addEventListener(
+        "click",
+        () => {
 
-colomboVideo.play();
+            if (activeTrack !== 4) return;
 
-ativarBotao(colomboPlayButton);
 
-}else{
+            controlarAudio(
+                audioColombo1,
+                audioColombo2,
+                medicinalAudioLeftButton,
+                medicinalAudioRightButton
+            );
 
-colomboVideo.pause();
-
-desativarBotao(colomboPlayButton);
+        }
+    );
 
 }
 
-});
 
-colomboVideo.addEventListener("ended",function(){
+if (medicinalAudioRightButton) {
 
-desativarBotao(colomboPlayButton);
+    medicinalAudioRightButton.addEventListener(
+        "click",
+        () => {
 
-});
+            if (activeTrack !== 4) return;
 
-colomboAudioLeftButton.addEventListener("click",function(){
 
-controlarAudio(
-audioColombo1,
-audioColombo2,
-colomboAudioLeftButton,
-colomboAudioRightButton
-);
+            controlarAudio(
+                audioColombo2,
+                audioColombo1,
+                medicinalAudioRightButton,
+                medicinalAudioLeftButton
+            );
 
-});
+        }
+    );
 
-colomboAudioRightButton.addEventListener("click",function(){
+}
 
-controlarAudio(
-audioColombo2,
-audioColombo1,
-colomboAudioRightButton,
-colomboAudioLeftButton
-);
-
-});
 
 /* =====================================================
-TRACK 5 — MONALISA
+TRACK 5 — PANC
 ===================================================== */
 
-monaPlayButton.addEventListener("click",function(){
+if (pancAudioLeftButton) {
 
-if(monalisaVideo.paused){
+    pancAudioLeftButton.addEventListener(
+        "click",
+        () => {
 
-monalisaVideo.play();
+            if (activeTrack !== 5) return;
 
-ativarBotao(monaPlayButton);
 
-}else{
+            controlarAudio(
+                audioMona1,
+                audioMona2,
+                pancAudioLeftButton,
+                pancAudioRightButton
+            );
 
-monalisaVideo.pause();
-
-desativarBotao(monaPlayButton);
+        }
+    );
 
 }
 
-});
 
-monalisaVideo.addEventListener("ended",function(){
+if (pancAudioRightButton) {
 
-desativarBotao(monaPlayButton);
+    pancAudioRightButton.addEventListener(
+        "click",
+        () => {
 
-});
+            if (activeTrack !== 5) return;
 
-monaAudioLeftButton.addEventListener("click",function(){
 
-controlarAudio(
-audioMona1,
-audioMona2,
-monaAudioLeftButton,
-monaAudioRightButton
-);
+            controlarAudio(
+                audioMona2,
+                audioMona1,
+                pancAudioRightButton,
+                pancAudioLeftButton
+            );
 
-});
+        }
+    );
 
-monaAudioRightButton.addEventListener("click",function(){
+}
 
-controlarAudio(
-audioMona2,
-audioMona1,
-monaAudioRightButton,
-monaAudioLeftButton
-);
-
-});
 
 /* =====================================================
-TRACK 6 — HENRIQUE DIAS
+CONTADOR DE TRACKS
 ===================================================== */
 
-diasPlayButton.addEventListener("click",function(){
+const progressCount =
+    document.getElementById("progressCount");
 
-if(diasVideo.paused){
 
-diasVideo.play();
+const finalButtonTop =
+    document.getElementById("finalButtonTop");
 
-ativarBotao(diasPlayButton);
 
-}else{
+const visitedTracks =
+    new Set();
 
-diasVideo.pause();
 
-desativarBotao(diasPlayButton);
+const totalTracks = 6;
+
+
+function registrarTrack(index) {
+
+
+    if (visitedTracks.has(index)) {
+
+        return;
+
+    }
+
+
+    visitedTracks.add(index);
+
+
+    if (progressCount) {
+
+        progressCount.innerText =
+            visitedTracks.size;
+
+    }
+
+
+    if (
+        visitedTracks.size >= totalTracks
+    ) {
+
+        mostrarMensagemFinal();
+
+    }
 
 }
 
-});
 
-diasVideo.addEventListener("ended",function(){
+function mostrarMensagemFinal() {
 
-desativarBotao(diasPlayButton);
+    if (finalButtonTop) {
 
-});
+        finalButtonTop.style.display =
+            "block";
 
-diasAudioLeftButton.addEventListener("click",function(){
+    }
 
-controlarAudio(
-audioDias1,
-audioDias2,
-diasAudioLeftButton,
-diasAudioRightButton
-);
+}
 
-});
-
-diasAudioRightButton.addEventListener("click",function(){
-
-controlarAudio(
-audioDias2,
-audioDias1,
-diasAudioRightButton,
-diasAudioLeftButton
-);
-
-});
 
 /* =====================================================
-TRACK 7 — DOM PEDRO
+BOTÃO DO QUIZ
 ===================================================== */
 
-dpedroPlayButton.addEventListener("click",function(){
+if (finalButtonTop) {
 
-if(dpedroIVideo.paused){
+    finalButtonTop.addEventListener(
+        "click",
+        () => {
 
-dpedroIVideo.play();
+            window.location.href =
+                "quiz.html";
 
-ativarBotao(dpedroPlayButton);
-
-}else{
-
-dpedroIVideo.pause();
-
-desativarBotao(dpedroPlayButton);
+        }
+    );
 
 }
-
-});
-
-dpedroIVideo.addEventListener("ended",function(){
-
-desativarBotao(dpedroPlayButton);
-
-});
-
-dpedroAudioLeftButton.addEventListener("click",function(){
-
-controlarAudio(
-audioDPedro1,
-audioDPedro2,
-dpedroAudioLeftButton,
-dpedroAudioRightButton
-);
-
-});
-
-dpedroAudioRightButton.addEventListener("click",function(){
-
-controlarAudio(
-audioDPedro2,
-audioDPedro1,
-dpedroAudioRightButton,
-dpedroAudioLeftButton
-);
-
-});
-
-/* =====================================================
-TRACK 8 — AVIÃO
-===================================================== */
-
-flyButton.addEventListener("click",function(){
-
-if(activeTrack!==8){return;}
-
-flyActive=controlarBotaoCentral(
-flyActive,
-flyButton
-);
-
-if(flyActive){
-
-terrenoVideo.play();
-
-acelerarTerreno();
-
-delayDecolagem=setTimeout(function(){
-
-if(flyActive){
-
-subirAviao();
-
-}
-
-},1500);
-
-}else{
-
-clearTimeout(delayDecolagem);
-
-descerAviao();
-
-}
-
-});
-
-audioLeftButton.addEventListener("click",function(){
-
-controlarAudio(
-audioFly1,
-audioFly2,
-audioLeftButton,
-audioRightButton
-);
-
-});
-
-audioRightButton.addEventListener("click",function(){
-
-controlarAudio(
-audioFly2,
-audioFly1,
-audioRightButton,
-audioLeftButton
-);
-
-});
-
-/* =====================================================
-TRACK 9 — TORRE
-===================================================== */
-
-torrePlayButton.addEventListener("click",function(){
-
-if(activeTrack!==9){return;}
-
-torreActive=controlarBotaoCentral(
-torreActive,
-torrePlayButton
-);
-
-if(torreActive){
-
-girarTorre();
-
-}else{
-
-torreLight.setAttribute("intensity","0");
-
-}
-
-});
-
-torreAudioLeftButton.addEventListener("click",function(){
-
-controlarAudio(
-audioTorre1,
-audioTorre2,
-torreAudioLeftButton,
-torreAudioRightButton
-);
-
-});
-
-torreAudioRightButton.addEventListener("click",function(){
-
-controlarAudio(
-audioTorre2,
-audioTorre1,
-torreAudioRightButton,
-torreAudioLeftButton
-);
-
-});
-
-function girarTorre(){
-
-let rot=0;
-
-let giro=setInterval(function(){
-
-if(!torreActive || activeTrack!==9){
-
-clearInterval(giro);
-return;
-
-}
-
-rot+=1;
-
-torreGroup.setAttribute(
-"rotation",
-"0 0 "+rot
-);
-
-},35);
-
-}
-
-/* =====================================================
-VOO
-===================================================== */
-
-function subirAviao(){
-
-let subida=setInterval(function(){
-
-if(!flyActive){
-
-clearInterval(subida);
-return;
-
-}
-
-if(alturaAtual<0.8){
-
-alturaAtual+=0.01;
-
-aviao14bis.setAttribute(
-"position",
-"0 0 "+alturaAtual
-);
-
-}else{
-
-clearInterval(subida);
-
-planarAviao();
-
-}
-
-},30);
-
-}
-
-function planarAviao(){
-
-let direcao=1;
-
-let planar=setInterval(function(){
-
-if(!flyActive){
-
-clearInterval(planar);
-return;
-
-}
-
-alturaAtual+=0.003*direcao;
-
-if(alturaAtual>0.85){
-
-direcao=-1;
-
-}
-
-if(alturaAtual<0.75){
-
-direcao=1;
-
-}
-
-aviao14bis.setAttribute(
-"position",
-"0 0 "+alturaAtual
-);
-
-},40);
-
-}
-
-function descerAviao(){
-
-let descida=setInterval(function(){
-
-if(alturaAtual>0){
-
-alturaAtual-=0.01;
-
-aviao14bis.setAttribute(
-"position",
-"0 0 "+alturaAtual
-);
-
-}else{
-
-clearInterval(descida);
-
-desacelerarTerreno();
-
-}
-
-},30);
-
-}
-
-function acelerarTerreno(){
-
-let acelerar=setInterval(function(){
-
-if(velocidadeTerreno<0.0007){
-
-velocidadeTerreno+=0.00002;
-
-}else{
-
-velocidadeTerreno=0.0007;
-
-clearInterval(acelerar);
-
-}
-
-},40);
-
-}
-
-function desacelerarTerreno(){
-
-let reduzir=setInterval(function(){
-
-if(velocidadeTerreno>0){
-
-velocidadeTerreno-=0.00002;
-
-}else{
-
-velocidadeTerreno=0;
-
-terrenoVideo.pause();
-
-terrenoVideo.currentTime=0;
-
-clearInterval(reduzir);
-
-}
-
-},40);
-
-}
-
-/* =====================================================
-CONTADOR TRACKS
-===================================================== */
-
-const progressCount=document.getElementById("progressCount");
-
-const finalButtonTop=
-document.getElementById("finalButtonTop");
-
-const visitedTracks=new Set();
-
-const totalTracks=10;
-
-function registrarTrack(index){
-
-if(visitedTracks.has(index)){
-return;
-}
-
-visitedTracks.add(index);
-
-progressCount.innerText=
-visitedTracks.size;
-
-if(visitedTracks.size>=totalTracks){
-
-mostrarMensagemFinal();
-
-}
-
-}
-
-function mostrarMensagemFinal(){
-
-finalButtonTop.style.display="block";
-
-}
-
-finalButtonTop.addEventListener("click",function(){
-
-window.location.href="quiz.html";
-
-});
