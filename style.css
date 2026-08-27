@@ -96,23 +96,22 @@ MENU HAMBURGER
 
 
 /* =====================================================
-BOTÕES DAS TRACKS
+BOTÕES DAS TRACKS (POSICIONADOS LADO A LADO)
 ===================================================== */
 
 .audio-left-fly-btn,
 .audio-right-fly-btn {
-
     display: none;
     position: fixed;
     bottom: 25px;
     z-index: 2000;
     height: 52px;
-    padding: 0 22px;
+    padding: 0 18px;
     border: none;
     border-radius: 26px;
     background: rgba(0,0,0,0.78);
     color: white;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
     letter-spacing: 0.5px;
     cursor: pointer;
@@ -120,28 +119,26 @@ BOTÕES DAS TRACKS
     transition: transform 0.2s ease, background 0.2s ease;
 }
 
+/* O botão CONHEÇA fica à esquerda do botão ESPÉCIES */
 .audio-left-fly-btn {
-    left: 20px;
+    right: 165px; /* Recuo para dar espaço ao botão da direita */
+    left: auto;   /* Remove o alinhamento antigo da esquerda */
 }
 
+/* O botão ESPÉCIES fica fixado à extrema direita */
 .audio-right-fly-btn {
     right: 20px;
 }
 
-
 .audio-left-fly-btn:active,
 .audio-right-fly-btn:active {
-
     transform: scale(0.94);
-
 }
-
 
 .audio-left-fly-btn.btn-active,
 .audio-right-fly-btn.btn-active {
     background: rgba(30, 120, 60, 0.9);
 }
-
 
 
 /* =====================================================
@@ -150,45 +147,35 @@ DROPDOWN DE ESPÉCIES
 
 .species-dropdown {
     position: fixed;
+    bottom: 88px; /* Abre logo acima dos botões */
+    right: 20px;  /* Alinhado com o botão ESPÉCIES */
     display: flex;
     flex-direction: column;
     gap: 8px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(20px);
-    transition:opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease; z-index: 10000;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease; 
+    z-index: 10000;
 }
-
-
-/* DROPDOWN ABERTO */
 
 .species-dropdown.open {
-
     opacity: 1;
     visibility: visible;
-
     transform: translateY(0);
-
 }
 
-
-/* BOTÕES DO DROPDOWN */
-
 .species-dropdown button {
-
     display: block;
-
-    width: 160px;
+    width: 135px;
     min-height: 42px;
-
     border: none;
     border-radius: 12px;
-
     cursor: pointer;
-
     font-size: 14px;
     font-weight: bold;
-
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
 }
 
 
@@ -377,25 +364,39 @@ CELULARES PEQUENOS
 
 
 /* =====================================================
-CELULAR MUITO PEQUENO
+CELULARES PEQUENOS (RESPONSIVIDADE)
 ===================================================== */
 
-@media (max-height: 600px) {
-
+@media (max-width: 500px) {
     .audio-left-fly-btn,
     .audio-right-fly-btn {
-
-        bottom: 12px;
-
-        height: 44px;
-
+        bottom: 18px;
+        height: 48px;
+        padding: 0 14px;
+        font-size: 12px;
     }
 
+    .audio-left-fly-btn {
+        right: 135px; /* Ajuste do espaçamento em telas menores */
+    }
+
+    .audio-right-fly-btn {
+        right: 12px;
+    }
 
     .species-dropdown {
-
-        bottom: 67px;
-
+        bottom: 74px;
+        right: 12px !important;
     }
+}
 
+/* Remova ou simplifique estas regras, pois a classe .species-dropdown já faz o trabalho */
+#folhosaSpeciesMenu,
+#temperoSpeciesMenu,
+#frutoSpeciesMenu,
+#frutaSpeciesMenu,
+#medicinalSpeciesMenu,
+#pancSpeciesMenu {
+    bottom: 88px;
+    right: 20px;
 }
