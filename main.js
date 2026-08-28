@@ -2,7 +2,7 @@ const message = document.getElementById("track-message");
 
 
 /* =====================================================
-SOM CLICK
+SOM DOS BOTÕES
 ===================================================== */
 
 const clickSound =
@@ -31,17 +31,8 @@ const folhosaAudioLeftButton =
 const folhosaAudioRightButton =
     document.getElementById("folhosaAudioRightButton");
 
-const audioVeloci1 =
-    document.getElementById("audioVeloci1");
-
-const audioVeloci2 =
-    document.getElementById("audioVeloci2");
-
-const audioVelociRoar =
-    document.getElementById("audioVelociRoar");
-
-const velociGroup =
-    document.getElementById("velociGroup");
+const audioFolhosas =
+    document.getElementById("audioFolhosas");
 
 
 /* =====================================================
@@ -54,20 +45,8 @@ const temperoAudioLeftButton =
 const temperoAudioRightButton =
     document.getElementById("temperoAudioRightButton");
 
-const audioFauna1 =
-    document.getElementById("audioFauna1");
-
-const audioFauna2 =
-    document.getElementById("audioFauna2");
-
-const audioElefante =
-    document.getElementById("audioElefante");
-
-const faunaGroup =
-    document.getElementById("faunaGroup");
-
-const mamuteModel =
-    document.getElementById("mamuteModel");
+const audioTemperos =
+    document.getElementById("audioTemperos");
 
 
 /* =====================================================
@@ -80,14 +59,8 @@ const frutoAudioLeftButton =
 const frutoAudioRightButton =
     document.getElementById("frutoAudioRightButton");
 
-const audioVenus1 =
-    document.getElementById("audioVenus1");
-
-const audioVenus2 =
-    document.getElementById("audioVenus2");
-
-const venusGroup =
-    document.getElementById("venusGroup");
+const audioFrutos =
+    document.getElementById("audioFrutos");
 
 
 /* =====================================================
@@ -100,14 +73,8 @@ const frutaAudioLeftButton =
 const frutaAudioRightButton =
     document.getElementById("frutaAudioRightButton");
 
-const audioVogel1 =
-    document.getElementById("audioVogel1");
-
-const audioVogel2 =
-    document.getElementById("audioVogel2");
-
-const vogelherdGroup =
-    document.getElementById("vogelherdGroup");
+const audioFrutas =
+    document.getElementById("audioFrutas");
 
 
 /* =====================================================
@@ -120,14 +87,8 @@ const medicinalAudioLeftButton =
 const medicinalAudioRightButton =
     document.getElementById("medicinalAudioRightButton");
 
-const audioColombo1 =
-    document.getElementById("audioColombo1");
-
-const audioColombo2 =
-    document.getElementById("audioColombo2");
-
-const colomboVideo =
-    document.querySelector("#colomboVideo");
+const audioMedicinais =
+    document.getElementById("audioMedicinais");
 
 
 /* =====================================================
@@ -140,14 +101,8 @@ const pancAudioLeftButton =
 const pancAudioRightButton =
     document.getElementById("pancAudioRightButton");
 
-const audioMona1 =
-    document.getElementById("audioMona1");
-
-const audioMona2 =
-    document.getElementById("audioMona2");
-
-const monalisaVideo =
-    document.querySelector("#monalisaVideo");
+const audioPanc =
+    document.getElementById("audioPanc");
 
 
 /* =====================================================
@@ -161,305 +116,14 @@ let menuOpen = false;
 
 
 /* =====================================================
-VARIÁVEIS
+TRACK ATIVA
 ===================================================== */
 
 let activeTrack = -1;
 
-let folhosaActive = false;
-let temperoActive = false;
-let frutoActive = false;
-let frutaActive = false;
-let medicinalActive = false;
-let pancActive = false;
-
 
 /* =====================================================
-FUNÇÕES DOS BOTÕES
-===================================================== */
-
-function ativarBotao(botao) {
-
-    if (!botao) return;
-
-    botao.classList.add("btn-active");
-
-}
-
-
-function desativarBotao(botao) {
-
-    if (!botao) return;
-
-    botao.classList.remove("btn-active");
-
-}
-
-
-/* =====================================================
-RESET BOTÕES
-===================================================== */
-
-function resetarBotoesTrack(
-    botaoEsquerdo,
-    botaoDireito
-) {
-
-    desativarBotao(botaoEsquerdo);
-    desativarBotao(botaoDireito);
-
-}
-
-
-/* =====================================================
-CONTROLE DOS ÁUDIOS
-===================================================== */
-
-function controlarAudio(
-    audioAtual,
-    audioOposto,
-    botaoAtual,
-    botaoOposto
-) {
-
-    if (!audioAtual || !audioOposto) return;
-
-
-    audioOposto.pause();
-
-    audioOposto.currentTime = 0;
-
-    desativarBotao(botaoOposto);
-
-
-    if (audioAtual.paused) {
-
-        audioAtual.play().catch(() => {});
-
-        ativarBotao(botaoAtual);
-
-    }
-
-    else {
-
-        audioAtual.pause();
-
-        audioAtual.currentTime = 0;
-
-        desativarBotao(botaoAtual);
-
-    }
-
-
-    audioAtual.onended = function () {
-
-        desativarBotao(botaoAtual);
-
-    };
-
-}
-
-
-/* =====================================================
-TODOS OS BOTÕES DE INTERAÇÃO
-===================================================== */
-
-const interactionButtons = [
-
-    folhosaAudioLeftButton,
-    folhosaAudioRightButton,
-
-    temperoAudioLeftButton,
-    temperoAudioRightButton,
-
-    frutoAudioLeftButton,
-    frutoAudioRightButton,
-
-    frutaAudioLeftButton,
-    frutaAudioRightButton,
-
-    medicinalAudioLeftButton,
-    medicinalAudioRightButton,
-
-    pancAudioLeftButton,
-    pancAudioRightButton
-
-];
-
-
-/* =====================================================
-ESCONDER BOTÕES DE INTERAÇÃO
-===================================================== */
-
-function esconderBotoesInteracao() {
-
-    interactionButtons.forEach(botao => {
-
-        if (!botao) return;
-
-        botao.style.display = "none";
-
-    });
-
-}
-
-
-/* =====================================================
-MOSTRAR BOTÕES DA TRACK
-===================================================== */
-
-function mostrarBotoesTrack(index) {
-
-    /* Primeiro esconde todos */
-
-    esconderBotoesInteracao();
-
-
-    /* =============================================
-    TRACK 0 — FOLHOSAS
-    ============================================= */
-
-    if (index === 0) {
-
-        if (folhosaAudioLeftButton) {
-
-            folhosaAudioLeftButton.style.display = "block";
-
-        }
-
-        if (folhosaAudioRightButton) {
-
-            folhosaAudioRightButton.style.display = "block";
-
-        }
-
-    }
-
-
-    /* =============================================
-    TRACK 1 — TEMPEROS
-    ============================================= */
-
-    if (index === 1) {
-
-        if (temperoAudioLeftButton) {
-
-            temperoAudioLeftButton.style.display = "block";
-
-        }
-
-        if (temperoAudioRightButton) {
-
-            temperoAudioRightButton.style.display = "block";
-
-        }
-
-    }
-
-
-    /* =============================================
-    TRACK 2 — FRUTOS
-    ============================================= */
-
-    if (index === 2) {
-
-        if (frutoAudioLeftButton) {
-
-            frutoAudioLeftButton.style.display = "block";
-
-        }
-
-        if (frutoAudioRightButton) {
-
-            frutoAudioRightButton.style.display = "block";
-
-        }
-
-    }
-
-
-    /* =============================================
-    TRACK 3 — FRUTAS
-    ============================================= */
-
-    if (index === 3) {
-
-        if (frutaAudioLeftButton) {
-
-            frutaAudioLeftButton.style.display = "block";
-
-        }
-
-        if (frutaAudioRightButton) {
-
-            frutaAudioRightButton.style.display = "block";
-
-        }
-
-    }
-
-
-    /* =============================================
-    TRACK 4 — MEDICINAIS
-    ============================================= */
-
-    if (index === 4) {
-
-        if (medicinalAudioLeftButton) {
-
-            medicinalAudioLeftButton.style.display = "block";
-
-        }
-
-        if (medicinalAudioRightButton) {
-
-            medicinalAudioRightButton.style.display = "block";
-
-        }
-
-    }
-
-
-    /* =============================================
-    TRACK 5 — PANC
-    ============================================= */
-
-    if (index === 5) {
-
-        if (pancAudioLeftButton) {
-
-            pancAudioLeftButton.style.display = "block";
-
-        }
-
-        if (pancAudioRightButton) {
-
-            pancAudioRightButton.style.display = "block";
-
-        }
-
-    }
-
-}
-
-
-/* =====================================================
-SOM EM TODOS OS BOTÕES
-===================================================== */
-
-document.querySelectorAll("button").forEach(botao => {
-
-    botao.addEventListener("click", () => {
-
-        tocarClick();
-
-    });
-
-});
-
-
-/* =====================================================
-DROPDOWN — ESPÉCIES
+DROPDOWNS
 ===================================================== */
 
 const dropdowns = [
@@ -504,72 +168,261 @@ const dropdowns = [
         menu: document.getElementById(
             "pancSpeciesMenu"
         )
-
     }
 
 ];
 
 
 /* =====================================================
-ABRIR DROPDOWN
+TODOS OS BOTÕES DE INTERAÇÃO
 ===================================================== */
 
-dropdowns.forEach(dropdown => {
+const interactionButtons = [
 
-    if (!dropdown.button || !dropdown.menu) return;
+    folhosaAudioLeftButton,
+    folhosaAudioRightButton,
 
+    temperoAudioLeftButton,
+    temperoAudioRightButton,
 
-    dropdown.button.addEventListener(
-        "click",
-        function (event) {
+    frutoAudioLeftButton,
+    frutoAudioRightButton,
 
-            event.stopPropagation();
+    frutaAudioLeftButton,
+    frutaAudioRightButton,
 
+    medicinalAudioLeftButton,
+    medicinalAudioRightButton,
 
-            /* =========================================
-            FECHA OS OUTROS DROPDOWNS
-            ========================================= */
+    pancAudioLeftButton,
+    pancAudioRightButton
 
-            dropdowns.forEach(outro => {
-
-                if (outro !== dropdown && outro.menu) {
-
-                    outro.menu.classList.remove("open");
-
-                }
-
-            });
+];
 
 
-            /* =========================================
-            ABRE / FECHA O DROPDOWN ATUAL
-            ========================================= */
+/* =====================================================
+ESCONDER BOTÕES
+===================================================== */
 
-            dropdown.menu.classList.toggle("open");
+function esconderBotoesInteracao() {
+
+    interactionButtons.forEach(botao => {
+
+        if (!botao) return;
+
+        botao.style.display = "none";
+
+    });
+
+}
+
+
+/* =====================================================
+MOSTRAR BOTÕES DA TRACK
+===================================================== */
+
+function mostrarBotoesTrack(index) {
+
+    esconderBotoesInteracao();
+
+
+    /* TRACK 0 — FOLHOSAS */
+
+    if (index === 0) {
+
+        folhosaAudioLeftButton.style.display =
+            "block";
+
+        folhosaAudioRightButton.style.display =
+            "block";
+
+    }
+
+
+    /* TRACK 1 — TEMPEROS */
+
+    if (index === 1) {
+
+        temperoAudioLeftButton.style.display =
+            "block";
+
+        temperoAudioRightButton.style.display =
+            "block";
+
+    }
+
+
+    /* TRACK 2 — FRUTOS */
+
+    if (index === 2) {
+
+        frutoAudioLeftButton.style.display =
+            "block";
+
+        frutoAudioRightButton.style.display =
+            "block";
+
+    }
+
+
+    /* TRACK 3 — FRUTAS */
+
+    if (index === 3) {
+
+        frutaAudioLeftButton.style.display =
+            "block";
+
+        frutaAudioRightButton.style.display =
+            "block";
+
+    }
+
+
+    /* TRACK 4 — MEDICINAIS */
+
+    if (index === 4) {
+
+        medicinalAudioLeftButton.style.display =
+            "block";
+
+        medicinalAudioRightButton.style.display =
+            "block";
+
+    }
+
+
+    /* TRACK 5 — PANC */
+
+    if (index === 5) {
+
+        pancAudioLeftButton.style.display =
+            "block";
+
+        pancAudioRightButton.style.display =
+            "block";
+
+    }
+
+}
+
+
+/* =====================================================
+DESATIVAR BOTÃO
+===================================================== */
+
+function desativarBotao(botao) {
+
+    if (!botao) return;
+
+    botao.classList.remove("btn-active");
+
+}
+
+
+/* =====================================================
+ATIVAR BOTÃO
+===================================================== */
+
+function ativarBotao(botao) {
+
+    if (!botao) return;
+
+    botao.classList.add("btn-active");
+
+}
+
+
+/* =====================================================
+TOCAR / PARAR ÁUDIO DO BOTÃO CONHEÇA
+===================================================== */
+
+function controlarAudioConheca(
+    audio,
+    botao
+) {
+
+    if (!audio || !botao) return;
+
+
+    /*
+    Para todos os outros áudios
+    */
+
+    document.querySelectorAll("audio").forEach(
+        outroAudio => {
+
+            if (
+                outroAudio !== audio &&
+                outroAudio.id !== "clickSound"
+            ) {
+
+                outroAudio.pause();
+                outroAudio.currentTime = 0;
+
+            }
 
         }
     );
 
-});
+
+    /*
+    Se estiver parado, toca
+    */
+
+    if (audio.paused) {
+
+        audio.play().catch(() => {});
+
+        ativarBotao(botao);
+
+    }
+
+    /*
+    Se estiver tocando, pausa
+    */
+
+    else {
+
+        audio.pause();
+
+        audio.currentTime = 0;
+
+        desativarBotao(botao);
+
+    }
+
+
+    /*
+    Ao terminar, remove o destaque
+    */
+
+    audio.onended = function () {
+
+        desativarBotao(botao);
+
+    };
+
+}
 
 
 /* =====================================================
-FECHAR DROPDOWN AO CLICAR FORA
+SOM EM TODOS OS BOTÕES
 ===================================================== */
 
-document.addEventListener("click", () => {
+document.querySelectorAll("button").forEach(
+    botao => {
 
-    dropdowns.forEach(dropdown => {
+        botao.addEventListener(
+            "click",
+            () => {
 
-        if (dropdown.menu) {
+                tocarClick();
 
-            dropdown.menu.classList.remove("open");
+            }
+        );
 
-        }
-
-    });
-
-});
+    }
+);
 
 
 /* =====================================================
@@ -582,211 +435,193 @@ const targets =
     );
 
 
-targets.forEach((target, index) => {
+targets.forEach(
+    (target, index) => {
 
 
-    /* =================================================
-    TARGET ENCONTRADO
-    ================================================= */
+        /* =============================================
+        TARGET ENCONTRADO
+        ============================================= */
 
-    target.addEventListener(
-        "targetFound",
-        () => {
-
-
-            /* =========================================
-            REGISTRA O TRACK
-            ========================================= */
-
-            registrarTrack(index);
+        target.addEventListener(
+            "targetFound",
+            () => {
 
 
-            activeTrack = index;
+                registrarTrack(index);
 
 
-            /* =========================================
-            ESCONDE MENSAGEM DE TRACKING
-            ========================================= */
-
-            if (message) {
-
-                message.classList.add("hidden");
-
-            }
+                activeTrack = index;
 
 
-            /* =========================================
-            MOSTRA MENU HAMBURGER
-            ========================================= */
+                /*
+                Esconde mensagem
+                */
 
-            if (menuToggleButton) {
+                if (message) {
 
-                menuToggleButton.style.display = "block";
-
-            }
-
-
-            /* =========================================
-            MOSTRA OS BOTÕES DA TRACK
-            ========================================= */
-
-            mostrarBotoesTrack(index);
-
-
-            /* =========================================
-            FECHA TODOS OS DROPDOWNS
-            ========================================= */
-
-            dropdowns.forEach(dropdown => {
-
-                if (dropdown.menu) {
-
-                    dropdown.menu.classList.remove("open");
+                    message.classList.add(
+                        "hidden"
+                    );
 
                 }
 
-            });
 
-        }
-    );
+                /*
+                Mostra menu
+                */
 
+                if (menuToggleButton) {
 
-    /* =================================================
-    TARGET PERDIDO
-    ================================================= */
-
-    target.addEventListener(
-        "targetLost",
-        () => {
-
-
-            activeTrack = -1;
-
-
-            /* =========================================
-            MOSTRA MENSAGEM DE TRACKING
-            ========================================= */
-
-            if (message) {
-
-                message.classList.remove("hidden");
-
-            }
-
-
-            /* =========================================
-            ESCONDE BOTÕES
-            ========================================= */
-
-            esconderBotoesInteracao();
-
-
-            /* =========================================
-            FECHA DROPDOWNS
-            ========================================= */
-
-            dropdowns.forEach(dropdown => {
-
-                if (dropdown.menu) {
-
-                    dropdown.menu.classList.remove("open");
+                    menuToggleButton.style.display =
+                        "block";
 
                 }
 
-            });
+
+                /*
+                Mostra os dois botões
+                */
+
+                mostrarBotoesTrack(index);
 
 
-            /* =========================================
-            FECHA MENU HAMBURGER
-            ========================================= */
+                /*
+                Fecha dropdowns
+                */
 
-            menuOpen = false;
-
-
-            document.body.classList.remove(
-                "menu-open"
-            );
-
-
-            if (menuToggleButton) {
-
-                menuToggleButton.innerHTML = "☰";
-
-                menuToggleButton.style.display = "none";
+                fecharTodosDropdowns();
 
             }
+        );
 
 
-            /* =========================================
-            RESET ESTADOS
-            ========================================= */
+        /* =============================================
+        TARGET PERDIDO
+        ============================================= */
 
-            folhosaActive = false;
-            temperoActive = false;
-            frutoActive = false;
-            frutaActive = false;
-            medicinalActive = false;
-            pancActive = false;
+        target.addEventListener(
+            "targetLost",
+            () => {
 
 
-            /* =========================================
-            RESET BOTÕES
-            ========================================= */
+                activeTrack = -1;
 
-            resetarBotoesTrack(
-                folhosaAudioLeftButton,
-                folhosaAudioRightButton
+
+                /*
+                Mostra mensagem
+                */
+
+                if (message) {
+
+                    message.classList.remove(
+                        "hidden"
+                    );
+
+                }
+
+
+                /*
+                Esconde botões
+                */
+
+                esconderBotoesInteracao();
+
+
+                /*
+                Fecha dropdowns
+                */
+
+                fecharTodosDropdowns();
+
+
+                /*
+                Fecha menu
+                */
+
+                menuOpen = false;
+
+
+                document.body.classList.remove(
+                    "menu-open"
+                );
+
+
+                if (menuToggleButton) {
+
+                    menuToggleButton.innerHTML =
+                        "☰";
+
+                    menuToggleButton.style.display =
+                        "none";
+
+                }
+
+
+                /*
+                Para todos os áudios
+                */
+
+                pararTodosAudios();
+
+
+                /*
+                Remove iluminação dos botões
+                */
+
+                interactionButtons.forEach(
+                    botao => {
+
+                        desativarBotao(botao);
+
+                    }
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+PARAR TODOS OS ÁUDIOS
+===================================================== */
+
+function pararTodosAudios() {
+
+    document
+        .querySelectorAll("audio")
+        .forEach(audio => {
+
+            audio.pause();
+
+            audio.currentTime = 0;
+
+        });
+
+}
+
+
+/* =====================================================
+FECHAR TODOS OS DROPDOWNS
+===================================================== */
+
+function fecharTodosDropdowns() {
+
+    dropdowns.forEach(dropdown => {
+
+        if (dropdown.menu) {
+
+            dropdown.menu.classList.remove(
+                "open"
             );
-
-
-            resetarBotoesTrack(
-                temperoAudioLeftButton,
-                temperoAudioRightButton
-            );
-
-
-            resetarBotoesTrack(
-                frutoAudioLeftButton,
-                frutoAudioRightButton
-            );
-
-
-            resetarBotoesTrack(
-                frutaAudioLeftButton,
-                frutaAudioRightButton
-            );
-
-
-            resetarBotoesTrack(
-                medicinalAudioLeftButton,
-                medicinalAudioRightButton
-            );
-
-
-            resetarBotoesTrack(
-                pancAudioLeftButton,
-                pancAudioRightButton
-            );
-
-
-            /* =========================================
-            PARA TODOS OS ÁUDIOS
-            ========================================= */
-
-            document
-                .querySelectorAll("audio")
-                .forEach(audio => {
-
-                    audio.pause();
-
-                    audio.currentTime = 0;
-
-                });
 
         }
-    );
 
-});
+    });
+
+}
 
 
 /* =====================================================
@@ -809,7 +644,16 @@ if (menuToggleButton) {
                     "menu-open"
                 );
 
-                menuToggleButton.innerHTML = "✕";
+                menuToggleButton.innerHTML =
+                    "✕";
+
+
+                /*
+                O menu sanduíche não esconde
+                os botões das tracks.
+                */
+
+                fecharTodosDropdowns();
 
             }
 
@@ -819,7 +663,8 @@ if (menuToggleButton) {
                     "menu-open"
                 );
 
-                menuToggleButton.innerHTML = "☰";
+                menuToggleButton.innerHTML =
+                    "☰";
 
             }
 
@@ -839,35 +684,12 @@ if (folhosaAudioLeftButton) {
         "click",
         () => {
 
-            if (activeTrack !== 0) return;
-
-
-            controlarAudio(
-                audioVeloci1,
-                audioVeloci2,
-                folhosaAudioLeftButton,
-                folhosaAudioRightButton
-            );
-
-        }
-    );
-
-}
-
-
-if (folhosaAudioRightButton) {
-
-    folhosaAudioRightButton.addEventListener(
-        "click",
-        () => {
 
             if (activeTrack !== 0) return;
 
 
-            controlarAudio(
-                audioVeloci2,
-                audioVeloci1,
-                folhosaAudioRightButton,
+            controlarAudioConheca(
+                audioFolhosas,
                 folhosaAudioLeftButton
             );
 
@@ -887,35 +709,12 @@ if (temperoAudioLeftButton) {
         "click",
         () => {
 
-            if (activeTrack !== 1) return;
-
-
-            controlarAudio(
-                audioFauna1,
-                audioFauna2,
-                temperoAudioLeftButton,
-                temperoAudioRightButton
-            );
-
-        }
-    );
-
-}
-
-
-if (temperoAudioRightButton) {
-
-    temperoAudioRightButton.addEventListener(
-        "click",
-        () => {
 
             if (activeTrack !== 1) return;
 
 
-            controlarAudio(
-                audioFauna2,
-                audioFauna1,
-                temperoAudioRightButton,
+            controlarAudioConheca(
+                audioTemperos,
                 temperoAudioLeftButton
             );
 
@@ -935,35 +734,12 @@ if (frutoAudioLeftButton) {
         "click",
         () => {
 
-            if (activeTrack !== 2) return;
-
-
-            controlarAudio(
-                audioVenus1,
-                audioVenus2,
-                frutoAudioLeftButton,
-                frutoAudioRightButton
-            );
-
-        }
-    );
-
-}
-
-
-if (frutoAudioRightButton) {
-
-    frutoAudioRightButton.addEventListener(
-        "click",
-        () => {
 
             if (activeTrack !== 2) return;
 
 
-            controlarAudio(
-                audioVenus2,
-                audioVenus1,
-                frutoAudioRightButton,
+            controlarAudioConheca(
+                audioFrutos,
                 frutoAudioLeftButton
             );
 
@@ -983,35 +759,12 @@ if (frutaAudioLeftButton) {
         "click",
         () => {
 
-            if (activeTrack !== 3) return;
-
-
-            controlarAudio(
-                audioVogel1,
-                audioVogel2,
-                frutaAudioLeftButton,
-                frutaAudioRightButton
-            );
-
-        }
-    );
-
-}
-
-
-if (frutaAudioRightButton) {
-
-    frutaAudioRightButton.addEventListener(
-        "click",
-        () => {
 
             if (activeTrack !== 3) return;
 
 
-            controlarAudio(
-                audioVogel2,
-                audioVogel1,
-                frutaAudioRightButton,
+            controlarAudioConheca(
+                audioFrutas,
                 frutaAudioLeftButton
             );
 
@@ -1031,35 +784,12 @@ if (medicinalAudioLeftButton) {
         "click",
         () => {
 
-            if (activeTrack !== 4) return;
-
-
-            controlarAudio(
-                audioColombo1,
-                audioColombo2,
-                medicinalAudioLeftButton,
-                medicinalAudioRightButton
-            );
-
-        }
-    );
-
-}
-
-
-if (medicinalAudioRightButton) {
-
-    medicinalAudioRightButton.addEventListener(
-        "click",
-        () => {
 
             if (activeTrack !== 4) return;
 
 
-            controlarAudio(
-                audioColombo2,
-                audioColombo1,
-                medicinalAudioRightButton,
+            controlarAudioConheca(
+                audioMedicinais,
                 medicinalAudioLeftButton
             );
 
@@ -1079,35 +809,12 @@ if (pancAudioLeftButton) {
         "click",
         () => {
 
-            if (activeTrack !== 5) return;
-
-
-            controlarAudio(
-                audioMona1,
-                audioMona2,
-                pancAudioLeftButton,
-                pancAudioRightButton
-            );
-
-        }
-    );
-
-}
-
-
-if (pancAudioRightButton) {
-
-    pancAudioRightButton.addEventListener(
-        "click",
-        () => {
 
             if (activeTrack !== 5) return;
 
 
-            controlarAudio(
-                audioMona2,
-                audioMona1,
-                pancAudioRightButton,
+            controlarAudioConheca(
+                audioPanc,
                 pancAudioLeftButton
             );
 
@@ -1118,15 +825,132 @@ if (pancAudioRightButton) {
 
 
 /* =====================================================
+DROPDOWN — ESPÉCIES
+===================================================== */
+
+dropdowns.forEach(
+    (dropdown, index) => {
+
+
+        if (
+            !dropdown.button ||
+            !dropdown.menu
+        ) {
+
+            return;
+
+        }
+
+
+        dropdown.button.addEventListener(
+            "click",
+            event => {
+
+
+                event.stopPropagation();
+
+
+                /*
+                Garante que apenas a track ativa
+                possa abrir seu dropdown.
+                */
+
+                if (
+                    activeTrack !== index
+                ) {
+
+                    return;
+
+                }
+
+
+                /*
+                Fecha os outros dropdowns
+                */
+
+                dropdowns.forEach(
+                    outro => {
+
+                        if (
+                            outro !== dropdown &&
+                            outro.menu
+                        ) {
+
+                            outro.menu.classList.remove(
+                                "open"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                /*
+                Abre ou fecha o dropdown atual
+                */
+
+                dropdown.menu.classList.toggle(
+                    "open"
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+IMPEDIR FECHAMENTO AO CLICAR NO DROPDOWN
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".species-dropdown"
+    )
+    .forEach(menu => {
+
+        menu.addEventListener(
+            "click",
+            event => {
+
+                event.stopPropagation();
+
+            }
+        );
+
+    });
+
+
+/* =====================================================
+FECHAR DROPDOWN AO CLICAR FORA
+===================================================== */
+
+document.addEventListener(
+    "click",
+    () => {
+
+        fecharTodosDropdowns();
+
+    }
+);
+
+
+/* =====================================================
 CONTADOR DE TRACKS
 ===================================================== */
 
 const progressCount =
-    document.getElementById("progressCount");
+    document.getElementById(
+        "progressCount"
+    );
 
 
 const finalButtonTop =
-    document.getElementById("finalButtonTop");
+    document.getElementById(
+        "finalButtonTop"
+    );
 
 
 const visitedTracks =
@@ -1139,7 +963,9 @@ const totalTracks = 6;
 function registrarTrack(index) {
 
 
-    if (visitedTracks.has(index)) {
+    if (
+        visitedTracks.has(index)
+    ) {
 
         return;
 
@@ -1158,7 +984,8 @@ function registrarTrack(index) {
 
 
     if (
-        visitedTracks.size >= totalTracks
+        visitedTracks.size >=
+        totalTracks
     ) {
 
         mostrarMensagemFinal();
@@ -1167,6 +994,10 @@ function registrarTrack(index) {
 
 }
 
+
+/* =====================================================
+BOTÃO FINAL
+===================================================== */
 
 function mostrarMensagemFinal() {
 
@@ -1178,11 +1009,6 @@ function mostrarMensagemFinal() {
     }
 
 }
-
-
-/* =====================================================
-BOTÃO DO QUIZ
-===================================================== */
 
 if (finalButtonTop) {
 
