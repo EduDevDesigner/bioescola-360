@@ -33,420 +33,13 @@
 
 
     <!-- =====================================================
-         CSS
+         CSS EXTERNO
+         
+         TODO O CSS DO PROJETO FICA NO style.css
     ====================================================== -->
-    <link rel="stylesheet" href="style.css">
-    <style>       
-        
 
-       
+    <link rel="stylesheet" href="./style.css">
 
-        
-        
-        /* =====================================================
-           DROPDOWN
-        ====================================================== */
-
-        .dropdown-container {
-
-            position: relative;
-
-        }
-
-
-        .species-menu {
-
-            position: absolute;
-
-            bottom: calc(100% + 10px);
-
-            left: 50%;
-
-            transform:
-                translateX(-50%)
-                translateY(10px);
-
-            min-width: 190px;
-
-            padding: 8px;
-
-            border-radius: 15px;
-
-            background: rgba(0, 0, 0, 0.88);
-
-            box-shadow:
-                0 5px 25px rgba(0,0,0,0.45);
-
-            opacity: 0;
-
-            visibility: hidden;
-
-            transition:
-                opacity 0.2s,
-                transform 0.2s;
-
-        }
-
-
-        .species-menu.open {
-
-            opacity: 1;
-
-            visibility: visible;
-
-            transform:
-                translateX(-50%)
-                translateY(0);
-
-        }
-
-
-        .species-btn {
-
-            display: block;
-
-            width: 100%;
-
-            margin: 4px 0;
-
-            padding: 12px;
-
-            border: none;
-
-            border-radius: 10px;
-
-            background: rgba(255,255,255,0.12);
-
-            color: #fff;
-
-            font-size: 15px;
-
-            text-align: left;
-
-            cursor: pointer;
-
-        }
-
-
-        .species-btn:active {
-
-            background: rgba(255,255,255,0.25);
-
-        }
-
-
-        /* =====================================================
-           CONTAINER DA ESPÉCIE
-        ====================================================== */
-
-        #speciesContent {
-
-            position: fixed;
-
-            top: 50%;
-            left: 50%;
-
-            transform: translate(-50%, -50%);
-
-            z-index: 2500;
-
-            width: min(92%, 600px);
-
-            max-height: 90vh;
-
-            padding: 18px;
-
-            overflow-y: auto;
-
-            border-radius: 22px;
-
-            background: rgba(0,0,0,0.90);
-
-            box-shadow:
-                0 10px 40px rgba(0,0,0,0.55);
-
-            color: #fff;
-
-            display: none;
-
-        }
-
-
-        /* =====================================================
-           TÍTULO DA ESPÉCIE
-        ====================================================== */
-
-        #speciesTitle {
-
-            margin: 0 0 15px;
-
-            text-align: center;
-
-            font-size: 24px;
-
-            font-weight: bold;
-
-        }
-
-
-        /* =====================================================
-           VÍDEO
-        ====================================================== */
-
-        #speciesVideo {
-
-            display: block;
-
-            width: 100%;
-
-            max-height: 55vh;
-
-            border-radius: 15px;
-
-            background: #000;
-
-            object-fit: contain;
-
-        }
-
-
-        /* =====================================================
-           BOTÕES DOS VÍDEOS
-        ====================================================== */
-
-        .species-video-buttons {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 8px;
-
-            margin-top: 14px;
-
-        }
-
-
-        .species-video-buttons button {
-
-            padding: 11px 8px;
-
-            border: none;
-
-            border-radius: 10px;
-
-            background: rgba(255,255,255,0.15);
-
-            color: #fff;
-
-            font-size: 13px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-        }
-
-
-        .species-video-buttons button.btn-ativo {
-
-            background: #238b45;
-
-        }
-
-
-        /* =====================================================
-           MENU LATERAL
-        ====================================================== */
-
-        #sideMenu {
-
-            position: fixed;
-
-            top: 0;
-            right: 0;
-
-            z-index: 2900;
-
-            width: min(82%, 340px);
-
-            height: 100%;
-
-            padding: 90px 25px 30px;
-
-            background: rgba(0,0,0,0.94);
-
-            transform: translateX(100%);
-
-            transition:
-                transform 0.3s ease;
-
-        }
-
-
-        body.menu-open #sideMenu {
-
-            transform: translateX(0);
-
-        }
-
-
-        #sideMenu h2 {
-
-            margin-top: 0;
-
-            color: #fff;
-
-            text-align: center;
-
-        }
-
-
-        #sideMenu p {
-
-            color: #ddd;
-
-            line-height: 1.5;
-
-            text-align: center;
-
-        }
-
-
-        /* =====================================================
-           CONTADOR
-        ====================================================== */
-
-        #progressBox {
-
-            position: fixed;
-
-            top: 18px;
-
-            left: 18px;
-
-            z-index: 2000;
-
-            padding: 9px 14px;
-
-            border-radius: 20px;
-
-            background: rgba(0,0,0,0.72);
-
-            color: #fff;
-
-            font-size: 14px;
-
-        }
-
-
-        #progressCount {
-
-            font-weight: bold;
-
-        }
-
-
-        /* =====================================================
-           BOTÃO FINAL / QUIZ
-        ====================================================== */
-
-        #finalButtonTop {
-
-            position: fixed;
-
-            top: 75px;
-
-            right: 18px;
-
-            z-index: 2800;
-
-            display: none;
-
-            padding: 12px 18px;
-
-            border: none;
-
-            border-radius: 15px;
-
-            background: #238b45;
-
-            color: #fff;
-
-            font-size: 14px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 4px 15px rgba(0,0,0,0.35);
-
-        }
-
-
-        /* =====================================================
-           RESPONSIVIDADE
-        ====================================================== */
-
-        @media (max-width: 600px) {
-
-            #track-message {
-
-                font-size: 15px;
-
-            }
-
-
-            #interactionPanel {
-
-                bottom: 18px;
-
-                gap: 7px;
-
-            }
-
-
-            .track-button {
-
-                min-width: 105px;
-
-                padding: 11px 10px;
-
-                font-size: 12px;
-
-            }
-
-
-            #speciesContent {
-
-                width: 94%;
-
-                padding: 14px;
-
-            }
-
-
-            #speciesTitle {
-
-                font-size: 20px;
-
-            }
-
-
-            .species-video-buttons button {
-
-                font-size: 11px;
-
-                padding: 10px 5px;
-
-            }
-
-        }
-
-
-    </style>
 
 </head>
 
@@ -455,7 +48,7 @@
 
 
     <!-- =====================================================
-         MENSAGEM
+         MENSAGEM INICIAL
     ====================================================== -->
 
     <div id="track-message">
@@ -464,7 +57,7 @@
         da horta para iniciar a experiência.
 
     </div>
-
+    
 
     <!-- =====================================================
          CONTADOR
@@ -482,7 +75,7 @@
 
 
     <!-- =====================================================
-         BOTÃO MENU HAMBURGER
+         BOTÃO MENU
     ====================================================== -->
 
     <button
@@ -501,39 +94,26 @@
     <button
         id="finalButtonTop"
         type="button"
+        aria-label="Fazer quiz"
     >
-        📝 FAZER QUIZ
+        📝
     </button>
-
-
-    <!-- =====================================================
-         MENU LATERAL
-    ====================================================== -->
-
-    <aside id="sideMenu">
-
-        <h2>BIOESCOLA 360°</h2>
-
-        <p>
-            Explore as categorias da horta escolar,
-            conheça as espécies e descubra
-            informações através da realidade aumentada.
-        </p>
-
-    </aside>
-
+    
 
     <!-- =====================================================
-         ÁUDIO DOS BOTÕES
+         SOM DOS BOTÕES
+         
+         O JavaScript também funciona caso esse arquivo
+         ainda não exista.
     ====================================================== -->
 
     <audio
         id="clickSound"
-        preload="auto"
+        preload="none"
     >
 
         <source
-            src="Audio/acerto.mp3"
+            src="./Audio/acerto.mp3"
             type="audio/mpeg"
         >
 
@@ -541,7 +121,7 @@
 
 
     <!-- =====================================================
-         ÁUDIOS DAS CATEGORIAS
+         ÁUDIO FOLHOSAS
     ====================================================== -->
 
     <audio
@@ -550,72 +130,7 @@
     >
 
         <source
-            src="Audio/Folhosas.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
-
-
-    <audio
-        id="audioTemperos"
-        preload="none"
-    >
-
-        <source
-            src="Audio/Temperos.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
-
-
-    <audio
-        id="audioFrutos"
-        preload="none"
-    >
-
-        <source
-            src="Audio/Frutos.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
-
-
-    <audio
-        id="audioFrutas"
-        preload="none"
-    >
-
-        <source
-            src="Audio/Frutas.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
-
-
-    <audio
-        id="audioMedicinais"
-        preload="none"
-    >
-
-        <source
-            src="Audio/Medicinais.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
-
-
-    <audio
-        id="audioPanc"
-        preload="none"
-    >
-
-        <source
-            src="Audio/PANC.mp3"
+            src="./Audio/Folhosas.mp3"
             type="audio/mpeg"
         >
 
@@ -623,7 +138,92 @@
 
 
     <!-- =====================================================
-         PAINEL DOS BOTÕES
+         ÁUDIO TEMPEROS
+    ====================================================== -->
+
+    <audio
+        id="audioTemperos"
+        preload="none"
+    >
+
+        <source
+            src="./Audio/Temperos.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+    <!-- =====================================================
+         ÁUDIO FRUTOS
+    ====================================================== -->
+
+    <audio
+        id="audioFrutos"
+        preload="none"
+    >
+
+        <source
+            src="./Audio/Frutos.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+    <!-- =====================================================
+         ÁUDIO FRUTAS
+    ====================================================== -->
+
+    <audio
+        id="audioFrutas"
+        preload="none"
+    >
+
+        <source
+            src="./Audio/Frutas.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+    <!-- =====================================================
+         ÁUDIO MEDICINAIS
+    ====================================================== -->
+
+    <audio
+        id="audioMedicinais"
+        preload="none"
+    >
+
+        <source
+            src="./Audio/Medicinais.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+    <!-- =====================================================
+         ÁUDIO PANC
+    ====================================================== -->
+
+    <audio
+        id="audioPanc"
+        preload="none"
+    >
+
+        <source
+            src="./Audio/PANC.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+    <!-- =====================================================
+         PAINEL DE INTERAÇÃO
     ====================================================== -->
 
     <div id="interactionPanel">
@@ -633,64 +233,52 @@
              FOLHOSAS
         ================================================== -->
 
-        <div class="dropdown-container">
+        <button
+            id="folhosaAudioLeftButton"
+            class="track-button audio-left-fly-btn"
+            type="button"
+        >
+            🔊 CONHEÇA
+        </button>
+
+
+        <button
+            id="folhosaAudioRightButton"
+            class="track-button audio-right-fly-btn"
+            type="button"
+        >
+            🌱 ESPÉCIES
+        </button>
+
+
+        <div
+            id="folhosaSpeciesMenu"
+            class="species-dropdown"
+        >
 
             <button
-                id="folhosaAudioLeftButton"
-                class="track-button"
+                class="species-btn"
                 type="button"
-                style="display:none;"
+                data-species="alface"
             >
-                🔊 CONHEÇA
+                🥬 Alface
             </button>
-
-        </div>
-
-
-        <div class="dropdown-container">
 
             <button
-                id="folhosaAudioRightButton"
-                class="track-button"
+                class="species-btn"
                 type="button"
-                style="display:none;"
+                data-species="couve"
             >
-                🌱 ESPÉCIES
+                🥬 Couve-Manteiga
             </button>
 
-
-            <div
-                id="folhosaSpeciesMenu"
-                class="species-menu"
+            <button
+                class="species-btn"
+                type="button"
+                data-species="rucula"
             >
-
-                <button
-                    class="species-btn"
-                    type="button"
-                    data-species="alface"
-                >
-                    🥬 Alface
-                </button>
-
-
-                <button
-                    class="species-btn"
-                    type="button"
-                    data-species="couve"
-                >
-                    🥬 Couve-Manteiga
-                </button>
-
-
-                <button
-                    class="species-btn"
-                    type="button"
-                    data-species="rucula"
-                >
-                    🌿 Rúcula
-                </button>
-
-            </div>
+                🌿 Rúcula
+            </button>
 
         </div>
 
@@ -699,48 +287,36 @@
              TEMPEROS
         ================================================== -->
 
-        <div class="dropdown-container">
+        <button
+            id="temperoAudioLeftButton"
+            class="track-button audio-left-fly-btn"
+            type="button"
+        >
+            🔊 CONHEÇA
+        </button>
+
+
+        <button
+            id="temperoAudioRightButton"
+            class="track-button audio-right-fly-btn"
+            type="button"
+        >
+            🌿 ESPÉCIES
+        </button>
+
+
+        <div
+            id="temperoSpeciesMenu"
+            class="species-dropdown"
+        >
 
             <button
-                id="temperoAudioLeftButton"
-                class="track-button"
+                class="species-btn"
                 type="button"
-                style="display:none;"
+                data-species="coentro"
             >
-                🔊 CONHEÇA
+                🌿 Coentro
             </button>
-
-        </div>
-
-
-        <div class="dropdown-container">
-
-            <button
-                id="temperoAudioRightButton"
-                class="track-button"
-                type="button"
-                style="display:none;"
-            >
-                🌿 ESPÉCIES
-            </button>
-
-
-            <div
-                id="temperoSpeciesMenu"
-                class="species-menu"
-            >
-
-                <!-- Adicione espécies aqui -->
-
-                <button
-                    class="species-btn"
-                    type="button"
-                    data-species="coentro"
-                >
-                    🌿 Coentro
-                </button>
-
-            </div>
 
         </div>
 
@@ -749,46 +325,36 @@
              FRUTOS
         ================================================== -->
 
-        <div class="dropdown-container">
+        <button
+            id="frutoAudioLeftButton"
+            class="track-button audio-left-fly-btn"
+            type="button"
+        >
+            🔊 CONHEÇA
+        </button>
+
+
+        <button
+            id="frutoAudioRightButton"
+            class="track-button audio-right-fly-btn"
+            type="button"
+        >
+            🍅 ESPÉCIES
+        </button>
+
+
+        <div
+            id="frutoSpeciesMenu"
+            class="species-dropdown"
+        >
 
             <button
-                id="frutoAudioLeftButton"
-                class="track-button"
+                class="species-btn"
                 type="button"
-                style="display:none;"
+                data-species="tomate"
             >
-                🔊 CONHEÇA
+                🍅 Tomate
             </button>
-
-        </div>
-
-
-        <div class="dropdown-container">
-
-            <button
-                id="frutoAudioRightButton"
-                class="track-button"
-                type="button"
-                style="display:none;"
-            >
-                🍅 ESPÉCIES
-            </button>
-
-
-            <div
-                id="frutoSpeciesMenu"
-                class="species-menu"
-            >
-
-                <button
-                    class="species-btn"
-                    type="button"
-                    data-species="tomate"
-                >
-                    🍅 Tomate
-                </button>
-
-            </div>
 
         </div>
 
@@ -797,46 +363,36 @@
              FRUTAS
         ================================================== -->
 
-        <div class="dropdown-container">
+        <button
+            id="frutaAudioLeftButton"
+            class="track-button audio-left-fly-btn"
+            type="button"
+        >
+            🔊 CONHEÇA
+        </button>
+
+
+        <button
+            id="frutaAudioRightButton"
+            class="track-button audio-right-fly-btn"
+            type="button"
+        >
+            🍍 ESPÉCIES
+        </button>
+
+
+        <div
+            id="frutaSpeciesMenu"
+            class="species-dropdown"
+        >
 
             <button
-                id="frutaAudioLeftButton"
-                class="track-button"
+                class="species-btn"
                 type="button"
-                style="display:none;"
+                data-species="abacaxi"
             >
-                🔊 CONHEÇA
+                🍍 Abacaxi
             </button>
-
-        </div>
-
-
-        <div class="dropdown-container">
-
-            <button
-                id="frutaAudioRightButton"
-                class="track-button"
-                type="button"
-                style="display:none;"
-            >
-                🍍 ESPÉCIES
-            </button>
-
-
-            <div
-                id="frutaSpeciesMenu"
-                class="species-menu"
-            >
-
-                <button
-                    class="species-btn"
-                    type="button"
-                    data-species="abacaxi"
-                >
-                    🍍 Abacaxi
-                </button>
-
-            </div>
 
         </div>
 
@@ -845,40 +401,28 @@
              MEDICINAIS
         ================================================== -->
 
-        <div class="dropdown-container">
-
-            <button
-                id="medicinalAudioLeftButton"
-                class="track-button"
-                type="button"
-                style="display:none;"
-            >
-                🔊 CONHEÇA
-            </button>
-
-        </div>
+        <button
+            id="medicinalAudioLeftButton"
+            class="track-button audio-left-fly-btn"
+            type="button"
+        >
+            🔊 CONHEÇA
+        </button>
 
 
-        <div class="dropdown-container">
-
-            <button
-                id="medicinalAudioRightButton"
-                class="track-button"
-                type="button"
-                style="display:none;"
-            >
-                🌿 ESPÉCIES
-            </button>
+        <button
+            id="medicinalAudioRightButton"
+            class="track-button audio-right-fly-btn"
+            type="button"
+        >
+            🌿 ESPÉCIES
+        </button>
 
 
-            <div
-                id="medicinalSpeciesMenu"
-                class="species-menu"
-            >
-
-                <!-- Adicione espécies aqui -->
-
-            </div>
+        <div
+            id="medicinalSpeciesMenu"
+            class="species-dropdown"
+        >
 
         </div>
 
@@ -887,40 +431,28 @@
              PANC
         ================================================== -->
 
-        <div class="dropdown-container">
-
-            <button
-                id="pancAudioLeftButton"
-                class="track-button"
-                type="button"
-                style="display:none;"
-            >
-                🔊 CONHEÇA
-            </button>
-
-        </div>
+        <button
+            id="pancAudioLeftButton"
+            class="track-button audio-left-fly-btn"
+            type="button"
+        >
+            🔊 CONHEÇA
+        </button>
 
 
-        <div class="dropdown-container">
-
-            <button
-                id="pancAudioRightButton"
-                class="track-button"
-                type="button"
-                style="display:none;"
-            >
-                🌱 ESPÉCIES
-            </button>
+        <button
+            id="pancAudioRightButton"
+            class="track-button audio-right-fly-btn"
+            type="button"
+        >
+            🌱 ESPÉCIES
+        </button>
 
 
-            <div
-                id="pancSpeciesMenu"
-                class="species-menu"
-            >
-
-                <!-- Adicione espécies aqui -->
-
-            </div>
+        <div
+            id="pancSpeciesMenu"
+            class="species-dropdown"
+        >
 
         </div>
 
@@ -929,7 +461,7 @@
 
 
     <!-- =====================================================
-         CONTAINER ÚNICO DE ESPÉCIE
+         CONTEÚDO DA ESPÉCIE
     ====================================================== -->
 
     <section
@@ -937,72 +469,74 @@
         aria-hidden="true"
     >
 
-
-        <!-- =================================================
-             TÍTULO
-        ================================================== -->
-
-        <h2 id="speciesTitle">
-            ALFACE
-        </h2>
+        <div class="species-video-container">
 
 
-        <!-- =================================================
-             VÍDEO WEBM
-             
-             NÃO COLOCAR SRC AQUI.
-             O JAVASCRIPT DEFINE O SRC.
-        ================================================== -->
-
-        <video
-            id="speciesVideo"
-            playsinline
-            webkit-playsinline
-            preload="metadata"
-            controls
-        >
-        </video>
-
-
-        <!-- =================================================
-             BOTÕES DOS VÍDEOS
-        ================================================== -->
-
-        <div
-            class="species-video-buttons"
-        >
-
-            <button
-                id="btnHistoria"
-                type="button"
+            <h2
+                id="speciesTitle"
+                class="titulo-video"
             >
-                📖 HISTÓRIA
-            </button>
+                ALFACE
+            </h2>
 
 
-            <button
-                id="btnCaracteristicas"
-                type="button"
+            <video
+                id="speciesVideo"
+                playsinline
+                webkit-playsinline
+                preload="metadata"
+                controls
             >
-                🌱 CARACTERÍSTICAS
-            </button>
+            </video>
+
+
+            <div class="species-video-buttons">
+
+                <button
+                    id="btnHistoria"
+                    type="button"
+                >
+                    📖 HISTÓRIA
+                </button>
+
+
+                <button
+                    id="btnCaracteristicas"
+                    type="button"
+                >
+                    🌱 CARACTERÍSTICAS
+                </button>
+
+
+                <button
+                    id="btnCuriosidades"
+                    type="button"
+                >
+                    💡 CURIOSIDADES
+                </button>
+
+            </div>
 
 
             <button
-                id="btnCuriosidades"
+                id="closeSpeciesButton"
                 type="button"
+                class="close-species-button"
             >
-                💡 CURIOSIDADES
+                ✕ FECHAR
             </button>
+
 
         </div>
-
 
     </section>
 
 
     <!-- =====================================================
          MINDAR / A-FRAME
+         
+         IMPORTANTE:
+         targets.mind está dentro da pasta Imagens.
     ====================================================== -->
 
     <a-scene
@@ -1013,7 +547,6 @@ xr-mode-ui="enabled:false"
 device-orientation-permission-ui="enabled:false">
 
 
-
         <!-- =================================================
              CÂMERA
         ================================================== -->
@@ -1021,6 +554,8 @@ device-orientation-permission-ui="enabled:false">
         <a-camera
             position="0 0 0"
             look-controls="enabled: false"
+            cursor="fuse: false; rayOrigin: mouse;"
+            raycaster="objects: .clickable"
         >
         </a-camera>
 
@@ -1032,7 +567,6 @@ device-orientation-permission-ui="enabled:false">
         <a-entity
             mindar-image-target="targetIndex: 0"
         >
-
         </a-entity>
 
 
@@ -1043,7 +577,6 @@ device-orientation-permission-ui="enabled:false">
         <a-entity
             mindar-image-target="targetIndex: 1"
         >
-
         </a-entity>
 
 
@@ -1054,7 +587,6 @@ device-orientation-permission-ui="enabled:false">
         <a-entity
             mindar-image-target="targetIndex: 2"
         >
-
         </a-entity>
 
 
@@ -1065,7 +597,6 @@ device-orientation-permission-ui="enabled:false">
         <a-entity
             mindar-image-target="targetIndex: 3"
         >
-
         </a-entity>
 
 
@@ -1076,7 +607,6 @@ device-orientation-permission-ui="enabled:false">
         <a-entity
             mindar-image-target="targetIndex: 4"
         >
-
         </a-entity>
 
 
@@ -1087,7 +617,6 @@ device-orientation-permission-ui="enabled:false">
         <a-entity
             mindar-image-target="targetIndex: 5"
         >
-
         </a-entity>
 
 
@@ -1095,10 +624,10 @@ device-orientation-permission-ui="enabled:false">
 
 
     <!-- =====================================================
-         JAVASCRIPT DO PROJETO
+         JAVASCRIPT
     ====================================================== -->
 
-    <script src="main.js"></script>
+    <script src="./main.js"></script>
 
 
 </body>
