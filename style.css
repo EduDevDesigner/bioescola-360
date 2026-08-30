@@ -400,3 +400,240 @@ CELULARES PEQUENOS (RESPONSIVIDADE)
     bottom: 88px;
     right: 20px;
 }
+
+/* =====================================================
+CONTAINER ÚNICO DA ESPÉCIE
+===================================================== */
+
+#speciesContent {
+
+    display: none;
+
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(92vw, 600px);
+
+    z-index: 5000;
+
+    text-align: center;
+
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+CAIXA DO VÍDEO
+===================================================== */
+
+.species-video-container {
+
+    width: 100%;
+
+    padding: 18px;
+
+    background:
+        rgba(0, 0, 0, 0.72);
+
+    border-radius: 18px;
+
+    backdrop-filter: blur(10px);
+
+    box-shadow:
+        0 8px 32px
+        rgba(0, 0, 0, 0.5);
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+TÍTULO
+===================================================== */
+
+.titulo-video {
+
+    margin: 0 0 12px;
+
+    color: white;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 2px 4px
+        rgba(0, 0, 0, 0.7);
+}
+
+
+/* =====================================================
+VÍDEO ÚNICO
+===================================================== */
+
+#speciesVideo {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    max-height: 60vh;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+
+    background: black;
+
+    filter:
+        drop-shadow(
+            0 10px 15px
+            rgba(0,0,0,0.4)
+        );
+}
+
+
+/* =====================================================
+BARRA DOS 3 BOTÕES
+===================================================== */
+
+.species-video-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    width: 100%;
+
+    margin-top: 10px;
+}
+
+
+/* =====================================================
+BOTÕES
+===================================================== */
+
+.species-video-buttons button {
+
+    flex: 1;
+
+    padding: 11px 8px;
+
+    min-width: 0;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background:
+        #ffffff;
+
+    color:
+        #1e3c72;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        background-color 0.2s,
+        box-shadow 0.2s;
+}
+
+
+/* =====================================================
+HOVER
+===================================================== */
+
+.species-video-buttons button:hover {
+
+    transform:
+        scale(1.04);
+
+    background:
+        #e0e0e0;
+}
+
+
+/* =====================================================
+BOTÃO ATIVO
+===================================================== */
+
+.species-video-buttons button.btn-ativo {
+
+    background:
+        #2ecc71;
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 0 12px
+        #2ecc71,
+
+        0 0 20px
+        rgba(46,204,113,0.6);
+}
+
+
+/* =====================================================
+CELULAR
+===================================================== */
+
+@media (max-width: 480px) {
+
+    #speciesContent {
+
+        width: 94vw;
+    }
+
+
+    .species-video-container {
+
+        padding: 12px;
+    }
+
+
+    .titulo-video {
+
+        font-size: 21px;
+    }
+
+
+    #speciesVideo {
+
+        max-height: 48vh;
+    }
+
+
+    .species-video-buttons {
+
+        gap: 5px;
+    }
+
+
+    .species-video-buttons button {
+
+        padding: 9px 5px;
+
+        font-size: 9px;
+    }
+
+}
