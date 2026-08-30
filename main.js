@@ -204,30 +204,30 @@ const especies = {
         historia: {
 
             webm:
-                "Alface.webm",
+                "Video/Alface.webm",
 
             mp4:
-                "Alface_Historia.mp4"
+                "Video/Alface_Historia.mp4"
 
         },
 
         caracteristicas: {
 
             webm:
-                "Alface_Caracteristicas_270.webm",
+                "Video/Alface_Caracteristicas_270.webm",
 
             mp4:
-                "Alface_Caracteristicas.mp4"
+                "Video/Alface_Caracteristicas.mp4"
 
         },
 
         curiosidades: {
 
             webm:
-                "Alface_Curiosidades_270.webm",
+                "Video/Alface_Curiosidades_270.webm",
 
             mp4:
-                "Alface_Curiosidades.mp4"
+                "Video/Alface_Curiosidades.mp4"
 
         }
 
