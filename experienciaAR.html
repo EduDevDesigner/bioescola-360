@@ -49,16 +49,41 @@ BOTÃO QUIZ
 TRACK 0 — FOLHOSAS
 ===================================================== -->
 
-<button id="folhosaAudioLeftButton" class="audio-left-fly-btn">CONHEÇA</button>
+<button
+    id="folhosaAudioLeftButton"
+    class="audio-left-fly-btn">
+    CONHEÇA
+</button>
 
-<button id="folhosaAudioRightButton" class="audio-right-fly-btn dropdown-btn">ESPÉCIES ▼</button>
+<button
+    id="folhosaAudioRightButton"
+    class="audio-right-fly-btn dropdown-btn">
+    ESPÉCIES ▼
+</button>
 
-<div id="folhosaSpeciesMenu" class="species-dropdown">
-    <button>Alface</button>
-    <button>Couve-Manteiga</button>
-    <button>Rúcula</button>
+<div
+    id="folhosaSpeciesMenu"
+    class="species-dropdown">
+
+    <button
+        class="species-btn"
+        data-species="alface">
+        ALFACE
+    </button>
+
+    <button
+        class="species-btn"
+        data-species="couve">
+        COUVE-MANTEIGA
+    </button>
+
+    <button
+        class="species-btn"
+        data-species="rucula">
+        RÚCULA
+    </button>
+
 </div>
-
 <!-- =====================================================
 TRACK 1 — TEMPEROS E ERVAS AROMÁTICAS
 ===================================================== -->
@@ -505,6 +530,55 @@ TRACK 5 — PANC
 </a-entity>
 
 </a-scene>
+    
+<!-- =====================================================
+CONTAINER ÚNICO DE VÍDEO
+===================================================== -->
+
+<div
+    id="speciesContent"
+    aria-hidden="true">
+
+    <div class="species-video-container">
+
+        <h2
+            id="speciesTitle"
+            class="titulo-video">
+            ALFACE
+        </h2>
+
+        <video
+            id="speciesVideo"
+            playsinline
+            preload="none">
+        </video>
+
+    </div>
+
+
+    <div class="species-video-buttons">
+
+        <button
+            id="btnHistoria"
+            type="button">
+            HISTÓRIA
+        </button>
+
+        <button
+            id="btnCaracteristicas"
+            type="button">
+            CARACTERÍSTICAS
+        </button>
+
+        <button
+            id="btnCuriosidades"
+            type="button">
+            CURIOSIDADES
+        </button>
+
+    </div>
+
+</div>    
 
 <!-- =====================================================
 SISTEMA DE PROGRESSO
