@@ -532,29 +532,39 @@ TRACK 5 — PANC
 </a-scene>
     
 <!-- =====================================================
-CONTAINER ÚNICO DE VÍDEO
+CONTAINER DE VÍDEO DA ESPÉCIE
 ===================================================== -->
 
-<div
-    id="speciesContent"
-    aria-hidden="true">
+<div id="speciesContent" aria-hidden="true">
 
     <div class="species-video-container">
 
-        <h2
-            id="speciesTitle"
-            class="titulo-video">
+        <h2 id="speciesTitle" class="titulo-video">
             ALFACE
         </h2>
 
         <video
             id="speciesVideo"
             playsinline
-            preload="none">
+            preload="none"
+            controls>
+
+            <source
+                id="speciesWebm"
+                src=""
+                type="video/webm">
+
+            <source
+                id="speciesMp4"
+                src=""
+                type="video/mp4">
+
         </video>
 
     </div>
 
+
+    <!-- BOTÕES DOS VÍDEOS -->
 
     <div class="species-video-buttons">
 
