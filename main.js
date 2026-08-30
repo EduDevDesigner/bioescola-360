@@ -949,6 +949,10 @@ function abrirEspecie(especie) {
         especies[especie];
 
 
+    /* -----------------------------------------------
+       Verifica se existe
+    ------------------------------------------------ */
+
     if (!dados) {
 
         console.warn(
@@ -961,9 +965,17 @@ function abrirEspecie(especie) {
     }
 
 
+    /* -----------------------------------------------
+       Guarda espécie atual
+    ------------------------------------------------ */
+
     especieAtual =
         especie;
 
+
+    /* -----------------------------------------------
+       Título
+    ------------------------------------------------ */
 
     if (speciesTitle) {
 
@@ -973,10 +985,15 @@ function abrirEspecie(especie) {
     }
 
 
+    /* -----------------------------------------------
+       Mostra container
+    ------------------------------------------------ */
+
     if (speciesContent) {
 
         speciesContent.style.display =
             "block";
+
 
         speciesContent.setAttribute(
             "aria-hidden",
@@ -986,10 +1003,43 @@ function abrirEspecie(especie) {
     }
 
 
-    trocarVideo(
-        dados.historia,
-        btnHistoria
-    );
+    /* -----------------------------------------------
+       NÃO INICIA NENHUM VÍDEO AUTOMATICAMENTE
+       
+       O vídeo permanece parado até o usuário
+       clicar em um dos três botões.
+    ------------------------------------------------ */
+
+    if (speciesVideo) {
+
+        speciesVideo.pause();
+
+        speciesVideo.removeAttribute(
+            "src"
+        );
+
+        speciesVideo.load();
+
+    }
+
+
+    /* -----------------------------------------------
+       Remove estado ativo dos botões
+    ------------------------------------------------ */
+
+    document
+        .querySelectorAll(
+            ".species-video-buttons button"
+        )
+        .forEach(
+            btn => {
+
+                btn.classList.remove(
+                    "btn-ativo"
+                );
+
+            }
+        );
 
 }
 
