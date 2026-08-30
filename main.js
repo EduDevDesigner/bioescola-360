@@ -1,5 +1,5 @@
 /* =====================================================
-MENSAGEM
+   MENSAGEM
 ===================================================== */
 
 const message =
@@ -7,7 +7,7 @@ const message =
 
 
 /* =====================================================
-SOM DOS BOTÕES
+   SOM DOS BOTÕES
 ===================================================== */
 
 const clickSound =
@@ -28,7 +28,7 @@ function tocarClick() {
 
 
 /* =====================================================
-ÁUDIOS DAS 6 CATEGORIAS
+   ÁUDIOS DAS 6 CATEGORIAS
 ===================================================== */
 
 const audioFolhosas =
@@ -51,7 +51,7 @@ const audioPanc =
 
 
 /* =====================================================
-BOTÕES DAS TRACKS
+   BOTÕES DAS TRACKS
 ===================================================== */
 
 const folhosaAudioLeftButton =
@@ -121,7 +121,7 @@ const pancAudioRightButton =
 
 
 /* =====================================================
-MENU HAMBURGER
+   MENU HAMBURGER
 ===================================================== */
 
 const menuToggleButton =
@@ -133,14 +133,14 @@ let menuOpen = false;
 
 
 /* =====================================================
-TRACK ATIVA
+   TRACK ATIVA
 ===================================================== */
 
 let activeTrack = -1;
 
 
 /* =====================================================
-CONTAINER ÚNICO DE VÍDEO
+   CONTAINER ÚNICO DE VÍDEO
 ===================================================== */
 
 const speciesContent =
@@ -162,7 +162,7 @@ const speciesVideo =
 
 
 /* =====================================================
-BOTÕES DO VÍDEO
+   BOTÕES DO VÍDEO
 ===================================================== */
 
 const btnHistoria =
@@ -184,128 +184,78 @@ const btnCuriosidades =
 
 
 /* =====================================================
-DADOS DAS ESPÉCIES
+   ESPÉCIE ATUAL
 ===================================================== */
 
-/*
-   Aqui ficará o conteúdo de cada espécie.
+let especieAtual = null;
 
-   Adicionar uma espécie posteriormente
-   não exige criar um novo <video>.
-*/
+
+/* =====================================================
+   DADOS DAS ESPÉCIES
+   TODOS OS VÍDEOS SÃO WEBM
+===================================================== */
 
 const especies = {
+
+    /* -------------------------------------------------
+       ALFACE
+    ------------------------------------------------- */
 
     alface: {
 
         nome:
             "ALFACE",
 
-        historia: {
+        historia:
+            "Video/Alface.webm",
 
-            webm:
-                "Video/Alface.webm",
+        caracteristicas:
+            "Video/Alface_Caracteristicas_270.webm",
 
-            mp4:
-                "Video/Alface_Historia.mp4"
-
-        },
-
-        caracteristicas: {
-
-            webm:
-                "Video/Alface_Caracteristicas_270.webm",
-
-            mp4:
-                "Video/Alface_Caracteristicas.mp4"
-
-        },
-
-        curiosidades: {
-
-            webm:
-                "Video/Alface_Curiosidades_270.webm",
-
-            mp4:
-                "Video/Alface_Curiosidades.mp4"
-
-        }
+        curiosidades:
+            "Video/Alface_Curiosidades_270.webm"
 
     },
 
+
+    /* -------------------------------------------------
+       COUVE-MANTEIGA
+    ------------------------------------------------- */
 
     couve: {
 
         nome:
             "COUVE-MANTEIGA",
 
-        historia: {
+        historia:
+            "Video/Couve.webm",
 
-            webm:
-                "Couve.webm",
+        caracteristicas:
+            "Video/Couve_Caracteristicas_270.webm",
 
-            mp4:
-                "Couve_Historia.mp4"
-
-        },
-
-        caracteristicas: {
-
-            webm:
-                "Couve_Caracteristicas_270.webm",
-
-            mp4:
-                "Couve_Caracteristicas.mp4"
-
-        },
-
-        curiosidades: {
-
-            webm:
-                "Couve_Curiosidades_270.webm",
-
-            mp4:
-                "Couve_Curiosidades.mp4"
-
-        }
+        curiosidades:
+            "Video/Couve_Curiosidades_270.webm"
 
     },
 
+
+    /* -------------------------------------------------
+       RÚCULA
+    ------------------------------------------------- */
 
     rucula: {
 
         nome:
             "RÚCULA",
 
-        historia: {
+        historia:
+            "Video/Rucula.webm",
 
-            webm:
-                "Rucula.webm",
+        caracteristicas:
+            "Video/Rucula_Caracteristicas_270.webm",
 
-            mp4:
-                "Rucula_Historia.mp4"
-
-        },
-
-        caracteristicas: {
-
-            webm:
-                "Rucula_Caracteristicas_270.webm",
-
-            mp4:
-                "Rucula_Caracteristicas.mp4"
-
-        },
-
-        curiosidades: {
-
-            webm:
-                "Rucula_Curiosidades_270.webm",
-
-            mp4:
-                "Rucula_Curiosidades.mp4"
-
-        }
+        curiosidades:
+            "Video/Rucula_Curiosidades_270.webm"
 
     }
 
@@ -313,7 +263,7 @@ const especies = {
 
 
 /* =====================================================
-TODAS AS CATEGORIAS
+   TODAS AS CATEGORIAS
 ===================================================== */
 
 const categorias = {
@@ -387,7 +337,7 @@ const categorias = {
 
 
 /* =====================================================
-DROPDOWNS
+   DROPDOWNS
 ===================================================== */
 
 const dropdowns = [
@@ -491,7 +441,7 @@ const dropdowns = [
 
 
 /* =====================================================
-FECHAR DROPDOWNS
+   FECHAR TODOS OS DROPDOWNS
 ===================================================== */
 
 function fecharTodosDropdowns() {
@@ -514,7 +464,7 @@ function fecharTodosDropdowns() {
 
 
 /* =====================================================
-ESCONDER BOTÕES DAS TRACKS
+   ESCONDER BOTÕES DAS TRACKS
 ===================================================== */
 
 function esconderBotoesInteracao() {
@@ -522,9 +472,7 @@ function esconderBotoesInteracao() {
     dropdowns.forEach(
         dropdown => {
 
-            if (
-                dropdown.button
-            ) {
+            if (dropdown.button) {
 
                 dropdown.button.style.display =
                     "none";
@@ -536,22 +484,24 @@ function esconderBotoesInteracao() {
 
 
     Object.values(categorias)
-        .forEach(categoria => {
+        .forEach(
+            categoria => {
 
-            if (categoria.button) {
+                if (categoria.button) {
 
-                categoria.button.style.display =
-                    "none";
+                    categoria.button.style.display =
+                        "none";
+
+                }
 
             }
-
-        });
+        );
 
 }
 
 
 /* =====================================================
-MOSTRAR BOTÕES DA TRACK
+   MOSTRAR BOTÕES DA TRACK
 ===================================================== */
 
 function mostrarBotoesTrack(index) {
@@ -561,6 +511,7 @@ function mostrarBotoesTrack(index) {
 
     const dropdown =
         dropdowns[index];
+
 
     const categoria =
         categorias[index];
@@ -591,34 +542,35 @@ function mostrarBotoesTrack(index) {
 
 
 /* =====================================================
-PARAR TODOS OS ÁUDIOS
+   PARAR TODOS OS ÁUDIOS
 ===================================================== */
 
 function pararTodosAudios() {
 
     document
         .querySelectorAll("audio")
-        .forEach(audio => {
+        .forEach(
+            audio => {
 
-            audio.pause();
+                audio.pause();
 
-            audio.currentTime = 0;
+                audio.currentTime = 0;
 
-        });
+            }
+        );
 
 }
 
 
 /* =====================================================
-CONHEÇA
+   TOCAR ÁUDIO DA CATEGORIA
 ===================================================== */
 
-function tocarAudioCategoria(
-    index
-) {
+function tocarAudioCategoria(index) {
 
     const categoria =
         categorias[index];
+
 
     if (
         !categoria ||
@@ -635,43 +587,65 @@ function tocarAudioCategoria(
         categoria.audio;
 
 
+    /* -----------------------------------------------
+       Para outros áudios
+    ------------------------------------------------ */
+
     Object.values(categorias)
-        .forEach(outro => {
+        .forEach(
+            outraCategoria => {
 
-            if (
-                outro.audio &&
-                outro.audio !== audio
-            ) {
+                if (
+                    outraCategoria.audio &&
+                    outraCategoria.audio !== audio
+                ) {
 
-                outro.audio.pause();
+                    outraCategoria.audio.pause();
 
-                outro.audio.currentTime = 0;
+                    outraCategoria.audio.currentTime =
+                        0;
+
+                }
+
+
+                if (
+                    outraCategoria.button &&
+                    outraCategoria.button !==
+                        categoria.button
+                ) {
+
+                    outraCategoria.button.classList.remove(
+                        "btn-active"
+                    );
+
+                }
 
             }
+        );
 
 
-            if (
-                outro.button &&
-                outro.button !== categoria.button
-            ) {
-
-                outro.button.classList.remove(
-                    "btn-active"
-                );
-
-            }
-
-        });
-
+    /* -----------------------------------------------
+       Toca / pausa
+    ------------------------------------------------ */
 
     if (audio.paused) {
 
         audio.play()
-            .catch(() => {});
+            .then(() => {
 
-        categoria.button.classList.add(
-            "btn-active"
-        );
+                categoria.button.classList.add(
+                    "btn-active"
+                );
+
+            })
+            .catch(error => {
+
+                console.warn(
+                    "Não foi possível reproduzir o áudio:",
+                    error
+                );
+
+            });
 
     }
 
@@ -688,6 +662,10 @@ function tocarAudioCategoria(
     }
 
 
+    /* -----------------------------------------------
+       Quando terminar
+    ------------------------------------------------ */
+
     audio.onended = () => {
 
         categoria.button.classList.remove(
@@ -700,83 +678,107 @@ function tocarAudioCategoria(
 
 
 /* =====================================================
-EVENTOS "CONHEÇA"
+   EVENTOS "CONHEÇA"
 ===================================================== */
 
-folhosaAudioLeftButton.addEventListener(
-    "click",
-    () => {
+if (folhosaAudioLeftButton) {
 
-        if (activeTrack !== 0) return;
+    folhosaAudioLeftButton.addEventListener(
+        "click",
+        () => {
 
-        tocarAudioCategoria(0);
+            if (activeTrack !== 0) return;
 
-    }
-);
+            tocarAudioCategoria(0);
 
+        }
+    );
 
-temperoAudioLeftButton.addEventListener(
-    "click",
-    () => {
-
-        if (activeTrack !== 1) return;
-
-        tocarAudioCategoria(1);
-
-    }
-);
+}
 
 
-frutoAudioLeftButton.addEventListener(
-    "click",
-    () => {
+if (temperoAudioLeftButton) {
 
-        if (activeTrack !== 2) return;
+    temperoAudioLeftButton.addEventListener(
+        "click",
+        () => {
 
-        tocarAudioCategoria(2);
+            if (activeTrack !== 1) return;
 
-    }
-);
+            tocarAudioCategoria(1);
 
+        }
+    );
 
-frutaAudioLeftButton.addEventListener(
-    "click",
-    () => {
-
-        if (activeTrack !== 3) return;
-
-        tocarAudioCategoria(3);
-
-    }
-);
+}
 
 
-medicinalAudioLeftButton.addEventListener(
-    "click",
-    () => {
+if (frutoAudioLeftButton) {
 
-        if (activeTrack !== 4) return;
+    frutoAudioLeftButton.addEventListener(
+        "click",
+        () => {
 
-        tocarAudioCategoria(4);
+            if (activeTrack !== 2) return;
 
-    }
-);
+            tocarAudioCategoria(2);
+
+        }
+    );
+
+}
 
 
-pancAudioLeftButton.addEventListener(
-    "click",
-    () => {
+if (frutaAudioLeftButton) {
 
-        if (activeTrack !== 5) return;
+    frutaAudioLeftButton.addEventListener(
+        "click",
+        () => {
 
-        tocarAudioCategoria(5);
+            if (activeTrack !== 3) return;
 
-    }
-);
+            tocarAudioCategoria(3);
+
+        }
+    );
+
+}
+
+
+if (medicinalAudioLeftButton) {
+
+    medicinalAudioLeftButton.addEventListener(
+        "click",
+        () => {
+
+            if (activeTrack !== 4) return;
+
+            tocarAudioCategoria(4);
+
+        }
+    );
+
+}
+
+
+if (pancAudioLeftButton) {
+
+    pancAudioLeftButton.addEventListener(
+        "click",
+        () => {
+
+            if (activeTrack !== 5) return;
+
+            tocarAudioCategoria(5);
+
+        }
+    );
+
+}
 
 
 /* =====================================================
-BOTÃO ESPÉCIES
+   BOTÃO "ESPÉCIES"
 ===================================================== */
 
 dropdowns.forEach(
@@ -809,6 +811,8 @@ dropdowns.forEach(
                 }
 
 
+                /* Fecha os outros */
+
                 dropdowns.forEach(
                     outro => {
 
@@ -827,6 +831,8 @@ dropdowns.forEach(
                 );
 
 
+                /* Abre / fecha o atual */
+
                 dropdown.menu.classList.toggle(
                     "open"
                 );
@@ -839,49 +845,52 @@ dropdowns.forEach(
 
 
 /* =====================================================
-SELEÇÃO DE ESPÉCIE
+   SELEÇÃO DE ESPÉCIE
 ===================================================== */
 
 document
     .querySelectorAll(".species-btn")
-    .forEach(button => {
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                event => {
+
+                    event.stopPropagation();
 
 
-        button.addEventListener(
-            "click",
-            event => {
-
-                event.stopPropagation();
+                    const especie =
+                        button.dataset.species;
 
 
-                const especie =
-                    button.dataset.species;
+                    fecharTodosDropdowns();
 
 
-                fecharTodosDropdowns();
+                    abrirEspecie(
+                        especie
+                    );
 
+                }
+            );
 
-                abrirEspecie(
-                    especie
-                );
-
-            }
-        );
-
-    });
+        }
+    );
 
 
 /* =====================================================
-ABRIR ESPÉCIE
+   ABRIR ESPÉCIE
 ===================================================== */
 
-function abrirEspecie(
-    especie
-) {
+function abrirEspecie(especie) {
 
     const dados =
         especies[especie];
 
+
+    /* -----------------------------------------------
+       Verifica se existe
+    ------------------------------------------------ */
 
     if (!dados) {
 
@@ -895,24 +904,47 @@ function abrirEspecie(
     }
 
 
-    speciesTitle.innerText =
-        dados.nome;
+    /* -----------------------------------------------
+       Guarda espécie atual
+    ------------------------------------------------ */
+
+    especieAtual =
+        especie;
 
 
-    speciesContent.style.display =
-        "block";
+    /* -----------------------------------------------
+       Título
+    ------------------------------------------------ */
+
+    if (speciesTitle) {
+
+        speciesTitle.innerText =
+            dados.nome;
+
+    }
 
 
-    speciesContent.setAttribute(
-        "aria-hidden",
-        "false"
-    );
+    /* -----------------------------------------------
+       Mostra container
+    ------------------------------------------------ */
+
+    if (speciesContent) {
+
+        speciesContent.style.display =
+            "block";
 
 
-    /*
-       Começa automaticamente
-       pela HISTÓRIA.
-    */
+        speciesContent.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+    }
+
+
+    /* -----------------------------------------------
+       Começa pela História
+    ------------------------------------------------ */
 
     trocarVideo(
         dados.historia,
@@ -923,17 +955,17 @@ function abrirEspecie(
 
 
 /* =====================================================
-TROCAR VÍDEO
+   TROCAR VÍDEO WEBM
 ===================================================== */
 
 function trocarVideo(
-    fontes,
+    videoSrc,
     botao
 ) {
 
     if (
         !speciesVideo ||
-        !fontes
+        !videoSrc
     ) {
 
         return;
@@ -941,9 +973,9 @@ function trocarVideo(
     }
 
 
-    /*
-       Remove estado ativo
-    */
+    /* -----------------------------------------------
+       Remove estado ativo dos botões
+    ------------------------------------------------ */
 
     document
         .querySelectorAll(
@@ -960,9 +992,9 @@ function trocarVideo(
         );
 
 
-    /*
+    /* -----------------------------------------------
        Ativa botão
-    */
+    ------------------------------------------------ */
 
     if (botao) {
 
@@ -973,20 +1005,16 @@ function trocarVideo(
     }
 
 
-    /*
-       Interrompe o vídeo atual
-    */
+    /* -----------------------------------------------
+       Para vídeo anterior
+    ------------------------------------------------ */
 
     speciesVideo.pause();
 
 
-    /*
-       Libera o arquivo anterior
-       antes de carregar o próximo.
-
-       Isso evita manter vários vídeos
-       ocupando memória.
-    */
+    /* -----------------------------------------------
+       Remove vídeo anterior
+    ------------------------------------------------ */
 
     speciesVideo.removeAttribute(
         "src"
@@ -996,133 +1024,155 @@ function trocarVideo(
     speciesVideo.load();
 
 
-    /*
-       Define somente o arquivo
-       solicitado pelo usuário.
-    */
+    /* -----------------------------------------------
+       Define vídeo WEBM
+    ------------------------------------------------ */
 
     speciesVideo.src =
-        fontes.mp4 || fontes.webm;
+        videoSrc;
 
 
-    /*
-       Configuração
-    */
+    /* -----------------------------------------------
+       Configurações
+    ------------------------------------------------ */
 
     speciesVideo.preload =
-        "none";
+        "metadata";
+
+    speciesVideo.playsInline =
+        true;
+
+    speciesVideo.setAttribute(
+        "playsinline",
+        ""
+    );
+
+    speciesVideo.setAttribute(
+        "webkit-playsinline",
+        ""
+    );
 
 
-    /*
-       Carrega/reproduz somente agora.
-    */
+    /* -----------------------------------------------
+       Carrega novo vídeo
+    ------------------------------------------------ */
 
     speciesVideo.load();
 
 
-    speciesVideo.play()
-        .catch(error => {
+    /* -----------------------------------------------
+       Reproduz
+    ------------------------------------------------ */
 
-            console.log(
-                "Reprodução:",
-                error
+    const promessa =
+        speciesVideo.play();
+
+
+    if (promessa) {
+
+        promessa.catch(
+            error => {
+
+                console.warn(
+                    "Reprodução do vídeo:",
+                    error
+                );
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   BOTÃO HISTÓRIA
+===================================================== */
+
+if (btnHistoria) {
+
+    btnHistoria.addEventListener(
+        "click",
+        () => {
+
+            const especie =
+                obterEspecieAtual();
+
+
+            if (!especie) return;
+
+
+            trocarVideo(
+                especie.historia,
+                btnHistoria
             );
 
-        });
+        }
+    );
 
 }
 
 
 /* =====================================================
-BOTÃO HISTÓRIA
+   BOTÃO CARACTERÍSTICAS
 ===================================================== */
 
-btnHistoria.addEventListener(
-    "click",
-    () => {
+if (btnCaracteristicas) {
 
-        const especie =
-            obterEspecieAtual();
+    btnCaracteristicas.addEventListener(
+        "click",
+        () => {
 
-        if (!especie) return;
-
-
-        trocarVideo(
-            especie.historia,
-            btnHistoria
-        );
-
-    }
-);
+            const especie =
+                obterEspecieAtual();
 
 
-/* =====================================================
-BOTÃO CARACTERÍSTICAS
-===================================================== */
-
-btnCaracteristicas.addEventListener(
-    "click",
-    () => {
-
-        const especie =
-            obterEspecieAtual();
-
-        if (!especie) return;
+            if (!especie) return;
 
 
-        trocarVideo(
-            especie.caracteristicas,
-            btnCaracteristicas
-        );
+            trocarVideo(
+                especie.caracteristicas,
+                btnCaracteristicas
+            );
 
-    }
-);
-
-
-/* =====================================================
-BOTÃO CURIOSIDADES
-===================================================== */
-
-btnCuriosidades.addEventListener(
-    "click",
-    () => {
-
-        const especie =
-            obterEspecieAtual();
-
-        if (!especie) return;
-
-
-        trocarVideo(
-            especie.curiosidades,
-            btnCuriosidades
-        );
-
-    }
-);
-
-
-/* =====================================================
-ESPÉCIE ATUAL
-===================================================== */
-
-let especieAtual =
-    null;
-
-
-/*
-   Guardamos a espécie selecionada.
-*/
-
-function selecionarEspecie(
-    especie
-) {
-
-    especieAtual =
-        especie;
+        }
+    );
 
 }
 
+
+/* =====================================================
+   BOTÃO CURIOSIDADES
+===================================================== */
+
+if (btnCuriosidades) {
+
+    btnCuriosidades.addEventListener(
+        "click",
+        () => {
+
+            const especie =
+                obterEspecieAtual();
+
+
+            if (!especie) return;
+
+
+            trocarVideo(
+                especie.curiosidades,
+                btnCuriosidades
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   OBTER ESPÉCIE ATUAL
+===================================================== */
 
 function obterEspecieAtual() {
 
@@ -1140,92 +1190,71 @@ function obterEspecieAtual() {
 }
 
 
-/*
-   Substitui a função abrirEspecie
-   para também armazenar a seleção.
-*/
+/* =====================================================
+   QUANDO O VÍDEO TERMINA
+===================================================== */
 
-function abrirEspecie(
-    especie
-) {
+if (speciesVideo) {
 
-    const dados =
-        especies[especie];
+    speciesVideo.addEventListener(
+        "ended",
+        () => {
 
+            document
+                .querySelectorAll(
+                    ".species-video-buttons button"
+                )
+                .forEach(
+                    btn => {
 
-    if (!dados) {
+                        btn.classList.remove(
+                            "btn-ativo"
+                        );
 
-        console.warn(
-            "Espécie não cadastrada:",
-            especie
-        );
+                    }
+                );
 
-        return;
-
-    }
-
-
-    selecionarEspecie(
-        especie
-    );
-
-
-    speciesTitle.innerText =
-        dados.nome;
-
-
-    speciesContent.style.display =
-        "block";
-
-
-    speciesContent.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-
-    trocarVideo(
-        dados.historia,
-        btnHistoria
+        }
     );
 
 }
 
 
 /* =====================================================
-QUANDO O VÍDEO TERMINA
+   ERRO NO VÍDEO
 ===================================================== */
 
-speciesVideo.addEventListener(
-    "ended",
-    () => {
+if (speciesVideo) {
 
-        document
-            .querySelectorAll(
-                ".species-video-buttons button"
-            )
-            .forEach(
-                btn => {
+    speciesVideo.addEventListener(
+        "error",
+        () => {
 
-                    btn.classList.remove(
-                        "btn-ativo"
-                    );
-
-                }
+            console.error(
+                "Erro ao carregar o vídeo WebM:",
+                speciesVideo.currentSrc
             );
 
-    }
-);
+        }
+    );
+
+}
 
 
 /* =====================================================
-FECHAR CONTAINER
+   FECHAR CONTAINER DA ESPÉCIE
 ===================================================== */
 
 function fecharConteudoEspecie() {
 
-    if (!speciesContent) return;
+    if (!speciesContent) {
+        return;
+    }
 
+
+    /* -----------------------------------------------
+       Esconde
+    ------------------------------------------------ */
 
     speciesContent.style.display =
         "none";
@@ -1237,27 +1266,36 @@ function fecharConteudoEspecie() {
     );
 
 
+    /* -----------------------------------------------
+       Para e libera vídeo
+    ------------------------------------------------ */
+
     if (speciesVideo) {
 
         speciesVideo.pause();
 
-        /*
-           Remove a fonte para liberar
-           o recurso do vídeo.
-        */
 
         speciesVideo.removeAttribute(
             "src"
         );
+
 
         speciesVideo.load();
 
     }
 
 
+    /* -----------------------------------------------
+       Limpa espécie
+    ------------------------------------------------ */
+
     especieAtual =
         null;
 
+
+    /* -----------------------------------------------
+       Remove estado dos botões
+    ------------------------------------------------ */
 
     document
         .querySelectorAll(
@@ -1277,7 +1315,7 @@ function fecharConteudoEspecie() {
 
 
 /* =====================================================
-SOM DOS BOTÕES
+   SOM DOS BOTÕES
 ===================================================== */
 
 document
@@ -1295,7 +1333,7 @@ document
 
 
 /* =====================================================
-TRACKS MINDAR
+   TRACKS MINDAR
 ===================================================== */
 
 const targets =
@@ -1308,6 +1346,10 @@ targets.forEach(
     (target, index) => {
 
 
+        /* ---------------------------------------------
+           TRACK ENCONTRADA
+        ---------------------------------------------- */
+
         target.addEventListener(
             "targetFound",
             () => {
@@ -1315,6 +1357,8 @@ targets.forEach(
                 activeTrack =
                     index;
 
+
+                /* Mensagem */
 
                 if (message) {
 
@@ -1325,6 +1369,8 @@ targets.forEach(
                 }
 
 
+                /* Menu */
+
                 if (menuToggleButton) {
 
                     menuToggleButton.style.display =
@@ -1333,19 +1379,29 @@ targets.forEach(
                 }
 
 
+                /* Botões */
+
                 mostrarBotoesTrack(
                     index
                 );
 
 
+                /* Fecha dropdown */
+
                 fecharTodosDropdowns();
 
+
+                /* Fecha espécie anterior */
 
                 fecharConteudoEspecie();
 
             }
         );
 
+
+        /* ---------------------------------------------
+           TRACK PERDIDA
+        ---------------------------------------------- */
 
         target.addEventListener(
             "targetLost",
@@ -1361,6 +1417,8 @@ targets.forEach(
                 }
 
 
+                /* Mensagem */
+
                 if (message) {
 
                     message.classList.remove(
@@ -1370,17 +1428,27 @@ targets.forEach(
                 }
 
 
+                /* Esconde botões */
+
                 esconderBotoesInteracao();
 
+
+                /* Fecha dropdowns */
 
                 fecharTodosDropdowns();
 
 
+                /* Fecha vídeo */
+
                 fecharConteudoEspecie();
 
 
+                /* Para áudios */
+
                 pararTodosAudios();
 
+
+                /* Fecha menu */
 
                 menuOpen =
                     false;
@@ -1391,10 +1459,13 @@ targets.forEach(
                 );
 
 
+                /* Esconde botão menu */
+
                 if (menuToggleButton) {
 
                     menuToggleButton.innerHTML =
                         "☰";
+
 
                     menuToggleButton.style.display =
                         "none";
@@ -1409,7 +1480,7 @@ targets.forEach(
 
 
 /* =====================================================
-MENU HAMBURGER
+   MENU HAMBURGER
 ===================================================== */
 
 if (menuToggleButton) {
@@ -1428,8 +1499,10 @@ if (menuToggleButton) {
                     "menu-open"
                 );
 
+
                 menuToggleButton.innerHTML =
                     "✕";
+
 
                 fecharTodosDropdowns();
 
@@ -1440,6 +1513,7 @@ if (menuToggleButton) {
                 document.body.classList.remove(
                     "menu-open"
                 );
+
 
                 menuToggleButton.innerHTML =
                     "☰";
@@ -1453,7 +1527,7 @@ if (menuToggleButton) {
 
 
 /* =====================================================
-CONTADOR
+   CONTADOR DE TRACKS
 ===================================================== */
 
 const progressCount =
@@ -1476,6 +1550,10 @@ const totalTracks =
     6;
 
 
+/* =====================================================
+   REGISTRAR TRACK
+===================================================== */
+
 function registrarTrack(index) {
 
     if (
@@ -1492,6 +1570,8 @@ function registrarTrack(index) {
     );
 
 
+    /* Atualiza contador */
+
     if (progressCount) {
 
         progressCount.innerText =
@@ -1499,6 +1579,8 @@ function registrarTrack(index) {
 
     }
 
+
+    /* Libera botão final */
 
     if (
         visitedTracks.size >=
@@ -1518,7 +1600,7 @@ function registrarTrack(index) {
 
 
 /* =====================================================
-REGISTRAR TRACK
+   REGISTRAR TRACKS VISITADAS
 ===================================================== */
 
 targets.forEach(
@@ -1540,7 +1622,7 @@ targets.forEach(
 
 
 /* =====================================================
-BOTÃO QUIZ
+   BOTÃO QUIZ
 ===================================================== */
 
 if (finalButtonTop) {
