@@ -1,9 +1,41 @@
 /* =====================================================
-   MENSAGEM
+   BIOESCOLA 360°
+   SISTEMA PRINCIPAL DE REALIDADE AUMENTADA
 ===================================================== */
+
+
+/* =====================================================
+   ELEMENTOS PRINCIPAIS
+===================================================== */
+
+const scene =
+    document.getElementById("arScene");
 
 const message =
     document.getElementById("track-message");
+
+const loadingMessage =
+    document.getElementById("loadingMessage");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+const errorText =
+    document.getElementById("errorText");
+
+const retryButton =
+    document.getElementById("retryButton");
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+let activeTrack = -1;
+
+let especieAtual = null;
+
+let menuOpen = false;
 
 
 /* =====================================================
@@ -16,19 +48,26 @@ const clickSound =
 
 function tocarClick() {
 
-    if (!clickSound) return;
-
-    clickSound.pause();
+    if (!clickSound) {
+        return;
+    }
 
     clickSound.currentTime = 0;
 
-    clickSound.play().catch(() => {});
+    clickSound.play()
+        .catch(() => {
+            /*
+                O áudio é opcional.
+                Se o arquivo não existir,
+                não interrompe a aplicação.
+            */
+        });
 
 }
 
 
 /* =====================================================
-   ÁUDIOS DAS 6 CATEGORIAS
+   ÁUDIOS DAS CATEGORIAS
 ===================================================== */
 
 const audioFolhosas =
@@ -51,7 +90,7 @@ const audioPanc =
 
 
 /* =====================================================
-   BOTÕES DAS TRACKS
+   BOTÕES DAS CATEGORIAS
 ===================================================== */
 
 const folhosaAudioLeftButton =
@@ -121,7 +160,7 @@ const pancAudioRightButton =
 
 
 /* =====================================================
-   MENU HAMBURGER
+   MENU
 ===================================================== */
 
 const menuToggleButton =
@@ -129,18 +168,14 @@ const menuToggleButton =
         "menuToggleButton"
     );
 
-let menuOpen = false;
+const sideMenu =
+    document.getElementById(
+        "sideMenu"
+    );
 
 
 /* =====================================================
-   TRACK ATIVA
-===================================================== */
-
-let activeTrack = -1;
-
-
-/* =====================================================
-   CONTAINER ÚNICO DE VÍDEO
+   CONTEÚDO DA ESPÉCIE
 ===================================================== */
 
 const speciesContent =
@@ -148,16 +183,19 @@ const speciesContent =
         "speciesContent"
     );
 
-
 const speciesTitle =
     document.getElementById(
         "speciesTitle"
     );
 
-
 const speciesVideo =
     document.getElementById(
         "speciesVideo"
+    );
+
+const closeSpeciesButton =
+    document.getElementById(
+        "closeSpeciesButton"
     );
 
 
@@ -170,12 +208,10 @@ const btnHistoria =
         "btnHistoria"
     );
 
-
 const btnCaracteristicas =
     document.getElementById(
         "btnCaracteristicas"
     );
-
 
 const btnCuriosidades =
     document.getElementById(
@@ -184,18 +220,11 @@ const btnCuriosidades =
 
 
 /* =====================================================
-   ESPÉCIE ATUAL
-===================================================== */
-
-let especieAtual = null;
-
-
-/* =====================================================
    DADOS DAS ESPÉCIES
-   TODOS OS VÍDEOS SÃO WEBM
 ===================================================== */
 
 const especies = {
+
 
     /* -------------------------------------------------
        ALFACE
@@ -207,19 +236,19 @@ const especies = {
             "ALFACE",
 
         historia:
-            "Video/Alface.webm",
+            "./Video/Alface.webm",
 
         caracteristicas:
-            "Video/Alface_Caracteristicas_270.webm",
+            "./Video/Alface_Caracteristicas_270.webm",
 
         curiosidades:
-            "Video/Alface_Curiosidades_270.webm"
+            "./Video/Alface_Curiosidades_270.webm"
 
     },
 
 
     /* -------------------------------------------------
-       COUVE-MANTEIGA
+       COUVE
     ------------------------------------------------- */
 
     couve: {
@@ -228,13 +257,13 @@ const especies = {
             "COUVE-MANTEIGA",
 
         historia:
-            "Video/Couve.webm",
+            "./Video/Couve.webm",
 
         caracteristicas:
-            "Video/Couve_Caracteristicas_270.webm",
+            "./Video/Couve_Caracteristicas_270.webm",
 
         curiosidades:
-            "Video/Couve_Curiosidades_270.webm"
+            "./Video/Couve_Curiosidades_270.webm"
 
     },
 
@@ -249,13 +278,76 @@ const especies = {
             "RÚCULA",
 
         historia:
-            "Video/Rucula.webm",
+            "./Video/Rucula.webm",
 
         caracteristicas:
-            "Video/Rucula_Caracteristicas_270.webm",
+            "./Video/Rucula_Caracteristicas_270.webm",
 
         curiosidades:
-            "Video/Rucula_Curiosidades_270.webm"
+            "./Video/Rucula_Curiosidades_270.webm"
+
+    },
+
+
+    /* -------------------------------------------------
+       COENTRO
+    ------------------------------------------------- */
+
+    coentro: {
+
+        nome:
+            "COENTRO",
+
+        historia:
+            "./Video/Coentro.webm",
+
+        caracteristicas:
+            "./Video/Coentro_Caracteristicas_270.webm",
+
+        curiosidades:
+            "./Video/Coentro_Curiosidades_270.webm"
+
+    },
+
+
+    /* -------------------------------------------------
+       TOMATE
+    ------------------------------------------------- */
+
+    tomate: {
+
+        nome:
+            "TOMATE",
+
+        historia:
+            "./Video/Tomate.webm",
+
+        caracteristicas:
+            "./Video/Tomate_Caracteristicas_270.webm",
+
+        curiosidades:
+            "./Video/Tomate_Curiosidades_270.webm"
+
+    },
+
+
+    /* -------------------------------------------------
+       ABACAXI
+    ------------------------------------------------- */
+
+    abacaxi: {
+
+        nome:
+            "ABACAXI",
+
+        historia:
+            "./Video/Abacaxi.webm",
+
+        caracteristicas:
+            "./Video/Abacaxi_Caracteristicas_270.webm",
+
+        curiosidades:
+            "./Video/Abacaxi_Curiosidades_270.webm"
 
     }
 
@@ -263,10 +355,11 @@ const especies = {
 
 
 /* =====================================================
-   TODAS AS CATEGORIAS
+   CATEGORIAS
 ===================================================== */
 
 const categorias = {
+
 
     0: {
 
@@ -341,6 +434,7 @@ const categorias = {
 ===================================================== */
 
 const dropdowns = [
+
 
     {
 
@@ -441,30 +535,7 @@ const dropdowns = [
 
 
 /* =====================================================
-   FECHAR TODOS OS DROPDOWNS
-===================================================== */
-
-function fecharTodosDropdowns() {
-
-    dropdowns.forEach(
-        dropdown => {
-
-            if (dropdown.menu) {
-
-                dropdown.menu.classList.remove(
-                    "open"
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   ESCONDER BOTÕES DAS TRACKS
+   ESCONDER BOTÕES
 ===================================================== */
 
 function esconderBotoesInteracao() {
@@ -512,7 +583,6 @@ function mostrarBotoesTrack(index) {
     const dropdown =
         dropdowns[index];
 
-
     const categoria =
         categorias[index];
 
@@ -542,7 +612,30 @@ function mostrarBotoesTrack(index) {
 
 
 /* =====================================================
-   PARAR TODOS OS ÁUDIOS
+   FECHAR DROPDOWNS
+===================================================== */
+
+function fecharTodosDropdowns() {
+
+    dropdowns.forEach(
+        dropdown => {
+
+            if (dropdown.menu) {
+
+                dropdown.menu.classList.remove(
+                    "open"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PARAR ÁUDIOS
 ===================================================== */
 
 function pararTodosAudios() {
@@ -563,7 +656,7 @@ function pararTodosAudios() {
 
 
 /* =====================================================
-   TOCAR ÁUDIO DA CATEGORIA
+   ÁUDIO DA CATEGORIA
 ===================================================== */
 
 function tocarAudioCategoria(index) {
@@ -588,33 +681,33 @@ function tocarAudioCategoria(index) {
 
 
     /* -----------------------------------------------
-       Para outros áudios
+       Para os demais áudios
     ------------------------------------------------ */
 
     Object.values(categorias)
         .forEach(
-            outraCategoria => {
+            outra => {
 
                 if (
-                    outraCategoria.audio &&
-                    outraCategoria.audio !== audio
+                    outra.audio &&
+                    outra.audio !== audio
                 ) {
 
-                    outraCategoria.audio.pause();
+                    outra.audio.pause();
 
-                    outraCategoria.audio.currentTime =
+                    outra.audio.currentTime =
                         0;
 
                 }
 
 
                 if (
-                    outraCategoria.button &&
-                    outraCategoria.button !==
+                    outra.button &&
+                    outra.button !==
                         categoria.button
                 ) {
 
-                    outraCategoria.button.classList.remove(
+                    outra.button.classList.remove(
                         "btn-active"
                     );
 
@@ -625,7 +718,7 @@ function tocarAudioCategoria(index) {
 
 
     /* -----------------------------------------------
-       Toca / pausa
+       Tocar / pausar
     ------------------------------------------------ */
 
     if (audio.paused) {
@@ -638,14 +731,16 @@ function tocarAudioCategoria(index) {
                 );
 
             })
-            .catch(error => {
+            .catch(
+                error => {
 
-                console.warn(
-                    "Não foi possível reproduzir o áudio:",
-                    error
-                );
+                    console.warn(
+                        "Áudio não disponível:",
+                        error
+                    );
 
-            });
+                }
+            );
 
     }
 
@@ -653,7 +748,8 @@ function tocarAudioCategoria(index) {
 
         audio.pause();
 
-        audio.currentTime = 0;
+        audio.currentTime =
+            0;
 
         categoria.button.classList.remove(
             "btn-active"
@@ -662,123 +758,92 @@ function tocarAudioCategoria(index) {
     }
 
 
-    /* -----------------------------------------------
-       Quando terminar
-    ------------------------------------------------ */
+    audio.onended =
+        () => {
 
-    audio.onended = () => {
+            categoria.button.classList.remove(
+                "btn-active"
+            );
 
-        categoria.button.classList.remove(
-            "btn-active"
-        );
-
-    };
+        };
 
 }
 
 
 /* =====================================================
-   EVENTOS "CONHEÇA"
+   EVENTOS DOS BOTÕES CONHEÇA
 ===================================================== */
 
-if (folhosaAudioLeftButton) {
+const botoesConheca = [
 
-    folhosaAudioLeftButton.addEventListener(
-        "click",
-        () => {
+    {
+        button: folhosaAudioLeftButton,
+        track: 0
+    },
 
-            if (activeTrack !== 0) return;
+    {
+        button: temperoAudioLeftButton,
+        track: 1
+    },
 
-            tocarAudioCategoria(0);
+    {
+        button: frutoAudioLeftButton,
+        track: 2
+    },
 
+    {
+        button: frutaAudioLeftButton,
+        track: 3
+    },
+
+    {
+        button: medicinalAudioLeftButton,
+        track: 4
+    },
+
+    {
+        button: pancAudioLeftButton,
+        track: 5
+    }
+
+];
+
+
+botoesConheca.forEach(
+    item => {
+
+        if (!item.button) {
+            return;
         }
-    );
-
-}
 
 
-if (temperoAudioLeftButton) {
+        item.button.addEventListener(
+            "click",
+            () => {
 
-    temperoAudioLeftButton.addEventListener(
-        "click",
-        () => {
+                if (
+                    activeTrack !==
+                    item.track
+                ) {
 
-            if (activeTrack !== 1) return;
+                    return;
 
-            tocarAudioCategoria(1);
-
-        }
-    );
-
-}
+                }
 
 
-if (frutoAudioLeftButton) {
+                tocarAudioCategoria(
+                    item.track
+                );
 
-    frutoAudioLeftButton.addEventListener(
-        "click",
-        () => {
+            }
+        );
 
-            if (activeTrack !== 2) return;
-
-            tocarAudioCategoria(2);
-
-        }
-    );
-
-}
-
-
-if (frutaAudioLeftButton) {
-
-    frutaAudioLeftButton.addEventListener(
-        "click",
-        () => {
-
-            if (activeTrack !== 3) return;
-
-            tocarAudioCategoria(3);
-
-        }
-    );
-
-}
-
-
-if (medicinalAudioLeftButton) {
-
-    medicinalAudioLeftButton.addEventListener(
-        "click",
-        () => {
-
-            if (activeTrack !== 4) return;
-
-            tocarAudioCategoria(4);
-
-        }
-    );
-
-}
-
-
-if (pancAudioLeftButton) {
-
-    pancAudioLeftButton.addEventListener(
-        "click",
-        () => {
-
-            if (activeTrack !== 5) return;
-
-            tocarAudioCategoria(5);
-
-        }
-    );
-
-}
+    }
+);
 
 
 /* =====================================================
-   BOTÃO "ESPÉCIES"
+   EVENTOS DOS DROPDOWNS
 ===================================================== */
 
 dropdowns.forEach(
@@ -811,8 +876,6 @@ dropdowns.forEach(
                 }
 
 
-                /* Fecha os outros */
-
                 dropdowns.forEach(
                     outro => {
 
@@ -830,8 +893,6 @@ dropdowns.forEach(
                     }
                 );
 
-
-                /* Abre / fecha o atual */
 
                 dropdown.menu.classList.toggle(
                     "open"
@@ -888,10 +949,6 @@ function abrirEspecie(especie) {
         especies[especie];
 
 
-    /* -----------------------------------------------
-       Verifica se existe
-    ------------------------------------------------ */
-
     if (!dados) {
 
         console.warn(
@@ -904,17 +961,9 @@ function abrirEspecie(especie) {
     }
 
 
-    /* -----------------------------------------------
-       Guarda espécie atual
-    ------------------------------------------------ */
-
     especieAtual =
         especie;
 
-
-    /* -----------------------------------------------
-       Título
-    ------------------------------------------------ */
 
     if (speciesTitle) {
 
@@ -924,15 +973,10 @@ function abrirEspecie(especie) {
     }
 
 
-    /* -----------------------------------------------
-       Mostra container
-    ------------------------------------------------ */
-
     if (speciesContent) {
 
         speciesContent.style.display =
             "block";
-
 
         speciesContent.setAttribute(
             "aria-hidden",
@@ -941,10 +985,6 @@ function abrirEspecie(especie) {
 
     }
 
-
-    /* -----------------------------------------------
-       Começa pela História
-    ------------------------------------------------ */
 
     trocarVideo(
         dados.historia,
@@ -955,7 +995,7 @@ function abrirEspecie(especie) {
 
 
 /* =====================================================
-   TROCAR VÍDEO WEBM
+   TROCAR VÍDEO
 ===================================================== */
 
 function trocarVideo(
@@ -973,10 +1013,6 @@ function trocarVideo(
     }
 
 
-    /* -----------------------------------------------
-       Remove estado ativo dos botões
-    ------------------------------------------------ */
-
     document
         .querySelectorAll(
             ".species-video-buttons button"
@@ -992,10 +1028,6 @@ function trocarVideo(
         );
 
 
-    /* -----------------------------------------------
-       Ativa botão
-    ------------------------------------------------ */
-
     if (botao) {
 
         botao.classList.add(
@@ -1005,16 +1037,8 @@ function trocarVideo(
     }
 
 
-    /* -----------------------------------------------
-       Para vídeo anterior
-    ------------------------------------------------ */
-
     speciesVideo.pause();
 
-
-    /* -----------------------------------------------
-       Remove vídeo anterior
-    ------------------------------------------------ */
 
     speciesVideo.removeAttribute(
         "src"
@@ -1024,45 +1048,12 @@ function trocarVideo(
     speciesVideo.load();
 
 
-    /* -----------------------------------------------
-       Define vídeo WEBM
-    ------------------------------------------------ */
-
     speciesVideo.src =
         videoSrc;
 
 
-    /* -----------------------------------------------
-       Configurações
-    ------------------------------------------------ */
-
-    speciesVideo.preload =
-        "metadata";
-
-    speciesVideo.playsInline =
-        true;
-
-    speciesVideo.setAttribute(
-        "playsinline",
-        ""
-    );
-
-    speciesVideo.setAttribute(
-        "webkit-playsinline",
-        ""
-    );
-
-
-    /* -----------------------------------------------
-       Carrega novo vídeo
-    ------------------------------------------------ */
-
     speciesVideo.load();
 
-
-    /* -----------------------------------------------
-       Reproduz
-    ------------------------------------------------ */
 
     const promessa =
         speciesVideo.play();
@@ -1074,7 +1065,7 @@ function trocarVideo(
             error => {
 
                 console.warn(
-                    "Reprodução do vídeo:",
+                    "O vídeo não iniciou automaticamente:",
                     error
                 );
 
@@ -1087,7 +1078,7 @@ function trocarVideo(
 
 
 /* =====================================================
-   BOTÃO HISTÓRIA
+   BOTÕES DO VÍDEO
 ===================================================== */
 
 if (btnHistoria) {
@@ -1096,15 +1087,15 @@ if (btnHistoria) {
         "click",
         () => {
 
-            const especie =
+            const dados =
                 obterEspecieAtual();
 
-
-            if (!especie) return;
-
+            if (!dados) {
+                return;
+            }
 
             trocarVideo(
-                especie.historia,
+                dados.historia,
                 btnHistoria
             );
 
@@ -1114,25 +1105,21 @@ if (btnHistoria) {
 }
 
 
-/* =====================================================
-   BOTÃO CARACTERÍSTICAS
-===================================================== */
-
 if (btnCaracteristicas) {
 
     btnCaracteristicas.addEventListener(
         "click",
         () => {
 
-            const especie =
+            const dados =
                 obterEspecieAtual();
 
-
-            if (!especie) return;
-
+            if (!dados) {
+                return;
+            }
 
             trocarVideo(
-                especie.caracteristicas,
+                dados.caracteristicas,
                 btnCaracteristicas
             );
 
@@ -1142,25 +1129,21 @@ if (btnCaracteristicas) {
 }
 
 
-/* =====================================================
-   BOTÃO CURIOSIDADES
-===================================================== */
-
 if (btnCuriosidades) {
 
     btnCuriosidades.addEventListener(
         "click",
         () => {
 
-            const especie =
+            const dados =
                 obterEspecieAtual();
 
-
-            if (!especie) return;
-
+            if (!dados) {
+                return;
+            }
 
             trocarVideo(
-                especie.curiosidades,
+                dados.curiosidades,
                 btnCuriosidades
             );
 
@@ -1171,7 +1154,7 @@ if (btnCuriosidades) {
 
 
 /* =====================================================
-   OBTER ESPÉCIE ATUAL
+   OBTER ESPÉCIE
 ===================================================== */
 
 function obterEspecieAtual() {
@@ -1191,58 +1174,7 @@ function obterEspecieAtual() {
 
 
 /* =====================================================
-   QUANDO O VÍDEO TERMINA
-===================================================== */
-
-if (speciesVideo) {
-
-    speciesVideo.addEventListener(
-        "ended",
-        () => {
-
-            document
-                .querySelectorAll(
-                    ".species-video-buttons button"
-                )
-                .forEach(
-                    btn => {
-
-                        btn.classList.remove(
-                            "btn-ativo"
-                        );
-
-                    }
-                );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   ERRO NO VÍDEO
-===================================================== */
-
-if (speciesVideo) {
-
-    speciesVideo.addEventListener(
-        "error",
-        () => {
-
-            console.error(
-                "Erro ao carregar o vídeo WebM:",
-                speciesVideo.currentSrc
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   FECHAR CONTAINER DA ESPÉCIE
+   FECHAR ESPÉCIE
 ===================================================== */
 
 function fecharConteudoEspecie() {
@@ -1251,10 +1183,6 @@ function fecharConteudoEspecie() {
         return;
     }
 
-
-    /* -----------------------------------------------
-       Esconde
-    ------------------------------------------------ */
 
     speciesContent.style.display =
         "none";
@@ -1266,45 +1194,31 @@ function fecharConteudoEspecie() {
     );
 
 
-    /* -----------------------------------------------
-       Para e libera vídeo
-    ------------------------------------------------ */
-
     if (speciesVideo) {
 
         speciesVideo.pause();
 
-
         speciesVideo.removeAttribute(
             "src"
         );
-
 
         speciesVideo.load();
 
     }
 
 
-    /* -----------------------------------------------
-       Limpa espécie
-    ------------------------------------------------ */
-
     especieAtual =
         null;
 
-
-    /* -----------------------------------------------
-       Remove estado dos botões
-    ------------------------------------------------ */
 
     document
         .querySelectorAll(
             ".species-video-buttons button"
         )
         .forEach(
-            btn => {
+            button => {
 
-                btn.classList.remove(
+                button.classList.remove(
                     "btn-ativo"
                 );
 
@@ -1314,26 +1228,39 @@ function fecharConteudoEspecie() {
 }
 
 
+if (closeSpeciesButton) {
+
+    closeSpeciesButton.addEventListener(
+        "click",
+        fecharConteudoEspecie
+    );
+
+}
+
+
 /* =====================================================
-   SOM DOS BOTÕES
+   ERRO DE VÍDEO
 ===================================================== */
 
-document
-    .querySelectorAll("button")
-    .forEach(
-        botao => {
+if (speciesVideo) {
 
-            botao.addEventListener(
-                "click",
-                tocarClick
+    speciesVideo.addEventListener(
+        "error",
+        () => {
+
+            console.error(
+                "Erro ao carregar vídeo:",
+                speciesVideo.currentSrc
             );
 
         }
     );
 
+}
+
 
 /* =====================================================
-   TRACKS MINDAR
+   TRACKS
 ===================================================== */
 
 const targets =
@@ -1342,23 +1269,27 @@ const targets =
     );
 
 
+/* =====================================================
+   TRACK ENCONTRADA
+===================================================== */
+
 targets.forEach(
     (target, index) => {
 
-
-        /* ---------------------------------------------
-           TRACK ENCONTRADA
-        ---------------------------------------------- */
 
         target.addEventListener(
             "targetFound",
             () => {
 
+                console.log(
+                    "TRACK ENCONTRADA:",
+                    index
+                );
+
+
                 activeTrack =
                     index;
 
-
-                /* Mensagem */
 
                 if (message) {
 
@@ -1369,46 +1300,42 @@ targets.forEach(
                 }
 
 
-                /* Menu */
-
-                if (menuToggleButton) {
-
-                    menuToggleButton.style.display =
-                        "block";
-
-                }
-
-
-                /* Botões */
-
                 mostrarBotoesTrack(
                     index
                 );
 
 
-                /* Fecha dropdown */
-
                 fecharTodosDropdowns();
 
 
-                /* Fecha espécie anterior */
-
                 fecharConteudoEspecie();
+
+
+                registrarTrack(
+                    index
+                );
 
             }
         );
 
 
-        /* ---------------------------------------------
+        /* =================================================
            TRACK PERDIDA
-        ---------------------------------------------- */
+        ================================================== */
 
         target.addEventListener(
             "targetLost",
             () => {
 
+                console.log(
+                    "TRACK PERDIDA:",
+                    index
+                );
+
+
                 if (
-                    activeTrack === index
+                    activeTrack ===
+                    index
                 ) {
 
                     activeTrack =
@@ -1416,8 +1343,6 @@ targets.forEach(
 
                 }
 
-
-                /* Mensagem */
 
                 if (message) {
 
@@ -1428,27 +1353,17 @@ targets.forEach(
                 }
 
 
-                /* Esconde botões */
-
                 esconderBotoesInteracao();
 
-
-                /* Fecha dropdowns */
 
                 fecharTodosDropdowns();
 
 
-                /* Fecha vídeo */
-
                 fecharConteudoEspecie();
 
 
-                /* Para áudios */
-
                 pararTodosAudios();
 
-
-                /* Fecha menu */
 
                 menuOpen =
                     false;
@@ -1459,13 +1374,10 @@ targets.forEach(
                 );
 
 
-                /* Esconde botão menu */
-
                 if (menuToggleButton) {
 
                     menuToggleButton.innerHTML =
                         "☰";
-
 
                     menuToggleButton.style.display =
                         "none";
@@ -1480,7 +1392,7 @@ targets.forEach(
 
 
 /* =====================================================
-   MENU HAMBURGER
+   MENU
 ===================================================== */
 
 if (menuToggleButton) {
@@ -1527,7 +1439,7 @@ if (menuToggleButton) {
 
 
 /* =====================================================
-   CONTADOR DE TRACKS
+   CONTADOR
 ===================================================== */
 
 const progressCount =
@@ -1550,10 +1462,6 @@ const totalTracks =
     6;
 
 
-/* =====================================================
-   REGISTRAR TRACK
-===================================================== */
-
 function registrarTrack(index) {
 
     if (
@@ -1570,8 +1478,6 @@ function registrarTrack(index) {
     );
 
 
-    /* Atualiza contador */
-
     if (progressCount) {
 
         progressCount.innerText =
@@ -1579,8 +1485,6 @@ function registrarTrack(index) {
 
     }
 
-
-    /* Libera botão final */
 
     if (
         visitedTracks.size >=
@@ -1600,28 +1504,6 @@ function registrarTrack(index) {
 
 
 /* =====================================================
-   REGISTRAR TRACKS VISITADAS
-===================================================== */
-
-targets.forEach(
-    (target, index) => {
-
-        target.addEventListener(
-            "targetFound",
-            () => {
-
-                registrarTrack(
-                    index
-                );
-
-            }
-        );
-
-    }
-);
-
-
-/* =====================================================
    BOTÃO QUIZ
 ===================================================== */
 
@@ -1638,3 +1520,197 @@ if (finalButtonTop) {
     );
 
 }
+
+
+/* =====================================================
+   CLIQUE DOS BOTÕES
+===================================================== */
+
+document
+    .querySelectorAll("button")
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                tocarClick
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   EVENTOS DO MINDAR
+===================================================== */
+
+if (scene) {
+
+
+    /* -------------------------------------------------
+       MINDAR PRONTO
+    ------------------------------------------------- */
+
+    scene.addEventListener(
+        "arReady",
+        () => {
+
+            console.log(
+                "MindAR iniciado com sucesso."
+            );
+
+
+            if (loadingMessage) {
+
+                loadingMessage.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+    /* -------------------------------------------------
+       MINDAR ERRO
+    ------------------------------------------------- */
+
+    scene.addEventListener(
+        "arError",
+        event => {
+
+            console.error(
+                "Erro do MindAR:",
+                event
+            );
+
+
+            if (loadingMessage) {
+
+                loadingMessage.style.display =
+                    "none";
+
+            }
+
+
+            if (errorMessage) {
+
+                errorMessage.style.display =
+                    "flex";
+
+            }
+
+
+            if (errorText) {
+
+                errorText.innerText =
+                    "Não foi possível iniciar a câmera.\n\n" +
+                    "Verifique se o navegador possui permissão para usar a câmera.";
+
+            }
+
+        }
+    );
+
+
+    /* -------------------------------------------------
+       CÂMERA PRONTA
+    ------------------------------------------------- */
+
+    scene.addEventListener(
+        "camera-init",
+        () => {
+
+            console.log(
+                "Câmera inicializada."
+            );
+
+
+            if (loadingMessage) {
+
+                loadingMessage.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+    /* -------------------------------------------------
+       ERRO DE CÂMERA
+    ------------------------------------------------- */
+
+    scene.addEventListener(
+        "camera-error",
+        event => {
+
+            console.error(
+                "Erro de câmera:",
+                event
+            );
+
+
+            if (loadingMessage) {
+
+                loadingMessage.style.display =
+                    "none";
+
+            }
+
+
+            if (errorMessage) {
+
+                errorMessage.style.display =
+                    "flex";
+
+            }
+
+
+            if (errorText) {
+
+                errorText.innerText =
+                    "O navegador não conseguiu acessar a câmera.\n\n" +
+                    "Verifique a permissão da câmera.";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   BOTÃO TENTAR NOVAMENTE
+===================================================== */
+
+if (retryButton) {
+
+    retryButton.addEventListener(
+        "click",
+        () => {
+
+            window.location.reload();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+esconderBotoesInteracao();
+
+
+console.log(
+    "BIOESCOLA 360° carregado."
+);
+
+console.log(
+    "Targets encontrados:",
+    targets.length
+);
