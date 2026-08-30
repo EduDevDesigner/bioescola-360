@@ -1,5 +1,5 @@
 /* =====================================================
-RESET
+   RESET
 ===================================================== */
 
 * {
@@ -7,37 +7,85 @@ RESET
     -webkit-tap-highlight-color: transparent;
 }
 
+
 html,
 body {
-    margin: 0;
-    padding: 0;
+
     width: 100%;
     height: 100%;
+
+    margin: 0;
+    padding: 0;
+
     overflow: hidden;
+
     font-family: Arial, sans-serif;
+
     background: transparent;
 }
 
+
 /* =====================================================
-MENSAGEM DE TRACKING
+   A-FRAME / MINDAR
+===================================================== */
+
+a-scene {
+
+    position: fixed !important;
+
+    top: 0;
+    left: 0;
+
+    width: 100vw !important;
+    height: 100vh !important;
+
+    z-index: 1;
+
+}
+
+
+/* =====================================================
+   MENSAGEM DE TRACKING
 ===================================================== */
 
 #track-message {
+
     position: fixed;
+
     top: 50%;
     left: 50%;
+
     transform: translate(-50%, -50%);
-    z-index: 1000;
+
     width: 85%;
+
+    z-index: 1000;
+
     text-align: center;
+
     color: white;
-    font-size: clamp(18px, 5vw, 30px);
+
+    font-size: clamp(
+        18px,
+        5vw,
+        30px
+    );
+
     font-weight: bold;
+
     line-height: 1.4;
-    text-shadow: 0 2px 5px black, 0 0 10px black;
+
+    text-shadow:
+        0 2px 5px black,
+        0 0 10px black;
+
     pointer-events: none;
-    transition: opacity 0.3s ease;
+
+    transition:
+        opacity 0.3s ease;
+
 }
+
 
 #track-message.hidden {
 
@@ -46,363 +94,608 @@ MENSAGEM DE TRACKING
 }
 
 
-
 /* =====================================================
-BOTÃO QUIZ
+   LOADING
 ===================================================== */
 
-#finalButtonTop {
+#loadingMessage {
 
-    display: none;
     position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 3000;
-    width: 55px;
-    height: 55px;
-    border: none;
-    border-radius: 50%;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
     background: rgba(0, 0, 0, 0.75);
-    color: white;
-    font-size: 25px;
-    cursor: pointer;
-    box-shadow:0 3px 10px rgba(0,0,0,0.4);
+
 }
 
 
+.loading-box {
+
+    width: min(
+        85%,
+        320px
+    );
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    color: white;
+
+    background:
+        rgba(0, 0, 0, 0.85);
+
+}
+
+
+.loading-box p {
+
+    margin:
+        15px 0 0;
+
+    font-size: 16px;
+
+}
+
+
+.loading-spinner {
+
+    width: 45px;
+    height: 45px;
+
+    margin: auto;
+
+    border:
+        4px solid
+        rgba(255,255,255,0.3);
+
+    border-top-color:
+        white;
+
+    border-radius: 50%;
+
+    animation:
+        spin 0.8s linear infinite;
+
+}
+
+
+@keyframes spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
 
 /* =====================================================
-MENU HAMBURGER
+   ERRO
+===================================================== */
+
+#errorMessage {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 11000;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        rgba(0,0,0,0.85);
+
+}
+
+
+.error-box {
+
+    width: min(
+        90%,
+        400px
+    );
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    color: white;
+
+    background:
+        rgba(20,20,20,0.95);
+
+}
+
+
+.error-box h2 {
+
+    margin-top: 0;
+
+}
+
+
+.error-box p {
+
+    color: #ddd;
+
+    line-height: 1.5;
+
+}
+
+
+#errorText {
+
+    white-space: pre-line;
+
+}
+
+
+#retryButton {
+
+    margin-top: 15px;
+
+    padding:
+        12px 20px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+        #238b45;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   CONTADOR
+===================================================== */
+
+#progressBox {
+
+    position: fixed;
+
+    top: 18px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 3000;
+
+    padding:
+        9px 15px;
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,0,0,0.70);
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    pointer-events: none;
+
+    white-space: nowrap;
+
+}
+
+
+/* =====================================================
+   BOTÃO MENU
 ===================================================== */
 
 #menuToggleButton {
 
     display: none;
+
     position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 3000;
+
+    top: 18px;
+    left: 18px;
+
+    z-index: 4000;
+
     width: 55px;
     height: 55px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.75);
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-    box-shadow:0 3px 10px rgba(0,0,0,0.4);
-}
 
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0,0,0,0.78);
+
+    color: white;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.4);
+
+}
 
 
 /* =====================================================
-BOTÕES DAS TRACKS (POSICIONADOS LADO A LADO)
+   BOTÃO QUIZ
 ===================================================== */
 
-.audio-left-fly-btn,
-.audio-right-fly-btn {
+#finalButtonTop {
+
     display: none;
+
     position: fixed;
-    bottom: 25px;
-    z-index: 2000;
-    height: 52px;
-    padding: 0 18px;
+
+    top: 18px;
+    right: 18px;
+
+    z-index: 4000;
+
+    width: 55px;
+    height: 55px;
+
     border: none;
-    border-radius: 26px;
-    background: rgba(0,0,0,0.78);
+
+    border-radius: 50%;
+
+    background:
+        rgba(0,0,0,0.78);
+
     color: white;
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
+
+    font-size: 24px;
+
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    transition: transform 0.2s ease, background 0.2s ease;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.4);
+
 }
 
-/* O botão CONHEÇA fica à esquerda do botão ESPÉCIES */
+
+/* =====================================================
+   PAINEL DE INTERAÇÃO
+===================================================== */
+
+#interactionPanel {
+
+    position: fixed;
+
+    left: 0;
+    right: 0;
+
+    bottom: 25px;
+
+    z-index: 3500;
+
+    pointer-events: none;
+
+}
+
+
+/* =====================================================
+   BOTÕES DAS TRACKS
+===================================================== */
+
+.track-button {
+
+    display: none;
+
+    position: fixed;
+
+    bottom: 25px;
+
+    height: 52px;
+
+    padding:
+        0 18px;
+
+    border: none;
+
+    border-radius: 26px;
+
+    background:
+        rgba(0,0,0,0.82);
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing:
+        0.3px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0,0,0,0.4);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+
+    pointer-events: auto;
+
+}
+
+
+/* =====================================================
+   BOTÃO CONHEÇA
+===================================================== */
+
 .audio-left-fly-btn {
-    right: 165px; /* Recuo para dar espaço ao botão da direita */
-    left: auto;   /* Remove o alinhamento antigo da esquerda */
+
+    right: 165px;
+
 }
 
-/* O botão ESPÉCIES fica fixado à extrema direita */
+
+/* =====================================================
+   BOTÃO ESPÉCIES
+===================================================== */
+
 .audio-right-fly-btn {
+
     right: 20px;
+
 }
+
+
+/* =====================================================
+   EFEITO DOS BOTÕES
+===================================================== */
 
 .audio-left-fly-btn:active,
 .audio-right-fly-btn:active {
-    transform: scale(0.94);
+
+    transform:
+        scale(0.94);
+
 }
+
 
 .audio-left-fly-btn.btn-active,
 .audio-right-fly-btn.btn-active {
-    background: rgba(30, 120, 60, 0.9);
+
+    background:
+        rgba(30,120,60,0.95);
+
 }
 
 
 /* =====================================================
-DROPDOWN DE ESPÉCIES
+   DROPDOWN
 ===================================================== */
 
 .species-dropdown {
+
     position: fixed;
-    bottom: 88px; /* Abre logo acima dos botões */
-    right: 20px;  /* Alinhado com o botão ESPÉCIES */
+
+    right: 20px;
+
+    bottom: 88px;
+
+    z-index: 6000;
+
     display: flex;
+
     flex-direction: column;
+
     gap: 8px;
+
+    width: 150px;
+
+    padding: 8px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(0,0,0,0.90);
+
+    box-shadow:
+        0 5px 25px
+        rgba(0,0,0,0.45);
+
     opacity: 0;
+
     visibility: hidden;
-    transform: translateY(10px);
-    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease; 
-    z-index: 10000;
+
+    pointer-events: none;
+
+    transform:
+        translateY(10px);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease;
+
 }
+
 
 .species-dropdown.open {
+
     opacity: 1;
+
     visibility: visible;
-    transform: translateY(0);
+
+    pointer-events: auto;
+
+    transform:
+        translateY(0);
+
 }
 
-.species-dropdown button {
+
+/* =====================================================
+   BOTÕES DAS ESPÉCIES
+===================================================== */
+
+.species-btn {
+
     display: block;
-    width: 135px;
+
+    width: 100%;
+
     min-height: 42px;
+
+    padding:
+        9px;
+
     border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.9);
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.12);
+
     color: white;
-}
 
+    font-size: 14px;
 
-/* POSIÇÃO DO DROPDOWN DA TRACK 0 */
+    font-weight: bold;
 
-#folhosaSpeciesMenu {
-    bottom: 90px;
-    right: 20px;
-}
+    text-align: left;
 
-
-/* POSIÇÃO DO DROPDOWN DA TRACK 1 */
-
-#temperoSpeciesMenu {
-    bottom: 90px;
-    right: 20px;
-}
-
-
-/* POSIÇÃO DO DROPDOWN DA TRACK 2 */
-
-#frutoSpeciesMenu {
-    bottom: 90px;
-    right: 20px;
-}
-
-
-/* POSIÇÃO DO DROPDOWN DA TRACK 3 */
-
-#frutaSpeciesMenu {
-    bottom: 90px;
-    right: 20px;
-}
-
-
-/* POSIÇÃO DO DROPDOWN DA TRACK 4 */
-
-#medicinalSpeciesMenu {
-    bottom: 90px;
-    right: 20px;
-}
-
-
-/* POSIÇÃO DO DROPDOWN DA TRACK 5 */
-
-#pancSpeciesMenu {
-    bottom: 90px;
-    right: 20px;
-}
-
-/* =====================================================
-IMPORTANTE:
-
-NÃO esconder os botões quando .menu-open existir.
-
-O menu hambúrguer não controla mais os botões
-das tracks.
-===================================================== */
-
-body.menu-open .audio-left-fly-btn,
-body.menu-open .audio-right-fly-btn {
-
-    display: none;
+    cursor: pointer;
 
 }
 
 
+.species-btn:active {
 
-/*
-   Quando o menu hambúrguer estiver aberto,
-   os dropdowns também ficam fechados.
-*/
-
-body.menu-open .species-dropdown {
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
+    background:
+        rgba(255,255,255,0.28);
 
 }
-
 
 
 /* =====================================================
-PROGRESSO
+   MENU LATERAL
 ===================================================== */
 
-#progressContainer {
+#sideMenu {
 
     position: fixed;
 
-    top: 25px;
-    left: 50%;
+    top: 0;
+    right: 0;
 
-    transform: translateX(-50%);
+    width:
+        min(82%, 340px);
 
-    z-index: 1500;
+    height: 100%;
 
-    padding: 8px 15px;
+    padding:
+        90px 25px 30px;
 
-    border-radius: 20px;
+    z-index: 5000;
 
-    background: rgba(0,0,0,0.6);
+    background:
+        rgba(0,0,0,0.95);
+
+    transform:
+        translateX(100%);
+
+    transition:
+        transform 0.3s ease;
+
+}
+
+
+body.menu-open #sideMenu {
+
+    transform:
+        translateX(0);
+
+}
+
+
+#sideMenu h2 {
+
+    margin-top: 0;
 
     color: white;
 
-    font-size: 13px;
+    text-align: center;
 
-    font-weight: bold;
-
-    pointer-events: none;
 }
 
 
+#sideMenu p {
+
+    color: #ddd;
+
+    line-height: 1.6;
+
+    text-align: center;
+
+}
+
 
 /* =====================================================
-CELULARES PEQUENOS
+   MENU ABERTO
 ===================================================== */
 
-@media (max-width: 500px) {
+body.menu-open
+.audio-left-fly-btn,
+body.menu-open
+.audio-right-fly-btn {
 
-    .audio-left-fly-btn,
-    .audio-right-fly-btn {
-
-        bottom: 18px;
-
-        height: 48px;
-
-        padding: 0 17px;
-
-        font-size: 13px;
-
-    }
-
-
-    .audio-left-fly-btn {
-
-        left: 12px;
-
-    }
-
-
-    .audio-right-fly-btn {
-
-        right: 12px;
-
-    }
-
-
-    .species-dropdown {
-
-        bottom: 78px;
-
-        min-width: 135px;
-
-        right: 12px !important;
-
-    }
-
-
-    #menuToggleButton {
-
-        top: 12px;
-        left: 12px;
-
-        width: 48px;
-        height: 48px;
-
-    }
-
-
-    #finalButtonTop {
-
-        top: 12px;
-        right: 12px;
-
-        width: 48px;
-        height: 48px;
-
-    }
+    display: none !important;
 
 }
 
+
+body.menu-open
+.species-dropdown {
+
+    opacity: 0 !important;
+
+    visibility: hidden !important;
+
+    pointer-events: none !important;
+
+}
 
 
 /* =====================================================
-CELULARES PEQUENOS (RESPONSIVIDADE)
-===================================================== */
-
-@media (max-width: 500px) {
-    .audio-left-fly-btn,
-    .audio-right-fly-btn {
-        bottom: 18px;
-        height: 48px;
-        padding: 0 14px;
-        font-size: 12px;
-    }
-
-    .audio-left-fly-btn {
-        right: 135px; /* Ajuste do espaçamento em telas menores */
-    }
-
-    .audio-right-fly-btn {
-        right: 12px;
-    }
-
-    .species-dropdown {
-        bottom: 74px;
-        right: 12px !important;
-    }
-}
-
-/* Remova ou simplifique estas regras, pois a classe .species-dropdown já faz o trabalho */
-#folhosaSpeciesMenu,
-#temperoSpeciesMenu,
-#frutoSpeciesMenu,
-#frutaSpeciesMenu,
-#medicinalSpeciesMenu,
-#pancSpeciesMenu {
-    bottom: 88px;
-    right: 20px;
-}
-
-/* =====================================================
-CONTAINER ÚNICO DA ESPÉCIE
+   CONTEÚDO DA ESPÉCIE
 ===================================================== */
 
 #speciesContent {
@@ -414,20 +707,28 @@ CONTAINER ÚNICO DA ESPÉCIE
     top: 50%;
     left: 50%;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
 
-    width: min(92vw, 600px);
+    width:
+        min(92vw, 600px);
 
-    z-index: 5000;
+    max-height:
+        92vh;
+
+    z-index: 7000;
+
+    overflow-y: auto;
 
     text-align: center;
 
     pointer-events: auto;
+
 }
 
 
 /* =====================================================
-CAIXA DO VÍDEO
+   CAIXA DO VÍDEO
 ===================================================== */
 
 .species-video-container {
@@ -436,28 +737,29 @@ CAIXA DO VÍDEO
 
     padding: 18px;
 
+    border-radius: 20px;
+
     background:
-        rgba(0, 0, 0, 0.72);
+        rgba(0,0,0,0.88);
 
-    border-radius: 18px;
-
-    backdrop-filter: blur(10px);
+    backdrop-filter:
+        blur(10px);
 
     box-shadow:
         0 8px 32px
-        rgba(0, 0, 0, 0.5);
+        rgba(0,0,0,0.6);
 
-    box-sizing: border-box;
 }
 
 
 /* =====================================================
-TÍTULO
+   TÍTULO
 ===================================================== */
 
 .titulo-video {
 
-    margin: 0 0 12px;
+    margin:
+        0 0 12px;
 
     color: white;
 
@@ -465,16 +767,18 @@ TÍTULO
 
     font-weight: bold;
 
-    letter-spacing: 1px;
+    letter-spacing:
+        1px;
 
     text-shadow:
         0 2px 4px
-        rgba(0, 0, 0, 0.7);
+        rgba(0,0,0,0.7);
+
 }
 
 
 /* =====================================================
-VÍDEO ÚNICO
+   VÍDEO
 ===================================================== */
 
 #speciesVideo {
@@ -485,7 +789,7 @@ VÍDEO ÚNICO
 
     height: auto;
 
-    max-height: 60vh;
+    max-height: 58vh;
 
     object-fit: contain;
 
@@ -493,16 +797,11 @@ VÍDEO ÚNICO
 
     background: black;
 
-    filter:
-        drop-shadow(
-            0 10px 15px
-            rgba(0,0,0,0.4)
-        );
 }
 
 
 /* =====================================================
-BARRA DOS 3 BOTÕES
+   BOTÕES DO VÍDEO
 ===================================================== */
 
 .species-video-buttons {
@@ -517,28 +816,26 @@ BARRA DOS 3 BOTÕES
 
     width: 100%;
 
-    margin-top: 10px;
+    margin-top: 12px;
+
 }
 
-
-/* =====================================================
-BOTÕES
-===================================================== */
 
 .species-video-buttons button {
 
     flex: 1;
 
-    padding: 11px 8px;
-
     min-width: 0;
+
+    padding:
+        11px 6px;
 
     border: none;
 
     border-radius: 20px;
 
     background:
-        #ffffff;
+        white;
 
     color:
         #1e3c72;
@@ -551,89 +848,179 @@ BOTÕES
 
     cursor: pointer;
 
-    transition:
-        transform 0.2s,
-        background-color 0.2s,
-        box-shadow 0.2s;
 }
 
-
-/* =====================================================
-HOVER
-===================================================== */
-
-.species-video-buttons button:hover {
-
-    transform:
-        scale(1.04);
-
-    background:
-        #e0e0e0;
-}
-
-
-/* =====================================================
-BOTÃO ATIVO
-===================================================== */
 
 .species-video-buttons button.btn-ativo {
 
     background:
         #2ecc71;
 
-    color:
-        #ffffff;
+    color: white;
 
     box-shadow:
         0 0 12px
-        #2ecc71,
+        #2ecc71;
 
-        0 0 20px
-        rgba(46,204,113,0.6);
 }
 
 
 /* =====================================================
-CELULAR
+   BOTÃO FECHAR ESPÉCIE
 ===================================================== */
 
-@media (max-width: 480px) {
+.close-species-button {
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding:
+        11px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,0.15);
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 600px) {
+
+
+    #progressBox {
+
+        top: 12px;
+
+        font-size: 12px;
+
+    }
+
+
+    #menuToggleButton {
+
+        top: 12px;
+        left: 12px;
+
+        width: 48px;
+        height: 48px;
+
+        font-size: 23px;
+
+    }
+
+
+    #finalButtonTop {
+
+        top: 12px;
+        right: 12px;
+
+        width: 48px;
+        height: 48px;
+
+        font-size: 21px;
+
+    }
+
+
+    .track-button {
+
+        bottom: 18px;
+
+        height: 48px;
+
+        padding:
+            0 14px;
+
+        font-size: 12px;
+
+    }
+
+
+    .audio-left-fly-btn {
+
+        right: 135px;
+
+    }
+
+
+    .audio-right-fly-btn {
+
+        right: 12px;
+
+    }
+
+
+    .species-dropdown {
+
+        right: 12px;
+
+        bottom: 74px;
+
+        width: 140px;
+
+    }
+
 
     #speciesContent {
 
         width: 94vw;
+
+        max-height: 90vh;
+
     }
 
 
     .species-video-container {
 
         padding: 12px;
+
     }
 
 
     .titulo-video {
 
         font-size: 21px;
+
     }
 
 
     #speciesVideo {
 
         max-height: 48vh;
+
     }
 
 
     .species-video-buttons {
 
         gap: 5px;
+
     }
 
 
     .species-video-buttons button {
 
-        padding: 9px 5px;
+        padding:
+            9px 4px;
 
         font-size: 9px;
+
     }
 
 }
