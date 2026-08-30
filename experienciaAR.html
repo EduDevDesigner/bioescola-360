@@ -35,215 +35,14 @@
     <!-- =====================================================
          CSS
     ====================================================== -->
+    <link rel="stylesheet" href="style.css">
+    <style>       
+        
 
-    <style>
+       
 
-        * {
-            box-sizing: border-box;
-        }
-
-
-        html,
-        body {
-
-            margin: 0;
-            padding: 0;
-
-            width: 100%;
-            height: 100%;
-
-            overflow: hidden;
-
-            font-family: Arial, Helvetica, sans-serif;
-
-            background: #000;
-
-        }
-
-
-        /* =====================================================
-           CÂMERA AR
-        ====================================================== */
-
-        a-scene {
-
-            position: fixed;
-
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
-
-        }
-
-
-        /* =====================================================
-           MENSAGEM INICIAL
-        ====================================================== */
-
-        #track-message {
-
-            position: fixed;
-
-            top: 50%;
-            left: 50%;
-
-            transform: translate(-50%, -50%);
-
-            z-index: 1000;
-
-            width: min(85%, 420px);
-
-            padding: 18px 22px;
-
-            border-radius: 18px;
-
-            background: rgba(0, 0, 0, 0.75);
-
-            color: #fff;
-
-            text-align: center;
-
-            font-size: 17px;
-
-            line-height: 1.4;
-
-            box-shadow:
-                0 5px 25px rgba(0,0,0,0.35);
-
-        }
-
-
-        #track-message.hidden {
-
-            display: none;
-
-        }
-
-
-        /* =====================================================
-           MENU HAMBURGER
-        ====================================================== */
-
-        #menuToggleButton {
-
-            position: fixed;
-
-            top: 18px;
-            right: 18px;
-
-            z-index: 3000;
-
-            width: 52px;
-            height: 52px;
-
-            display: none;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background: rgba(0, 0, 0, 0.72);
-
-            color: #fff;
-
-            font-size: 27px;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 4px 15px rgba(0,0,0,0.35);
-
-        }
-
-
-        /* =====================================================
-           PAINEL DE INTERAÇÃO
-        ====================================================== */
-
-        #interactionPanel {
-
-            position: fixed;
-
-            left: 50%;
-
-            bottom: 25px;
-
-            transform: translateX(-50%);
-
-            z-index: 2000;
-
-            width: min(94%, 600px);
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            gap: 10px;
-
-            pointer-events: none;
-
-        }
-
-
-        #interactionPanel button {
-
-            pointer-events: auto;
-
-        }
-
-
-        /* =====================================================
-           BOTÕES PRINCIPAIS
-        ====================================================== */
-
-        .track-button {
-
-            min-width: 130px;
-
-            padding: 13px 18px;
-
-            border: none;
-
-            border-radius: 14px;
-
-            background: rgba(0, 0, 0, 0.78);
-
-            color: #fff;
-
-            font-size: 15px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 4px 15px rgba(0,0,0,0.35);
-
-            transition:
-                transform 0.2s,
-                background 0.2s;
-
-        }
-
-
-        .track-button:active {
-
-            transform: scale(0.95);
-
-        }
-
-
-        .track-button.btn-active {
-
-            background: rgba(30, 130, 70, 0.95);
-
-        }
-
-
+        
+        
         /* =====================================================
            DROPDOWN
         ====================================================== */
@@ -734,7 +533,7 @@
     >
 
         <source
-            src="Audio/click.mp3"
+            src="Audio/acerto.mp3"
             type="audio/mpeg"
         >
 
@@ -1207,21 +1006,12 @@
     ====================================================== -->
 
     <a-scene
-        mindar-image="
-            imageTargetSrc: Imagens/targets.mind;
-            maxTrack: 1;
-            filterMinCF: 0.0001;
-            filterBeta: 0.001;
-        "
-        embedded
-        color-space="sRGB"
-        renderer="
-            colorManagement: true;
-            physicallyCorrectLights: true;
-        "
-        vr-mode-ui="enabled: false"
-        device-orientation-permission-ui="enabled: false"
-    >
+mindar-image="imageTargetSrc: Imagens/targets.mind;"
+color-space="sRGB"
+renderer="colorManagement:true,physicallyCorrectLights"
+xr-mode-ui="enabled:false"
+device-orientation-permission-ui="enabled:false">
+
 
 
         <!-- =================================================
@@ -1314,4 +1104,4 @@
 </body>
 
 </html>
-```
+
