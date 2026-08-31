@@ -341,98 +341,260 @@ function shuffleArray(array) {
   }
 }
 
-// ===== QUIZ =====
+// ===== QUIZ BIOESCOLA 360° =====
+
 const quizData = [
 
-{
-  modulo: "Revolução dos Transportes – Santos Dumont",
-  perguntas: [
-    { q: "Quem foi Santos Dumont?", o: ["Um navegador português","Um pioneiro da aviação brasileira","Um imperador do Brasil"], c: 1 },
-    { q: "Em que país ocorreram os voos do 14-Bis?", o: ["Brasil","França","Estados Unidos"], c: 1 },
-    { q: "Quais materiais foram usados no 14-Bis?", o: ["Pedra e ferro","Bambu e seda","Madeira e concreto"], c: 1 }
-  ]
-},
+  /* =====================================================
+     MÓDULO 1 — FOLHOSAS
+  ===================================================== */
 
-{
-  modulo: "Renascimento – Leonardo da Vinci e Mona Lisa",
-  perguntas: [
-    { q: "Quem foi Leonardo da Vinci?", o: ["Um pintor e inventor renascentista","Um rei francês","Um navegador espanhol"], c: 0 },
-    { q: "Qual é a obra mais famosa de Leonardo da Vinci?", o: ["A Noite Estrelada","Mona Lisa","Guernica"], c: 1 },
-    { q: "O que é a técnica sfumato?", o: ["Escultura em mármore","Sombras suaves na pintura","Pintura em metal"], c: 1 }
-  ]
-},
+  {
+    modulo: "Folhosas",
+    perguntas: [
 
-{
-  modulo: "Patrimônio Pernambucano – Torre Malakoff",
-  perguntas: [
-    { q: "Onde fica a Torre Malakoff?", o: ["Recife","Salvador","Rio de Janeiro"], c: 0 },
-    { q: "Qual era uma função da Torre Malakoff?", o: ["Observatório astronômico","Palácio imperial","Fortaleza romana"], c: 0 },
-    { q: "Hoje a Torre Malakoff funciona como:", o: ["Fábrica","Espaço cultural","Shopping"], c: 1 }
-  ]
-},
+      {
+        q: "Qual é o nome científico da alface?",
+        o: [
+          "Lactuca sativa",
+          "Eruca vesicaria sativa",
+          "Brassica oleracea"
+        ],
+        c: 0
+      },
 
-{
-  modulo: "Primeiros Símbolos Humanos – Vênus de Willendorf",
-  perguntas: [
-    { q: "O que é a Vênus de Willendorf?", o: ["Uma escultura pré-histórica","Um templo antigo","Uma pintura medieval"], c: 0 },
-    { q: "Qual possível significado da Vênus de Willendorf?", o: ["Fertilidade","Guerra","Comércio"], c: 0 },
-    { q: "Em qual país a Vênus foi encontrada?", o: ["Alemanha","Áustria","França"], c: 1 }
-  ]
-},
+      {
+        q: "Qual é o ciclo médio da rúcula?",
+        o: [
+          "30 a 40 dias",
+          "70 a 90 dias",
+          "90 a 120 dias"
+        ],
+        c: 0
+      },
 
-{
-  modulo: "Era Glacial – Megafauna",
-  perguntas: [
-    { q: "O que é megafauna?", o: ["Animais gigantes da Pré-História","Insetos pré-históricos","Plantas gigantes"], c: 0 },
-    { q: "Qual destes fazia parte da megafauna?", o: ["Mamute","Cachorro","Gato"], c: 0 },
-    { q: "Uma das causas da extinção da megafauna foi:", o: ["Mudanças climáticas","Internet","Energia elétrica"], c: 0 }
-  ]
-},
+      {
+        q: "Qual destas características pertence à couve-manteiga?",
+        o: [
+          "Pode crescer mais de um metro de altura",
+          "Possui flores que duram apenas algumas horas",
+          "Produz frutos do tipo baga"
+        ],
+        c: 0
+      }
 
-{
-  modulo: "História de Pernambuco – Henrique Dias",
-  perguntas: [
-    { q: "Quem foi Henrique Dias?", o: ["Líder militar contra os holandeses","Pintor renascentista","Imperador brasileiro"], c: 0 },
-    { q: "Contra quem Henrique Dias lutou?", o: ["Franceses","Holandeses","Romanos"], c: 1 },
-    { q: "Em quais batalhas Henrique Dias participou?", o: ["Montes Guararapes","Guerra do Paraguai","Revolução Francesa"], c: 0 }
-  ]
-},
+    ]
+  },
 
-{
-  modulo: "História do Brasil – Dom Pedro I",
-  perguntas: [
-    { q: "Quem proclamou a independência do Brasil?", o: ["Tiradentes","Dom Pedro I","Getúlio Vargas"], c: 1 },
-    { q: "Onde aconteceu o grito da independência?", o: ["Riacho do Ipiranga","Praia de Copacabana","Brasília"], c: 0 },
-    { q: "Dom Pedro I também foi:", o: ["Rei de Portugal","Presidente da França","Imperador Romano"], c: 0 }
-  ]
-},
 
-{
-  modulo: "As Grandes Navegações – Cristóvão Colombo",
-  perguntas: [
-    { q: "Quem foi Cristóvão Colombo?", o: ["Explorador e navegador","Cientista","Imperador"], c: 0 },
-    { q: "Qual era o objetivo de sua viagem?", o: ["Chegar às Índias","Descobrir a Antártica","Viajar para a Lua"], c: 0 },
-    { q: "Em qual continente Colombo chegou em 1492?", o: ["África","América","Oceania"], c: 1 }
-  ]
-},
+  /* =====================================================
+     MÓDULO 2 — TEMPEROS E ERVAS AROMÁTICAS
+  ===================================================== */
 
-{
-  modulo: "Era dos Dinossauros – Dinossauros e Velociraptor",
-  perguntas: [
-    { q: "O que foi o período Cretáceo?", o: ["Última fase da Era dos Dinossauros","Idade Média","Era do Bronze"], c: 0 },
-    { q: "Qual característica real do Velociraptor surpreendeu os cientistas?", o: ["Possuía penas","Vivia na água","Era gigante"], c: 0 },
-    { q: "Qual evento contribuiu para a extinção dos dinossauros?", o: ["Queda de um asteroide","Construção de cidades","Navegações"], c: 0 }
-  ]
-},
+  {
+    modulo: "Temperos e Ervas Aromáticas",
+    perguntas: [
 
-{
-  modulo: "Arte Paleolítica – Cavalo e Mamute de Vogelherd",
-  perguntas: [
-    { q: "Onde foram encontradas as esculturas de Vogelherd?", o: ["Caverna de Vogelherd","Egito","Machu Picchu"], c: 0 },
-    { q: "De que material eram feitas as esculturas?", o: ["Marfim de mamute","Bronze","Madeira"], c: 0 },
-    { q: "O que essas esculturas representam?", o: ["Arte pré-histórica","Arquitetura romana","Arte medieval"], c: 0 }
-  ]
-}
+      {
+        q: "Qual é o nome científico do coentro?",
+        o: [
+          "Coriandrum sativum",
+          "Petroselinum crispum",
+          "Ocimum basilicum"
+        ],
+        c: 0
+      },
+
+      {
+        q: "Segundo o catálogo, onde foram encontradas sementes de coentro?",
+        o: [
+          "Na tumba do faraó Tutancâmon",
+          "Nas pirâmides de Teotihuacán",
+          "Em uma caverna na Europa"
+        ],
+        c: 0
+      },
+
+      {
+        q: "Qual destas plantas pode viver por anos e possui folhas que concentram óleos essenciais?",
+        o: [
+          "Alecrim",
+          "Cebolinha",
+          "Salsa"
+        ],
+        c: 0
+      }
+
+    ]
+  },
+
+
+  /* =====================================================
+     MÓDULO 3 — FRUTOS
+  ===================================================== */
+
+  {
+    modulo: "Frutos",
+    perguntas: [
+
+      {
+        q: "Qual destas plantas pertence à categoria Frutos?",
+        o: [
+          "Tomate",
+          "Alface",
+          "Abacaxi"
+        ],
+        c: 0
+      },
+
+      {
+        q: "Qual é o ciclo médio do tomate?",
+        o: [
+          "90 a 110 dias",
+          "15 a 18 meses",
+          "30 a 40 dias"
+        ],
+        c: 0
+      },
+
+      {
+        q: "Segundo o catálogo, o milho deve ser plantado preferencialmente:",
+        o: [
+          "Em blocos para garantir a polinização pelo vento",
+          "Somente em vasos",
+          "Em locais totalmente sombreados"
+        ],
+        c: 0
+      }
+
+    ]
+  },
+
+
+  /* =====================================================
+     MÓDULO 4 — FRUTAS
+  ===================================================== */
+
+  {
+    modulo: "Frutas",
+    perguntas: [
+
+      {
+        q: "Qual é o ciclo médio do abacaxi?",
+        o: [
+          "15 a 18 meses",
+          "30 a 50 dias",
+          "60 a 90 dias"
+        ],
+        c: 0
+      },
+
+      {
+        q: "Qual fruta é descrita no catálogo como um conjunto de dezenas de pequenos frutos que se fundem?",
+        o: [
+          "Abacaxi",
+          "Banana",
+          "Pitanga"
+        ],
+        c: 0
+      },
+
+      {
+        q: "Qual é o nome científico do maracujá?",
+        o: [
+          "Passiflora edulis",
+          "Musa spp.",
+          "Eugenia uniflora"
+        ],
+        c: 0
+      }
+
+    ]
+  },
+
+
+  /* =====================================================
+     MÓDULO 5 — MEDICINAIS E AROMÁTICAS
+  ===================================================== */
+
+  {
+    modulo: "Medicinais e Aromáticas",
+    perguntas: [
+
+      {
+        q: "Qual destas plantas pertence à categoria Medicinais e Aromáticas?",
+        o: [
+          "Hortelã",
+          "Rúcula",
+          "Tomate"
+        ],
+        c: 0
+      },
+
+      {
+        q: "Qual é o ciclo médio da hortelã para iniciar a colheita?",
+        o: [
+          "40 dias",
+          "90 dias",
+          "15 meses"
+        ],
+        c: 0
+      },
+
+      {
+        q: "Qual planta não deve ser confundida com o Capim Santo?",
+        o: [
+          "Citronela",
+          "Babosa",
+          "Hortelã"
+        ],
+        c: 0
+      }
+
+    ]
+  },
+
+
+  /* =====================================================
+     MÓDULO 6 — PANC
+  ===================================================== */
+
+  {
+    modulo: "PANC — Plantas Alimentícias Não Convencionais",
+    perguntas: [
+
+      {
+        q: "O que significa a sigla PANC?",
+        o: [
+          "Plantas Alimentícias Não Convencionais",
+          "Plantas Aromáticas Naturais Cultivadas",
+          "Produtos Agrícolas Naturais e Comestíveis"
+        ],
+        c: 0
+      },
+
+      {
+        q: "Qual destas plantas pertence à categoria PANC?",
+        o: [
+          "Peixinho da Horta",
+          "Cebolinha",
+          "Abacaxi"
+        ],
+        c: 0
+      },
+
+      {
+        q: "Qual característica é atribuída ao Ora-pro-nóbis no catálogo?",
+        o: [
+          "É um cacto trepador e folhoso",
+          "É uma árvore frutífera de grande porte",
+          "É uma gramínea de folhas longas"
+        ],
+        c: 0
+      }
+
+    ]
+  }
 
 ];
 
