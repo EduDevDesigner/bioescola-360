@@ -26,6 +26,19 @@ const errorText =
 const retryButton =
     document.getElementById("retryButton");
 
+/* =====================================================
+IMAGEM HTML — FOLHOSAS
+===================================================== */
+
+const folhosasImageContainer =
+    document.getElementById(
+        "folhosasImageContainer"
+    );
+
+const folhosasImage =
+    document.getElementById(
+        "folhosasImage"
+    );
 
 /* =====================================================
    ESTADO
@@ -1331,6 +1344,10 @@ targets.forEach(
             "targetFound",
             () => {
 
+                if (index === 0) {
+                 mostrarImagemFolhosas();
+                }
+                
                 console.log(
                     "TRACK ENCONTRADA:",
                     index
@@ -1377,6 +1394,10 @@ targets.forEach(
             "targetLost",
             () => {
 
+                if (index === 0) {
+                    esconderImagemFolhosas();
+                }
+                
                 console.log(
                     "TRACK PERDIDA:",
                     index
@@ -1764,3 +1785,33 @@ console.log(
     "Targets encontrados:",
     targets.length
 );
+
+/*-------------------------------------------------------------*/
+/* =====================================================
+MOSTRAR IMAGEM FOLHOSAS
+===================================================== */
+
+function mostrarImagemFolhosas() {
+
+    if (!folhosasImageContainer) {
+        return;
+    }
+
+    folhosasImageContainer.style.display =
+        "block";
+}
+
+
+/* =====================================================
+ESCONDER IMAGEM FOLHOSAS
+===================================================== */
+
+function esconderImagemFolhosas() {
+
+    if (!folhosasImageContainer) {
+        return;
+    }
+
+    folhosasImageContainer.style.display =
+        "none";
+}
