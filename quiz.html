@@ -29,10 +29,14 @@ html, body {
   overflow-y: hidden;
   background: #001c40ff;
 
-  background-image: url("Imagens/papel_Fundo.jpg");
-  background-size: contain;
+  /* ================================
+     IMAGEM DE FUNDO
+     ================================ */
+  background-image: url("Imagens/Fundo.jpg");
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
   background-color: #001c40ff;
 }
 
@@ -52,16 +56,7 @@ html, body {
   }
 }
 
-#overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 59, 92, 0);
-  z-index: 1;
-}
-
+/* ===== CONTEÚDO ===== */
 .main-content {
   position: relative;
   z-index: 2;
@@ -93,7 +88,8 @@ FORMULÁRIO DO ALUNO
 ===================================================== */
 
 #studentForm{
-  padding: 20px 50px 0 50px;
+  margin-top: 320px;
+  padding: 20px 100px 0 100px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -110,18 +106,20 @@ FORMULÁRIO DO ALUNO
   font-weight: bold;
 }
 
-#startQuizBtn{
-  margin-top: 20px;
-  margin-left: 80px;
-  width: 60%;
-  padding: 12px;
-  background: #000000;
-  border: none;
-  border-radius: 6px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  color: white;
+#startQuizBtn {
+   display: block;
+    margin: 20px auto;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+#startQuizBtn img {
+  margin-top: 50px;
+    width: 250px;
+    height: auto;
+    display: block;
 }
 
 /* ===================================================== */
@@ -137,7 +135,7 @@ FORMULÁRIO DO ALUNO
   font-size: 20px;
   font-weight: bold;
   margin-bottom:20px;
-  color: #1e1600;
+  color: #ffffff;
   text-align: center;
   text-shadow: 1px 1px 1px rgba(97, 97, 97, 0);
 }
@@ -151,7 +149,7 @@ FORMULÁRIO DO ALUNO
 }
 
 .option {
-  background: rgba(114, 74, 1, 0.58);
+  background: rgba(2, 16, 55, 0.89);
   border-radius: 6px;
   padding: 15px;
   margin-bottom: 20px;
@@ -243,16 +241,11 @@ FORMULÁRIO DO ALUNO
     <audio id="audioAcerto" src="Audios/acerto.mp3"></audio>
     <audio id="audioErro" src="Audios/erro.mp3"></audio>      
 
-    <header>
-      <h1>Quiz</h1>
-    </header>
-
 <!-- =====================================================
 FORMULÁRIO DO ALUNO
 ===================================================== -->
 
 <div id="studentForm">
-
 <input 
 type="text" 
 id="nomeAluno" 
@@ -264,7 +257,7 @@ id="turmaAluno"
 placeholder="Digite a turma">
 
 <button id="startQuizBtn">
-Iniciar Quiz
+    <img src="Imagens/btnQuiz.png" alt="Iniciar Quiz">
 </button>
 
 </div>
@@ -386,7 +379,6 @@ const quizData = [
     ]
   },
 
-
   /* =====================================================
      MÓDULO 2 — TEMPEROS E ERVAS AROMÁTICAS
   ===================================================== */
@@ -427,7 +419,6 @@ const quizData = [
 
     ]
   },
-
 
   /* =====================================================
      MÓDULO 3 — FRUTOS
@@ -470,7 +461,6 @@ const quizData = [
     ]
   },
 
-
   /* =====================================================
      MÓDULO 4 — FRUTAS
   ===================================================== */
@@ -512,7 +502,6 @@ const quizData = [
     ]
   },
 
-
   /* =====================================================
      MÓDULO 5 — MEDICINAIS E AROMÁTICAS
   ===================================================== */
@@ -553,7 +542,6 @@ const quizData = [
 
     ]
   },
-
 
   /* =====================================================
      MÓDULO 6 — PANC
