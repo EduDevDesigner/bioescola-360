@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -60,7 +61,8 @@ html, body {
 .main-content {
   position: relative;
   z-index: 2;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 header {
@@ -87,39 +89,84 @@ header p {
 FORMULÁRIO DO ALUNO
 ===================================================== */
 
-#studentForm{
-  margin-top: 320px;
-  padding: 20px 100px 0 100px;
+#studentForm {
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 85%;
+  max-width: 360px;
+
+  padding: 20px;
+
   display: flex;
   flex-direction: column;
+
+  align-items: center;
+
   gap: 15px;
+
+  box-sizing: border-box;
 }
 
-#studentForm input{
+#studentForm input {
+
+  width: 100%;
+
   padding: 14px;
+
   border: none;
+
   border-radius: 8px;
+
   font-size: 16px;
+
   outline: none;
-  background: rgba(255, 255, 255, 0.9);
+
+  background:
+    rgba(255, 255, 255, 0.9);
+
   color: #000000;
+
   font-weight: bold;
+
+  box-sizing: border-box;
 }
 
 #startQuizBtn {
-   display: block;
-    margin: 20px auto;
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin: 10px auto 0;
+
+  width: 75%;
+
+  max-width: 250px;
+
+  background: transparent;
+
+  border: none;
+
+  padding: 0;
+
+  cursor: pointer;
 }
 
 #startQuizBtn img {
-  margin-top: 50px;
-    width: 250px;
-    height: auto;
-    display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  display: block;
 }
 
 /* ===================================================== */
@@ -149,7 +196,6 @@ FORMULÁRIO DO ALUNO
   background: rgb(0, 0, 0);
   border-radius: 6px;
   padding: 8px;
-  
 }
 
 .option {
@@ -168,9 +214,18 @@ FORMULÁRIO DO ALUNO
   background: rgba(140, 255, 0, 0.65);
 }
 
-.option.correct { background: #00ff6b; }
-.option.wrong { background: #ff1800; }
-.option.disabled { pointer-events: none; opacity: 0.8; }
+.option.correct {
+  background: #00ff6b;
+}
+
+.option.wrong {
+  background: #ff1800;
+}
+
+.option.disabled {
+  pointer-events: none;
+  opacity: 0.8;
+}
 
 #nextBtn {
   margin-top: 55px;
@@ -234,57 +289,162 @@ FORMULÁRIO DO ALUNO
   font-size: 14px;
   color: #ffcb48;
 }
+
+/* =====================================================
+AJUSTES PARA CELULARES PEQUENOS
+===================================================== */
+
+@media (max-width: 480px) {
+
+  #studentForm {
+
+    width: 88%;
+
+    max-width: 340px;
+
+    padding: 15px;
+  }
+
+  #studentForm input {
+
+    font-size: 15px;
+
+    padding: 13px;
+  }
+
+  #startQuizBtn {
+
+    width: 70%;
+
+    max-width: 230px;
+
+    margin-top: 8px;
+  }
+
+}
+
+/* =====================================================
+CELULARES MUITO PEQUENOS
+===================================================== */
+
+@media (max-height: 650px) {
+
+  #studentForm {
+
+    top: 52%;
+  }
+
+  #startQuizBtn {
+
+    width: 62%;
+  }
+
+}
+
+/* =====================================================
+TALLETES / TELAS MAIORES
+===================================================== */
+
+@media (min-width: 600px) and (max-width: 867px) {
+
+  #studentForm {
+
+    width: 55%;
+
+    max-width: 420px;
+  }
+
+  #startQuizBtn {
+
+    width: 60%;
+
+    max-width: 240px;
+  }
+
+}
 </style>
+
 </head>
 
 <body>
 
-<div class="app-wrapper">  
-  
+<div class="app-wrapper">
+
   <div id="overlay"></div>
 
   <div class="main-content">
 
-    <audio id="audioAcerto" src="Audios/acerto.mp3"></audio>
-    <audio id="audioErro" src="Audios/erro.mp3"></audio>      
+```
+<audio id="audioAcerto" src="Audios/acerto.mp3"></audio>
+<audio id="audioErro" src="Audios/erro.mp3"></audio>
+```
 
 <!-- =====================================================
 FORMULÁRIO DO ALUNO
 ===================================================== -->
 
 <div id="studentForm">
-<input 
-type="text" 
-id="nomeAluno" 
+
+<input
+type="text"
+id="nomeAluno"
 placeholder="Nome do aluno">
 
-<input 
-type="text" 
-id="turmaAluno" 
+<input
+type="text"
+id="turmaAluno"
 placeholder="Digite a turma">
 
 <button id="startQuizBtn">
-    <img src="Imagens/btnQuiz.png" alt="Iniciar Quiz">
+
+```
+<img
+    src="Imagens/btnQuiz.png"
+    alt="Iniciar Quiz">
+```
+
 </button>
 
 </div>
 
 <!-- ===================================================== -->
 
-    <div id="quizBox" style="display:none;">
-      <div id="moduleTitle"></div>
-      <div id="question"></div>
-      <div id="options"></div>
-      <button id="nextBtn">Próxima Pergunta</button>
-    </div>
+```
+<div id="quizBox" style="display:none;">
 
-    <div id="scoreBox" style="display:none;">
-      <h2>Relatório do Aluno</h2>
-      <div id="studentInfo" class="dados-aluno"></div>
-      <p id="scoreText"></p>
-      <div id="moduleReport"></div>
-      <button id="generatePdf">Gerar PDF</button>
-    </div>
+  <div id="moduleTitle"></div>
+
+  <div id="question"></div>
+
+  <div id="options"></div>
+
+  <button id="nextBtn">
+    Próxima Pergunta
+  </button>
+
+</div>
+
+<div id="scoreBox" style="display:none;">
+
+  <h2>
+    Relatório do Aluno
+  </h2>
+
+  <div
+    id="studentInfo"
+    class="dados-aluno">
+  </div>
+
+  <p id="scoreText"></p>
+
+  <div id="moduleReport"></div>
+
+  <button id="generatePdf">
+    Gerar PDF
+  </button>
+
+</div>
+```
 
   </div>
 
@@ -298,6 +458,7 @@ placeholder="Digite a turma">
 
 let nomeAluno = "";
 let turmaAluno = "";
+
 
 // =====================================================
 // INICIAR QUIZ
@@ -333,13 +494,34 @@ loadQuestion();
 
 };
 
+
 // ===== FUNÇÃO DE EMBARALHAMENTO =====
+
 function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+
+  for (
+    let i = array.length - 1;
+    i > 0;
+    i--
+  ) {
+
+    const j =
+      Math.floor(
+        Math.random() * (i + 1)
+      );
+
+    [
+      array[i],
+      array[j]
+    ] = [
+      array[j],
+      array[i]
+    ];
+
   }
+
 }
+
 
 // ===== QUIZ BIOESCOLA 360° =====
 
@@ -351,396 +533,696 @@ const quizData = [
 
   {
     modulo: "Folhosas",
+
     perguntas: [
 
       {
+
         q: "Qual é o nome científico da alface?",
+
         o: [
           "Lactuca sativa",
           "Eruca vesicaria sativa",
           "Brassica oleracea"
         ],
+
         c: 0
+
       },
 
+
       {
+
         q: "Qual é o ciclo médio da rúcula?",
+
         o: [
           "30 a 40 dias",
           "70 a 90 dias",
           "90 a 120 dias"
         ],
+
         c: 0
+
       },
 
+
       {
+
         q: "Qual destas características pertence à couve-manteiga?",
+
         o: [
           "Pode crescer mais de um metro de altura",
           "Possui flores que duram apenas algumas horas",
           "Produz frutos do tipo baga"
         ],
+
         c: 0
+
       }
 
     ]
+
   },
+
 
   /* =====================================================
      MÓDULO 2 — TEMPEROS E ERVAS AROMÁTICAS
   ===================================================== */
 
   {
+
     modulo: "Temperos e Ervas Aromáticas",
+
     perguntas: [
 
       {
+
         q: "Qual é o nome científico do coentro?",
+
         o: [
           "Coriandrum sativum",
           "Petroselinum crispum",
           "Ocimum basilicum"
         ],
+
         c: 0
+
       },
 
+
       {
+
         q: "Segundo o catálogo, onde foram encontradas sementes de coentro?",
+
         o: [
           "Na tumba do faraó Tutancâmon",
           "Nas pirâmides de Teotihuacán",
           "Em uma caverna na Europa"
         ],
+
         c: 0
+
       },
 
+
       {
+
         q: "Qual destas plantas pode viver por anos e possui folhas que concentram óleos essenciais?",
+
         o: [
           "Alecrim",
           "Cebolinha",
           "Salsa"
         ],
+
         c: 0
+
       }
 
     ]
+
   },
+
 
   /* =====================================================
      MÓDULO 3 — FRUTOS
   ===================================================== */
 
   {
+
     modulo: "Frutos",
+
     perguntas: [
 
       {
+
         q: "Qual destas plantas pertence à categoria Frutos?",
+
         o: [
           "Tomate",
           "Alface",
           "Abacaxi"
         ],
+
         c: 0
+
       },
 
+
       {
+
         q: "Qual é o ciclo médio do tomate?",
+
         o: [
           "90 a 110 dias",
           "15 a 18 meses",
           "30 a 40 dias"
         ],
+
         c: 0
+
       },
 
+
       {
+
         q: "Segundo o catálogo, o milho deve ser plantado preferencialmente:",
+
         o: [
           "Em blocos para garantir a polinização pelo vento",
           "Somente em vasos",
           "Em locais totalmente sombreados"
         ],
+
         c: 0
+
       }
 
     ]
+
   },
+
 
   /* =====================================================
      MÓDULO 4 — FRUTAS
   ===================================================== */
 
   {
+
     modulo: "Frutas",
+
     perguntas: [
 
       {
+
         q: "Qual é o ciclo médio do abacaxi?",
+
         o: [
           "15 a 18 meses",
           "30 a 50 dias",
           "60 a 90 dias"
         ],
+
         c: 0
+
       },
 
+
       {
+
         q: "Qual fruta é descrita no catálogo como um conjunto de dezenas de pequenos frutos que se fundem?",
+
         o: [
           "Abacaxi",
           "Banana",
           "Pitanga"
         ],
+
         c: 0
+
       },
 
+
       {
+
         q: "Qual é o nome científico do maracujá?",
+
         o: [
           "Passiflora edulis",
           "Musa spp.",
           "Eugenia uniflora"
         ],
+
         c: 0
+
       }
 
     ]
+
   },
+
 
   /* =====================================================
      MÓDULO 5 — MEDICINAIS E AROMÁTICAS
   ===================================================== */
 
   {
+
     modulo: "Medicinais e Aromáticas",
+
     perguntas: [
 
       {
+
         q: "Qual destas plantas pertence à categoria Medicinais e Aromáticas?",
+
         o: [
           "Hortelã",
           "Rúcula",
           "Tomate"
         ],
+
         c: 0
+
       },
 
+
       {
+
         q: "Qual é o ciclo médio da hortelã para iniciar a colheita?",
+
         o: [
           "40 dias",
           "90 dias",
           "15 meses"
         ],
+
         c: 0
+
       },
 
+
       {
+
         q: "Qual planta não deve ser confundida com o Capim Santo?",
+
         o: [
           "Citronela",
           "Babosa",
           "Hortelã"
         ],
+
         c: 0
+
       }
 
     ]
+
   },
+
 
   /* =====================================================
      MÓDULO 6 — PANC
   ===================================================== */
 
   {
-    modulo: "PANC — Plantas Alimentícias Não Convencionais",
+
+    modulo:
+      "PANC — Plantas Alimentícias Não Convencionais",
+
     perguntas: [
 
       {
+
         q: "O que significa a sigla PANC?",
+
         o: [
           "Plantas Alimentícias Não Convencionais",
           "Plantas Aromáticas Naturais Cultivadas",
           "Produtos Agrícolas Naturais e Comestíveis"
         ],
+
         c: 0
+
       },
 
+
       {
+
         q: "Qual destas plantas pertence à categoria PANC?",
+
         o: [
           "Peixinho da Horta",
           "Cebolinha",
           "Abacaxi"
         ],
+
         c: 0
+
       },
 
+
       {
+
         q: "Qual característica é atribuída ao Ora-pro-nóbis no catálogo?",
+
         o: [
           "É um cacto trepador e folhoso",
           "É uma árvore frutífera de grande porte",
           "É uma gramínea de folhas longas"
         ],
+
         c: 0
+
       }
 
     ]
+
   }
 
 ];
 
+
 // ===== RANDOMIZAÇÃO DAS RESPOSTAS =====
 
 quizData.forEach(mod => {
+
   mod.perguntas.forEach(pergunta => {
-    const respostas = pergunta.o.map((texto, index) => ({
-      texto,
-      correta: index === pergunta.c
-    }));
+
+    const respostas =
+      pergunta.o.map(
+        (texto, index) => ({
+
+          texto,
+
+          correta:
+            index === pergunta.c
+
+        })
+      );
+
 
     shuffleArray(respostas);
 
-    pergunta.o = respostas.map(r => r.texto);
 
-    pergunta.c = respostas.findIndex(r => r.correta);
+    pergunta.o =
+      respostas.map(
+        r => r.texto
+      );
+
+
+    pergunta.c =
+      respostas.findIndex(
+        r => r.correta
+      );
+
   });
+
 });
 
-let moduleIndex = 0;
-let questionIndex = 0;
-let score = 0;
-let questionNumber = 1;
-let moduleScores = new Array(quizData.length).fill(0);
-let respostasAluno = [];  
 
-const moduleTitle = document.getElementById("moduleTitle");
-const questionEl = document.getElementById("question");
-const optionsEl = document.getElementById("options");
-const nextBtn = document.getElementById("nextBtn");
+let moduleIndex = 0;
+
+let questionIndex = 0;
+
+let score = 0;
+
+let questionNumber = 1;
+
+let moduleScores =
+  new Array(
+    quizData.length
+  ).fill(0);
+
+let respostasAluno = [];
+
+
+const moduleTitle =
+  document.getElementById(
+    "moduleTitle"
+  );
+
+const questionEl =
+  document.getElementById(
+    "question"
+  );
+
+const optionsEl =
+  document.getElementById(
+    "options"
+  );
+
+const nextBtn =
+  document.getElementById(
+    "nextBtn"
+  );
+
 
 function loadQuestion() {
 
-  const current = quizData[moduleIndex].perguntas[questionIndex];
+  const current =
+    quizData[
+      moduleIndex
+    ].perguntas[
+      questionIndex
+    ];
 
-  moduleTitle.innerText = quizData[moduleIndex].modulo;
 
-  questionEl.innerText = questionNumber + ") " + current.q;
+  moduleTitle.innerText =
+    quizData[
+      moduleIndex
+    ].modulo;
 
-  optionsEl.innerHTML = "";
 
-  nextBtn.style.display = "none";
+  questionEl.innerText =
+    questionNumber +
+    ") " +
+    current.q;
 
-  const letters = ["A", "B", "C"];
 
-  current.o.forEach((opt, i) => {
+  optionsEl.innerHTML =
+    "";
 
-    const div = document.createElement("div");
 
-    div.className = "option";
+  nextBtn.style.display =
+    "none";
 
-    div.innerText = letters[i] + ") " + opt;
 
-    div.onclick = () => selectOption(div, i);
+  const letters =
+    ["A", "B", "C"];
 
-    optionsEl.appendChild(div);
 
-  });
+  current.o.forEach(
+    (opt, i) => {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "option";
+
+
+      div.innerText =
+        letters[i] +
+        ") " +
+        opt;
+
+
+      div.onclick =
+        () =>
+          selectOption(
+            div,
+            i
+          );
+
+
+      optionsEl.appendChild(
+        div
+      );
+
+    }
+  );
 
 }
 
-function selectOption(el, index) {
 
-  const correct = quizData[moduleIndex].perguntas[questionIndex].c;
-  const perguntaAtual = quizData[moduleIndex].perguntas[questionIndex];
+function selectOption(
+  el,
+  index
+) {
 
-respostasAluno.push({
+  const correct =
+    quizData[
+      moduleIndex
+    ].perguntas[
+      questionIndex
+    ].c;
 
- modulo: quizData[moduleIndex].modulo,
 
- pergunta: perguntaAtual.q,
+  const perguntaAtual =
+    quizData[
+      moduleIndex
+    ].perguntas[
+      questionIndex
+    ];
 
- respostaAluno: perguntaAtual.o[index],
 
- respostaCorreta: perguntaAtual.o[correct],
+  respostasAluno.push({
 
- acertou: index === correct
+    modulo:
+      quizData[
+        moduleIndex
+      ].modulo,
 
-});
+    pergunta:
+      perguntaAtual.q,
 
-  const options = document.querySelectorAll(".option");
+    respostaAluno:
+      perguntaAtual.o[index],
 
-  options.forEach((opt, i) => {
+    respostaCorreta:
+      perguntaAtual.o[correct],
 
-    opt.classList.add("disabled");
-
-    if (i === correct) opt.classList.add("correct");
-
-    if (i === index && i !== correct) opt.classList.add("wrong");
+    acertou:
+      index === correct
 
   });
 
-  if (index === correct) {
+
+  const options =
+    document.querySelectorAll(
+      ".option"
+    );
+
+
+  options.forEach(
+    (opt, i) => {
+
+      opt.classList.add(
+        "disabled"
+      );
+
+
+      if (
+        i === correct
+      ) {
+
+        opt.classList.add(
+          "correct"
+        );
+
+      }
+
+
+      if (
+        i === index &&
+        i !== correct
+      ) {
+
+        opt.classList.add(
+          "wrong"
+        );
+
+      }
+
+    }
+  );
+
+
+  if (
+    index === correct
+  ) {
 
     score++;
 
-    moduleScores[moduleIndex]++;
+    moduleScores[
+      moduleIndex
+    ]++;
 
     audioAcerto.play();
 
-  } else {
+  }
+
+  else {
 
     audioErro.play();
 
   }
 
-  nextBtn.style.display = "block";
+
+  nextBtn.style.display =
+    "block";
 
 }
+
 
 nextBtn.onclick = () => {
 
   questionIndex++;
+
   questionNumber++;
 
-  if (questionIndex >= quizData[moduleIndex].perguntas.length) {
+
+  if (
+    questionIndex >=
+    quizData[
+      moduleIndex
+    ].perguntas.length
+  ) {
 
     moduleIndex++;
+
     questionIndex = 0;
 
   }
 
-  if (moduleIndex >= quizData.length) {
 
-    document.getElementById("quizBox").style.display = "none";
+  if (
+    moduleIndex >=
+    quizData.length
+  ) {
 
-    document.getElementById("scoreBox").style.display = "block";
+    document
+      .getElementById(
+        "quizBox"
+      )
+      .style.display =
+      "none";
 
-    document.getElementById("studentInfo").innerHTML = `
-      Nome: ${nomeAluno}<br>
-      Turma: ${turmaAluno}
-    `;
 
-    document.getElementById("scoreText").innerText =
+    document
+      .getElementById(
+        "scoreBox"
+      )
+      .style.display =
+      "block";
+
+
+    document
+      .getElementById(
+        "studentInfo"
+      )
+      .innerHTML = `
+        Nome: ${nomeAluno}<br>
+        Turma: ${turmaAluno}
+      `;
+
+
+    document
+      .getElementById(
+        "scoreText"
+      )
+      .innerText =
       `Você acertou ${score} de ${quizData.length * 3} perguntas.`;
 
-    const reportDiv = document.getElementById("moduleReport");
 
-    reportDiv.innerHTML = "";
+    const reportDiv =
+      document.getElementById(
+        "moduleReport"
+      );
 
-    quizData.forEach((mod, i) => {
 
-      reportDiv.innerHTML += `
-      <div class="report-line">
-      ${mod.modulo}: ${moduleScores[i]} de 3 acertos
-      </div>`;
+    reportDiv.innerHTML =
+      "";
 
-    });
 
-  } else {
+    quizData.forEach(
+      (mod, i) => {
+
+        reportDiv.innerHTML += `
+          <div class="report-line">
+            ${mod.modulo}: ${moduleScores[i]} de 3 acertos
+          </div>`;
+
+      }
+    );
+
+  }
+
+  else {
 
     loadQuestion();
 
@@ -748,36 +1230,85 @@ nextBtn.onclick = () => {
 
 };
 
-document.getElementById("generatePdf").onclick = function() {
 
-  const { jsPDF } = window.jspdf;
+document
+.getElementById(
+  "generatePdf"
+)
+.onclick = function() {
 
-  const doc = new jsPDF();
+  const { jsPDF } =
+    window.jspdf;
 
-  const agora = new Date();
+
+  const doc =
+    new jsPDF();
+
+
+  const agora =
+    new Date();
+
 
   const dataHora =
-    agora.toLocaleDateString("pt-BR") +
+    agora.toLocaleDateString(
+      "pt-BR"
+    ) +
     " " +
-    agora.toLocaleTimeString("pt-BR");
+    agora.toLocaleTimeString(
+      "pt-BR"
+    );
+
 
   let y = 20;
 
+
   doc.setFontSize(16);
-  doc.text("Relatório do Quiz", 20, y);
+
+  doc.text(
+    "Relatório do Quiz",
+    20,
+    y
+  );
+
 
   y += 10;
 
+
   doc.setFontSize(12);
 
-  doc.text("Aluno: " + nomeAluno, 20, y);
+
+  doc.text(
+    "Aluno: " +
+    nomeAluno,
+    20,
+    y
+  );
+
+
   y += 8;
 
-  doc.text("Turma: " + turmaAluno, 20, y);
+
+  doc.text(
+    "Turma: " +
+    turmaAluno,
+    20,
+    y
+  );
+
+
   y += 8;
 
-  doc.text("Data/Hora: " + dataHora, 20, y);
+
+  doc.text(
+    "Data/Hora: " +
+    dataHora,
+    20,
+    y
+  );
+
+
   y += 8;
+
 
   doc.text(
     `Resultado: ${score} de ${quizData.length * 3}`,
@@ -785,94 +1316,142 @@ document.getElementById("generatePdf").onclick = function() {
     y
   );
 
+
   y += 15;
 
+
   doc.setFontSize(14);
-  doc.text("Desempenho por módulo", 20, y);
+
+  doc.text(
+    "Desempenho por módulo",
+    20,
+    y
+  );
+
 
   y += 10;
+
 
   doc.setFontSize(11);
 
-  quizData.forEach((mod, i) => {
 
-    doc.text(
-      `${mod.modulo}: ${moduleScores[i]} de 3 acertos`,
-      20,
-      y
-    );
+  quizData.forEach(
+    (mod, i) => {
 
-    y += 8;
+      doc.text(
+        `${mod.modulo}: ${moduleScores[i]} de 3 acertos`,
+        20,
+        y
+      );
 
-  });
+      y += 8;
+
+    }
+  );
+
 
   y += 10;
+
 
   doc.setFontSize(14);
-  doc.text("Detalhamento das respostas", 20, y);
+
+  doc.text(
+    "Detalhamento das respostas",
+    20,
+    y
+  );
+
 
   y += 10;
+
 
   doc.setFontSize(10);
 
-  respostasAluno.forEach((resp, index) => {
 
-    if (y > 260) {
-      doc.addPage();
-      y = 20;
+  respostasAluno.forEach(
+    (resp, index) => {
+
+
+      if (y > 260) {
+
+        doc.addPage();
+
+        y = 20;
+
+      }
+
+
+      doc.text(
+        `${index + 1}) ${resp.pergunta}`,
+        10,
+        y
+      );
+
+
+      y += 6;
+
+
+      const respostaAlunoTexto =
+        doc.splitTextToSize(
+          "Resposta do aluno: " +
+          resp.respostaAluno,
+          180
+        );
+
+
+      doc.text(
+        respostaAlunoTexto,
+        15,
+        y
+      );
+
+
+      y +=
+        respostaAlunoTexto.length *
+        5;
+
+
+      const respostaCorretaTexto =
+        doc.splitTextToSize(
+          "Resposta correta: " +
+          resp.respostaCorreta,
+          180
+        );
+
+
+      doc.text(
+        respostaCorretaTexto,
+        15,
+        y
+      );
+
+
+      y +=
+        respostaCorretaTexto.length *
+        5;
+
+
+      doc.text(
+        resp.acertou
+          ? "Resultado: ACERTOU"
+          : "Resultado: ERROU",
+        15,
+        y
+      );
+
+
+      y += 10;
+
     }
+  );
 
-    doc.text(
-      `${index + 1}) ${resp.pergunta}`,
-      10,
-      y
-    );
 
-    y += 6;
-
-    const respostaAlunoTexto =
-      doc.splitTextToSize(
-        "Resposta do aluno: " + resp.respostaAluno,
-        180
-      );
-
-    doc.text(
-      respostaAlunoTexto,
-      15,
-      y
-    );
-
-    y += respostaAlunoTexto.length * 5;
-
-    const respostaCorretaTexto =
-      doc.splitTextToSize(
-        "Resposta correta: " + resp.respostaCorreta,
-        180
-      );
-
-    doc.text(
-      respostaCorretaTexto,
-      15,
-      y
-    );
-
-    y += respostaCorretaTexto.length * 5;
-
-    doc.text(
-      resp.acertou
-        ? "Resultado: ACERTOU"
-        : "Resultado: ERROU",
-      15,
-      y
-    );
-
-    y += 10;
-
-  });
-
-  doc.save("relatorio_quiz.pdf");
+  doc.save(
+    "relatorio_quiz.pdf"
+  );
 
 };
+
 </script>
 
 </body>
