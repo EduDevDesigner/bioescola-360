@@ -41,6 +41,20 @@ const folhosasImage =
     );
 
 /* =====================================================
+IMAGEM HTML — TEMPEROS E ERVAS AROMÁTICAS
+===================================================== */
+
+const temperosImageContainer =
+document.getElementById(
+"temperosImageContainer"
+);
+
+const temperosImage =
+document.getElementById(
+"temperosImage"
+);
+
+/* =====================================================
    ESTADO
 ===================================================== */
 
@@ -1467,6 +1481,10 @@ targets.forEach(
                  mostrarImagemFolhosas();
                 }
                 
+                if (index === 1) {
+                  mostrarImagemTemperos();
+                }
+                
                 console.log(
                     "TRACK ENCONTRADA:",
                     index
@@ -1515,6 +1533,10 @@ targets.forEach(
 
                 if (index === 0) {
                     esconderImagemFolhosas();
+                }
+                
+                if (index === 1) {
+                    esconderImagemTemperos();
                 }
                 
                 console.log(
@@ -1933,4 +1955,34 @@ function esconderImagemFolhosas() {
 
     folhosasImageContainer.style.display =
         "none";
+}
+
+/* =====================================================
+MOSTRAR IMAGEM TEMPEROS
+===================================================== */
+
+function mostrarImagemTemperos() {
+
+if (!temperosImageContainer) {
+    return;
+}
+
+temperosImageContainer.style.display =
+    "block";
+
+}
+
+/* =====================================================
+ESCONDER IMAGEM TEMPEROS
+===================================================== */
+
+function esconderImagemTemperos() {
+
+if (!temperosImageContainer) {
+    return;
+}
+
+temperosImageContainer.style.display =
+    "none";
+
 }
