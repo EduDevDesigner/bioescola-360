@@ -321,7 +321,126 @@ const especies = {
             "./Video/Coentro_Curiosidades_270.webm"
 
     },
+    
+    /* -------------------------------------------------
+       CEBOLINHA    
+    ------------------------------------------------- */
 
+    cebolinha: {
+
+        nome:
+            "CEBOLINHA",
+
+        historia:
+            "./Video/Cebolinha.webm",
+
+        caracteristicas:
+            "./Video/Cebolinha_Caracteristicas_270.webm",
+
+        curiosidades:
+            "./Video/Cebolinha_Curiosidades_270.webm"
+
+    },
+    
+    /* -------------------------------------------------
+       SALSA
+    ------------------------------------------------- */
+
+    salsa: {
+
+        nome:
+            "SALSA",
+
+        historia:
+            "./Video/Salsa.webm",
+
+        caracteristicas:
+            "./Video/Salsa_Caracteristicas_270.webm",
+
+        curiosidades:
+            "./Video/Salsa_Curiosidades_270.webm"
+
+    },
+
+    /* -------------------------------------------------
+       ALECRIM
+    ------------------------------------------------- */
+
+    alecrim: {
+
+        nome:
+            "ALECRIM",
+
+        historia:
+            "./Video/Alecrim.webm",
+
+        caracteristicas:
+            "./Video/Alecrim_Caracteristicas_270.webm",
+
+        curiosidades:
+            "./Video/Alecrim_Curiosidades_270.webm"
+
+    },
+
+/* -------------------------------------------------
+      MANJERICÃO
+    ------------------------------------------------- */
+
+    manjericao: {
+
+        nome:
+            "MANJERICÃO",
+
+        historia:
+            "./Video/Manjericao.webm",
+
+        caracteristicas:
+            "./Video/Manjericao_Caracteristicas_270.webm",
+
+        curiosidades:
+            "./Video/Manjericao_Curiosidades_270.webm"
+
+    },
+    
+    /* -------------------------------------------------
+       ORÉGANO
+    ------------------------------------------------- */
+
+    oregano: {
+
+        nome:
+            "ORÉGANO",
+
+        historia:
+            "./Video/Oregano.webm",
+
+        caracteristicas:
+            "./Video/Oregano_Caracteristicas_270.webm",
+
+        curiosidades:
+            "./Video/Oregano_Curiosidades_270.webm"
+
+    },
+    
+    /* -------------------------------------------------
+       TOMILHO
+    ------------------------------------------------- */
+
+    tomilho: {
+
+        nome:
+            "TOMILHO",
+
+        historia:
+            "./Video/Tomilho.webm",
+
+        caracteristicas:
+            "./Video/Tomilho_Caracteristicas_270.webm",
+
+        curiosidades:
+            "./Video/Tomilho_Curiosidades_270.webm"
+
+    },
 
     /* -------------------------------------------------
        TOMATE
