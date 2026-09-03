@@ -1,468 +1,512 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
 
-    <meta
-        name="description"
-        content="BioEscola 360° - Horta Escolar em Realidade Aumentada"
-    >
+<meta
+    name="description"
+    content="BioEscola 360° - Horta Escolar em Realidade Aumentada"
+>
 
-    <title>BIOESCOLA 360°</title>
-
-
-    <!-- =====================================================
-         A-FRAME
-    ====================================================== -->
-
-    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+<title>BIOESCOLA 360°</title>
 
 
-    <!-- =====================================================
-         MINDAR
-    ====================================================== -->
+<!-- =====================================================
+     A-FRAME
+====================================================== -->
 
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+<script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
 
 
-    <!-- =====================================================
-         CSS EXTERNO
-         
-         TODO O CSS DO PROJETO FICA NO style.css
-    ====================================================== -->
+<!-- =====================================================
+     MINDAR
+====================================================== -->
 
-    <link rel="stylesheet" href="./style.css">
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
+
+<!-- =====================================================
+     CSS EXTERNO
+====================================================== -->
+
+<link rel="stylesheet" href="./style.css">
+```
 
 </head>
 
-
 <body>
 
+```
+<!-- =====================================================
+     MENSAGEM INICIAL
+====================================================== -->
 
-    <!-- =====================================================
-         MENSAGEM INICIAL
-    ====================================================== -->
+<div id="track-message">
 
-    <div id="track-message">
+    Aponte a câmera para uma das placas
+    da horta para iniciar a experiência.
 
-        Aponte a câmera para uma das placas
-        da horta para iniciar a experiência.
-
-    </div>
-    
-
-    <!-- =====================================================
-         CONTADOR
-    ====================================================== -->
-
-    <div id="progressBox">
-
-        🌱
-
-        <span id="progressCount">0</span>
-
-        / 6 categorias
-
-    </div>
+</div>
 
 
-    <!-- =====================================================
-         BOTÃO MENU
-    ====================================================== -->
+<!-- =====================================================
+     CONTADOR
+====================================================== -->
+
+<div id="progressBox">
+
+    🌱
+
+    <span id="progressCount">0</span>
+
+    / 6 categorias
+
+</div>
+
+
+<!-- =====================================================
+     BOTÃO MENU
+====================================================== -->
+
+<button
+    id="menuToggleButton"
+    type="button"
+    aria-label="Abrir menu"
+>
+    ☰
+</button>
+
+
+<!-- =====================================================
+     BOTÃO QUIZ
+====================================================== -->
+
+<button
+    id="finalButtonTop"
+    type="button"
+    aria-label="Fazer quiz"
+>
+    📝
+</button>
+
+
+<!-- =====================================================
+     SOM DOS BOTÕES
+====================================================== -->
+
+<audio
+    id="clickSound"
+    preload="none"
+>
+
+    <source
+        src="Audios/acerto.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+<!-- =====================================================
+     ÁUDIO FOLHOSAS
+====================================================== -->
+
+<audio
+    id="audioFolhosas"
+    preload="none"
+>
+
+    <source
+        src="Audios/Narrativa_Folhosas.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+<!-- =====================================================
+     ÁUDIO TEMPEROS
+====================================================== -->
+
+<audio
+    id="audioTemperos"
+    preload="none"
+>
+
+    <source
+        src="./Audio/Temperos.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+<!-- =====================================================
+     ÁUDIO FRUTOS
+====================================================== -->
+
+<audio
+    id="audioFrutos"
+    preload="none"
+>
+
+    <source
+        src="./Audio/Frutos.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+<!-- =====================================================
+     ÁUDIO FRUTAS
+====================================================== -->
+
+<audio
+    id="audioFrutas"
+    preload="none"
+>
+
+    <source
+        src="./Audio/Frutas.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+<!-- =====================================================
+     ÁUDIO MEDICINAIS
+====================================================== -->
+
+<audio
+    id="audioMedicinais"
+    preload="none"
+>
+
+    <source
+        src="./Audio/Medicinais.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+<!-- =====================================================
+     ÁUDIO PANC
+====================================================== -->
+
+<audio
+    id="audioPanc"
+    preload="none"
+>
+
+    <source
+        src="./Audio/PANC.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+<!-- =====================================================
+     PAINEL DE INTERAÇÃO
+====================================================== -->
+
+<div id="interactionPanel">
+
+
+    <!-- =================================================
+         TRACK 0 — FOLHOSAS
+    ================================================== -->
 
     <button
-        id="menuToggleButton"
+        id="folhosaAudioLeftButton"
+        class="track-button audio-left-fly-btn"
         type="button"
-        aria-label="Abrir menu"
     >
-        ☰
+        🔊 CONHEÇA
     </button>
 
 
-    <!-- =====================================================
-         BOTÃO QUIZ
-    ====================================================== -->
-
     <button
-        id="finalButtonTop"
+        id="folhosaAudioRightButton"
+        class="track-button audio-right-fly-btn"
         type="button"
-        aria-label="Fazer quiz"
     >
-        📝
+        🌱 ESPÉCIES
     </button>
-    
 
-    <!-- =====================================================
-         SOM DOS BOTÕES
-         
-         O JavaScript também funciona caso esse arquivo
-         ainda não exista.
-    ====================================================== -->
 
-    <audio
-        id="clickSound"
-        preload="none"
+    <div
+        id="folhosaSpeciesMenu"
+        class="species-dropdown"
     >
 
-        <source
-            src="Audios/acerto.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
-
-
-    <!-- =====================================================
-         ÁUDIO FOLHOSAS
-    ====================================================== -->
-
-    <audio
-        id="audioFolhosas"
-        preload="none"
-    >
-
-        <source
-            src="Audios/Narrativa_Folhosas.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
-
-
-    <!-- =====================================================
-         ÁUDIO TEMPEROS
-    ====================================================== -->
-
-    <audio
-        id="audioTemperos"
-        preload="none"
-    >
-
-        <source
-            src="./Audio/Temperos.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
-
-
-    <!-- =====================================================
-         ÁUDIO FRUTOS
-    ====================================================== -->
-
-    <audio
-        id="audioFrutos"
-        preload="none"
-    >
-
-        <source
-            src="./Audio/Frutos.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
-
-
-    <!-- =====================================================
-         ÁUDIO FRUTAS
-    ====================================================== -->
-
-    <audio
-        id="audioFrutas"
-        preload="none"
-    >
-
-        <source
-            src="./Audio/Frutas.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
-
-
-    <!-- =====================================================
-         ÁUDIO MEDICINAIS
-    ====================================================== -->
-
-    <audio
-        id="audioMedicinais"
-        preload="none"
-    >
-
-        <source
-            src="./Audio/Medicinais.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
-
-
-    <!-- =====================================================
-         ÁUDIO PANC
-    ====================================================== -->
-
-    <audio
-        id="audioPanc"
-        preload="none"
-    >
-
-        <source
-            src="./Audio/PANC.mp3"
-            type="audio/mpeg"
-        >
-
-    </audio>
-
-
-    <!-- =====================================================
-         PAINEL DE INTERAÇÃO
-    ====================================================== -->
-
-    <div id="interactionPanel">
-
-
-        <!-- =================================================
-             FOLHOSAS
-        ================================================== -->
-
         <button
-            id="folhosaAudioLeftButton"
-            class="track-button audio-left-fly-btn"
+            class="species-btn"
             type="button"
+            data-species="alface"
         >
-            🔊 CONHEÇA
+            🥬 Alface
         </button>
 
-
         <button
-            id="folhosaAudioRightButton"
-            class="track-button audio-right-fly-btn"
+            class="species-btn"
             type="button"
+            data-species="couve"
         >
-            🌱 ESPÉCIES
+            🥬 Couve-Manteiga
         </button>
 
-
-        <div
-            id="folhosaSpeciesMenu"
-            class="species-dropdown"
-        >
-
-            <button
-                class="species-btn"
-                type="button"
-                data-species="alface"
-            >
-                🥬 Alface
-            </button>
-
-            <button
-                class="species-btn"
-                type="button"
-                data-species="couve"
-            >
-                🥬 Couve-Manteiga
-            </button>
-
-            <button
-                class="species-btn"
-                type="button"
-                data-species="rucula"
-            >
-                🌿 Rúcula
-            </button>
-
-        </div>
-
-
-        <!-- =================================================
-             TEMPEROS
-        ================================================== -->
-
         <button
-            id="temperoAudioLeftButton"
-            class="track-button audio-left-fly-btn"
+            class="species-btn"
             type="button"
+            data-species="rucula"
         >
-            🔊 CONHEÇA
+            🌿 Rúcula
         </button>
-
-
-        <button
-            id="temperoAudioRightButton"
-            class="track-button audio-right-fly-btn"
-            type="button"
-        >
-            🌿 ESPÉCIES
-        </button>
-
-
-        <div
-            id="temperoSpeciesMenu"
-            class="species-dropdown"
-        >
-
-            <button
-                class="species-btn"
-                type="button"
-                data-species="coentro"
-            >
-                🌿 Coentro
-            </button>
-
-        </div>
-
-
-        <!-- =================================================
-             FRUTOS
-        ================================================== -->
-
-        <button
-            id="frutoAudioLeftButton"
-            class="track-button audio-left-fly-btn"
-            type="button"
-        >
-            🔊 CONHEÇA
-        </button>
-
-
-        <button
-            id="frutoAudioRightButton"
-            class="track-button audio-right-fly-btn"
-            type="button"
-        >
-            🍅 ESPÉCIES
-        </button>
-
-
-        <div
-            id="frutoSpeciesMenu"
-            class="species-dropdown"
-        >
-
-            <button
-                class="species-btn"
-                type="button"
-                data-species="tomate"
-            >
-                🍅 Tomate
-            </button>
-
-        </div>
-
-
-        <!-- =================================================
-             FRUTAS
-        ================================================== -->
-
-        <button
-            id="frutaAudioLeftButton"
-            class="track-button audio-left-fly-btn"
-            type="button"
-        >
-            🔊 CONHEÇA
-        </button>
-
-
-        <button
-            id="frutaAudioRightButton"
-            class="track-button audio-right-fly-btn"
-            type="button"
-        >
-            🍍 ESPÉCIES
-        </button>
-
-
-        <div
-            id="frutaSpeciesMenu"
-            class="species-dropdown"
-        >
-
-            <button
-                class="species-btn"
-                type="button"
-                data-species="abacaxi"
-            >
-                🍍 Abacaxi
-            </button>
-
-        </div>
-
-
-        <!-- =================================================
-             MEDICINAIS
-        ================================================== -->
-
-        <button
-            id="medicinalAudioLeftButton"
-            class="track-button audio-left-fly-btn"
-            type="button"
-        >
-            🔊 CONHEÇA
-        </button>
-
-
-        <button
-            id="medicinalAudioRightButton"
-            class="track-button audio-right-fly-btn"
-            type="button"
-        >
-            🌿 ESPÉCIES
-        </button>
-
-
-        <div
-            id="medicinalSpeciesMenu"
-            class="species-dropdown"
-        >
-
-        </div>
-
-
-        <!-- =================================================
-             PANC
-        ================================================== -->
-
-        <button
-            id="pancAudioLeftButton"
-            class="track-button audio-left-fly-btn"
-            type="button"
-        >
-            🔊 CONHEÇA
-        </button>
-
-
-        <button
-            id="pancAudioRightButton"
-            class="track-button audio-right-fly-btn"
-            type="button"
-        >
-            🌱 ESPÉCIES
-        </button>
-
-
-        <div
-            id="pancSpeciesMenu"
-            class="species-dropdown"
-        >
-
-        </div>
-
 
     </div>
 
-    
-    <!-- =====================================================
-IMAGEM HTML — TRACK 0 FOLHOSAS
-===================================================== -->
+
+    <!-- =================================================
+         TRACK 1 — TEMPEROS E ERVAS AROMÁTICAS
+    ================================================== -->
+
+    <button
+        id="temperoAudioLeftButton"
+        class="track-button audio-left-fly-btn"
+        type="button"
+    >
+        🔊 CONHEÇA
+    </button>
+
+
+    <button
+        id="temperoAudioRightButton"
+        class="track-button audio-right-fly-btn"
+        type="button"
+    >
+        🌿 ESPÉCIES
+    </button>
+
+
+    <div
+        id="temperoSpeciesMenu"
+        class="species-dropdown"
+    >
+
+        <button
+            class="species-btn"
+            type="button"
+            data-species="coentro"
+        >
+            🌿 Coentro
+        </button>
+
+        <button
+            class="species-btn"
+            type="button"
+            data-species="cebolinha"
+        >
+            🌱 Cebolinha
+        </button>
+
+        <button
+            class="species-btn"
+            type="button"
+            data-species="salsa"
+        >
+            🌿 Salsa
+        </button>
+
+        <button
+            class="species-btn"
+            type="button"
+            data-species="alecrim"
+        >
+            🌿 Alecrim
+        </button>
+
+        <button
+            class="species-btn"
+            type="button"
+            data-species="manjericao"
+        >
+            🌿 Manjericão
+        </button>
+
+        <button
+            class="species-btn"
+            type="button"
+            data-species="oregano"
+        >
+            🌿 Orégano
+        </button>
+
+        <button
+            class="species-btn"
+            type="button"
+            data-species="tomilho"
+        >
+            🌿 Tomilho
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         TRACK 2 — FRUTOS
+    ================================================== -->
+
+    <button
+        id="frutoAudioLeftButton"
+        class="track-button audio-left-fly-btn"
+        type="button"
+    >
+        🔊 CONHEÇA
+    </button>
+
+
+    <button
+        id="frutoAudioRightButton"
+        class="track-button audio-right-fly-btn"
+        type="button"
+    >
+        🍅 ESPÉCIES
+    </button>
+
+
+    <div
+        id="frutoSpeciesMenu"
+        class="species-dropdown"
+    >
+
+        <button
+            class="species-btn"
+            type="button"
+            data-species="tomate"
+        >
+            🍅 Tomate
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         TRACK 3 — FRUTAS
+    ================================================== -->
+
+    <button
+        id="frutaAudioLeftButton"
+        class="track-button audio-left-fly-btn"
+        type="button"
+    >
+        🔊 CONHEÇA
+    </button>
+
+
+    <button
+        id="frutaAudioRightButton"
+        class="track-button audio-right-fly-btn"
+        type="button"
+    >
+        🍍 ESPÉCIES
+    </button>
+
+
+    <div
+        id="frutaSpeciesMenu"
+        class="species-dropdown"
+    >
+
+        <button
+            class="species-btn"
+            type="button"
+            data-species="abacaxi"
+        >
+            🍍 Abacaxi
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         TRACK 4 — MEDICINAIS
+    ================================================== -->
+
+    <button
+        id="medicinalAudioLeftButton"
+        class="track-button audio-left-fly-btn"
+        type="button"
+    >
+        🔊 CONHEÇA
+    </button>
+
+
+    <button
+        id="medicinalAudioRightButton"
+        class="track-button audio-right-fly-btn"
+        type="button"
+    >
+        🌿 ESPÉCIES
+    </button>
+
+
+    <div
+        id="medicinalSpeciesMenu"
+        class="species-dropdown"
+    >
+
+    </div>
+
+
+    <!-- =================================================
+         TRACK 5 — PANC
+    ================================================== -->
+
+    <button
+        id="pancAudioLeftButton"
+        class="track-button audio-left-fly-btn"
+        type="button"
+    >
+        🔊 CONHEÇA
+    </button>
+
+
+    <button
+        id="pancAudioRightButton"
+        class="track-button audio-right-fly-btn"
+        type="button"
+    >
+        🌱 ESPÉCIES
+    </button>
+
+
+    <div
+        id="pancSpeciesMenu"
+        class="species-dropdown"
+    >
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     IMAGEM HTML — TRACK 0 FOLHOSAS
+====================================================== -->
 
 <div id="folhosasImageContainer">
 
@@ -473,179 +517,176 @@ IMAGEM HTML — TRACK 0 FOLHOSAS
     >
 
 </div>
-    
-
-    <!-- =====================================================
-         CONTEÚDO DA ESPÉCIE
-    ====================================================== -->
-
-    <section
-        id="speciesContent"
-        aria-hidden="true"
-    >
-
-        <div class="species-video-container">
 
 
-            <h2
-                id="speciesTitle"
-                class="titulo-video"
-            >
-                FOFOLHA
-            </h2>
+<!-- =====================================================
+     CONTEÚDO DA ESPÉCIE
+====================================================== -->
+
+<section
+    id="speciesContent"
+    aria-hidden="true"
+>
+
+    <div class="species-video-container">
 
 
-            <video
-                id="speciesVideo"
-                playsinline
-                webkit-playsinline
-                preload="metadata"
-                controls
-            >
-            </video>
+        <h2
+            id="speciesTitle"
+            class="titulo-video"
+        >
+            FOFOLHA
+        </h2>
 
 
-            <div class="species-video-buttons">
-
-                <button
-                    id="btnHistoria"
-                    type="button"
-                >
-                    📖 HISTÓRIA
-                </button>
-
-
-                <button
-                    id="btnCaracteristicas"
-                    type="button"
-                >
-                    🌱 CARACTERÍSTICAS
-                </button>
+        <video
+            id="speciesVideo"
+            playsinline
+            webkit-playsinline
+            preload="metadata"
+            controls
+        >
+        </video>
 
 
-                <button
-                    id="btnCuriosidades"
-                    type="button"
-                >
-                    💡 CURIOSIDADES
-                </button>
-
-            </div>
-
+        <div class="species-video-buttons">
 
             <button
-                id="closeSpeciesButton"
+                id="btnHistoria"
                 type="button"
-                class="close-species-button"
             >
-                ✕ FECHAR
+                📖 HISTÓRIA
             </button>
 
 
+            <button
+                id="btnCaracteristicas"
+                type="button"
+            >
+                🌱 CARACTERÍSTICAS
+            </button>
+
+
+            <button
+                id="btnCuriosidades"
+                type="button"
+            >
+                💡 CURIOSIDADES
+            </button>
+
         </div>
 
-    </section>
 
-
-    <!-- =====================================================
-         MINDAR / A-FRAME
-         
-         IMPORTANTE:
-         targets.mind está dentro da pasta Imagens.
-    ====================================================== -->
-
-    <a-scene
-mindar-image="imageTargetSrc: Imagens/targets.mind;"
-color-space="sRGB"
-renderer="colorManagement:true,physicallyCorrectLights"
-xr-mode-ui="enabled:false"
-device-orientation-permission-ui="enabled:false">
-
-
-        <!-- =================================================
-             CÂMERA
-        ================================================== -->
-
-        <a-camera
-            position="0 0 0"
-            look-controls="enabled: false"
-            cursor="fuse: false; rayOrigin: mouse;"
-            raycaster="objects: .clickable"
+        <button
+            id="closeSpeciesButton"
+            type="button"
+            class="close-species-button"
         >
-        </a-camera>
+            ✕ FECHAR
+        </button>
 
 
-        <!-- =================================================
-             TRACK 0 - FOLHOSAS
-        ================================================== -->
+    </div>
 
-        <a-entity
-            mindar-image-target="targetIndex: 0"
-        >
-        </a-entity>
+</section>
 
 
-        <!-- =================================================
-             TRACK 1 - TEMPEROS
-        ================================================== -->
+<!-- =====================================================
+     MINDAR / A-FRAME
+====================================================== -->
 
-        <a-entity
-            mindar-image-target="targetIndex: 1"
-        >
-        </a-entity>
-
-
-        <!-- =================================================
-             TRACK 2 - FRUTOS
-        ================================================== -->
-
-        <a-entity
-            mindar-image-target="targetIndex: 2"
-        >
-        </a-entity>
+<a-scene
+    mindar-image="imageTargetSrc: Imagens/targets.mind;"
+    color-space="sRGB"
+    renderer="colorManagement:true,physicallyCorrectLights"
+    xr-mode-ui="enabled:false"
+    device-orientation-permission-ui="enabled:false"
+>
 
 
-        <!-- =================================================
-             TRACK 3 - FRUTAS
-        ================================================== -->
+    <!-- =================================================
+         CÂMERA
+    ================================================== -->
 
-        <a-entity
-            mindar-image-target="targetIndex: 3"
-        >
-        </a-entity>
-
-
-        <!-- =================================================
-             TRACK 4 - MEDICINAIS
-        ================================================== -->
-
-        <a-entity
-            mindar-image-target="targetIndex: 4"
-        >
-        </a-entity>
+    <a-camera
+        position="0 0 0"
+        look-controls="enabled:false"
+        cursor="fuse:false; rayOrigin:mouse;"
+        raycaster="objects:.clickable"
+    >
+    </a-camera>
 
 
-        <!-- =================================================
-             TRACK 5 - PANC
-        ================================================== -->
+    <!-- =================================================
+         TRACK 0 - FOLHOSAS
+    ================================================== -->
 
-        <a-entity
-            mindar-image-target="targetIndex: 5"
-        >
-        </a-entity>
-
-
-    </a-scene>
+    <a-entity
+        mindar-image-target="targetIndex:0"
+    >
+    </a-entity>
 
 
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
+    <!-- =================================================
+         TRACK 1 - TEMPEROS
+    ================================================== -->
 
-    <script src="main.js"></script>
+    <a-entity
+        mindar-image-target="targetIndex:1"
+    >
+    </a-entity>
 
+
+    <!-- =================================================
+         TRACK 2 - FRUTOS
+    ================================================== -->
+
+    <a-entity
+        mindar-image-target="targetIndex:2"
+    >
+    </a-entity>
+
+
+    <!-- =================================================
+         TRACK 3 - FRUTAS
+    ================================================== -->
+
+    <a-entity
+        mindar-image-target="targetIndex:3"
+    >
+    </a-entity>
+
+
+    <!-- =================================================
+         TRACK 4 - MEDICINAIS
+    ================================================== -->
+
+    <a-entity
+        mindar-image-target="targetIndex:4"
+    >
+    </a-entity>
+
+
+    <!-- =================================================
+         TRACK 5 - PANC
+    ================================================== -->
+
+    <a-entity
+        mindar-image-target="targetIndex:5"
+    >
+    </a-entity>
+
+
+</a-scene>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="main.js"></script>
+```
 
 </body>
 
 </html>
-
