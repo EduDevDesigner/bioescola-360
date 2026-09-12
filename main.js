@@ -2090,7 +2090,7 @@ ESCONDER IMAGEM PANC
 function esconderImagemPanc() {
 
 
-if (!pancAudioLeftButtonImageContainer) {
+if (!pancImageContainer) {
     return;
 }
 
