@@ -72,7 +72,7 @@ document.getElementById("clickSound");
 
 function tocarClick() {
 
-```
+
 if (!clickSound) {
     return;
 }
@@ -87,7 +87,7 @@ clickSound.play()
             não interrompe a aplicação.
         */
     });
-```
+
 
 }
 
@@ -240,7 +240,7 @@ DADOS DAS ESPÉCIES
 
 const especies = {
 
-```
+
 /* -------------------------------------------------
    ALFACE
 ------------------------------------------------- */
@@ -533,7 +533,7 @@ oraProNobis: {
         "./Video/OraProNobis_Curiosidades_270.webm"
 
 }
-```
+
 
 };
 
@@ -543,7 +543,7 @@ CATEGORIAS
 
 const categorias = {
 
-```
+
 0: {
 
     audio:
@@ -608,7 +608,7 @@ const categorias = {
         pancAudioLeftButton
 
 }
-```
+
 
 };
 
@@ -618,7 +618,7 @@ DROPDOWNS
 
 const dropdowns = [
 
-```
+
 {
 
     button:
@@ -713,7 +713,7 @@ const dropdowns = [
         5
 
 }
-```
+
 
 ];
 
@@ -723,7 +723,6 @@ ESCONDER BOTÕES
 
 function esconderBotoesInteracao() {
 
-```
 dropdowns.forEach(
     dropdown => {
 
@@ -751,7 +750,7 @@ Object.values(categorias)
 
         }
     );
-```
+
 
 }
 
@@ -761,7 +760,6 @@ MOSTRAR BOTÕES DA TRACK
 
 function mostrarBotoesTrack(index) {
 
-```
 esconderBotoesInteracao();
 
 
@@ -792,7 +790,7 @@ if (
         "block";
 
 }
-```
+
 
 }
 
@@ -802,7 +800,7 @@ FECHAR DROPDOWNS
 
 function fecharTodosDropdowns() {
 
-```
+
 dropdowns.forEach(
     dropdown => {
 
@@ -816,7 +814,7 @@ dropdowns.forEach(
 
     }
 );
-```
+
 
 }
 
@@ -826,7 +824,7 @@ PARAR ÁUDIOS
 
 function pararTodosAudios() {
 
-```
+
 document
     .querySelectorAll("audio")
     .forEach(
@@ -838,7 +836,7 @@ document
 
         }
     );
-```
+
 
 }
 
@@ -848,7 +846,7 @@ document
 
 function tocarAudioCategoria(index) {
 
-```
+
 const categoria =
     categorias[index];
 
@@ -954,7 +952,7 @@ audio.onended =
         );
 
     };
-```
+
 
 }
 
@@ -964,7 +962,6 @@ EVENTOS DOS BOTÕES CONHEÇA
 
 const botoesConheca = [
 
-```
 {
     button: folhosaAudioLeftButton,
     track: 0
@@ -994,14 +991,14 @@ const botoesConheca = [
     button: pancAudioLeftButton,
     track: 5
 }
-```
+
 
 ];
 
 botoesConheca.forEach(
 item => {
 
-```
+
     if (!item.button) {
         return;
     }
@@ -1029,7 +1026,7 @@ item => {
     );
 
 }
-```
+
 
 );
 
@@ -1040,7 +1037,6 @@ EVENTOS DOS DROPDOWNS
 dropdowns.forEach(
 dropdown => {
 
-```
     if (
         !dropdown.button ||
         !dropdown.menu
@@ -1094,7 +1090,7 @@ dropdown => {
     );
 
 }
-```
+
 
 );
 
@@ -1107,7 +1103,6 @@ document
 .forEach(
 button => {
 
-```
         button.addEventListener(
             "click",
             event => {
@@ -1131,7 +1126,7 @@ button => {
 
     }
 );
-```
+
 
 /* =====================================================
 ABRIR ESPÉCIE
@@ -1139,7 +1134,6 @@ ABRIR ESPÉCIE
 
 function abrirEspecie(especie) {
 
-```
 const dados =
     especies[especie];
 
@@ -1234,7 +1228,7 @@ document
 
         }
     );
-```
+
 
 }
 
@@ -1247,7 +1241,6 @@ videoSrc,
 botao
 ) {
 
-```
 if (
     !speciesVideo ||
     !videoSrc
@@ -1318,7 +1311,7 @@ if (promessa) {
     );
 
 }
-```
+
 
 }
 
@@ -1328,7 +1321,6 @@ BOTÕES DO VÍDEO
 
 if (btnHistoria) {
 
-```
 btnHistoria.addEventListener(
     "click",
     () => {
@@ -1347,13 +1339,13 @@ btnHistoria.addEventListener(
 
     }
 );
-```
+
 
 }
 
 if (btnCaracteristicas) {
 
-```
+
 btnCaracteristicas.addEventListener(
     "click",
     () => {
@@ -1372,13 +1364,13 @@ btnCaracteristicas.addEventListener(
 
     }
 );
-```
+
 
 }
 
 if (btnCuriosidades) {
 
-```
+
 btnCuriosidades.addEventListener(
     "click",
     () => {
@@ -1397,7 +1389,7 @@ btnCuriosidades.addEventListener(
 
     }
 );
-```
+
 
 }
 
@@ -1407,7 +1399,7 @@ OBTER ESPÉCIE
 
 function obterEspecieAtual() {
 
-```
+
 if (!especieAtual) {
 
     return null;
@@ -1418,7 +1410,7 @@ if (!especieAtual) {
 return especies[
     especieAtual
 ];
-```
+
 
 }
 
@@ -1428,7 +1420,6 @@ FECHAR ESPÉCIE
 
 function fecharConteudoEspecie() {
 
-```
 if (!speciesContent) {
     return;
 }
@@ -1474,18 +1465,18 @@ document
 
         }
     );
-```
+
 
 }
 
 if (closeSpeciesButton) {
 
-```
+
 closeSpeciesButton.addEventListener(
     "click",
     fecharConteudoEspecie
 );
-```
+
 
 }
 
@@ -1495,7 +1486,7 @@ ERRO DE VÍDEO
 
 if (speciesVideo) {
 
-```
+
 speciesVideo.addEventListener(
     "error",
     () => {
@@ -1507,7 +1498,7 @@ speciesVideo.addEventListener(
 
     }
 );
-```
+
 
 }
 
@@ -1527,7 +1518,6 @@ TRACK ENCONTRADA
 targets.forEach(
 (target, index) => {
 
-```
     target.addEventListener(
         "targetFound",
         () => {
@@ -1659,7 +1649,7 @@ targets.forEach(
     );
 
 }
-```
+
 
 );
 
@@ -1669,7 +1659,7 @@ MENU
 
 if (menuToggleButton) {
 
-```
+
 menuToggleButton.addEventListener(
     "click",
     () => {
@@ -1707,7 +1697,7 @@ menuToggleButton.addEventListener(
 
     }
 );
-```
+
 
 }
 
@@ -1733,7 +1723,7 @@ const totalTracks =
 
 function registrarTrack(index) {
 
-```
+
 if (
     visitedTracks.has(index)
 ) {
@@ -1769,7 +1759,7 @@ if (
     }
 
 }
-```
+
 
 }
 
@@ -1779,7 +1769,7 @@ BOTÃO QUIZ
 
 if (finalButtonTop) {
 
-```
+
 finalButtonTop.addEventListener(
     "click",
     () => {
@@ -1789,7 +1779,7 @@ finalButtonTop.addEventListener(
 
     }
 );
-```
+
 
 }
 
@@ -1802,7 +1792,7 @@ document
 .forEach(
 button => {
 
-```
+
         button.addEventListener(
             "click",
             tocarClick
@@ -1810,7 +1800,7 @@ button => {
 
     }
 );
-```
+
 
 /* =====================================================
 EVENTOS DO MINDAR
@@ -1818,7 +1808,7 @@ EVENTOS DO MINDAR
 
 if (scene) {
 
-```
+
 /* -------------------------------------------------
    MINDAR PRONTO
 ------------------------------------------------- */
@@ -1949,7 +1939,7 @@ scene.addEventListener(
 
     }
 );
-```
+
 
 }
 
@@ -1959,7 +1949,6 @@ BOTÃO TENTAR NOVAMENTE
 
 if (retryButton) {
 
-```
 retryButton.addEventListener(
     "click",
     () => {
@@ -1968,7 +1957,7 @@ retryButton.addEventListener(
 
     }
 );
-```
+
 
 }
 
@@ -1993,14 +1982,14 @@ MOSTRAR IMAGEM FOLHOSAS
 
 function mostrarImagemFolhosas() {
 
-```
+
 if (!folhosasImageContainer) {
     return;
 }
 
 folhosasImageContainer.style.display =
     "block";
-```
+
 
 }
 
@@ -2010,14 +1999,14 @@ ESCONDER IMAGEM FOLHOSAS
 
 function esconderImagemFolhosas() {
 
-```
+
 if (!folhosasImageContainer) {
     return;
 }
 
 folhosasImageContainer.style.display =
     "none";
-```
+
 
 }
 
@@ -2027,14 +2016,14 @@ MOSTRAR IMAGEM TEMPEROS
 
 function mostrarImagemTemperos() {
 
-```
+
 if (!temperosImageContainer) {
     return;
 }
 
 temperosImageContainer.style.display =
     "block";
-```
+
 
 }
 
@@ -2044,13 +2033,13 @@ ESCONDER IMAGEM TEMPEROS
 
 function esconderImagemTemperos() {
 
-```
+
 if (!temperosImageContainer) {
     return;
 }
 
 temperosImageContainer.style.display =
     "none";
-```
+
 
 }
