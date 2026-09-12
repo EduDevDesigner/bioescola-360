@@ -1125,3 +1125,53 @@ IMAGEM HTML — TEMPEROS
 
 }
 
+/* =====================================================
+IMAGEM HTML — PANC
+===================================================== */
+
+#pancImageContainer {
+
+    display: none;
+
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 2500;
+
+    width: min(78vw, 420px);
+
+    pointer-events: none;
+}
+
+
+#pancImage {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 8px 18px
+            rgba(0, 0, 0, 0.45)
+        );
+}
+
+@media (max-width: 600px) {
+
+    #pancImageContainer {
+
+        width: 92vw;
+
+    }
+
+}
+
