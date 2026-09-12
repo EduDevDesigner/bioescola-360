@@ -54,6 +54,20 @@ document.getElementById(
 );
 
 /* =====================================================
+IMAGEM HTML — PANC
+===================================================== */
+
+const pancImageContainer =
+document.getElementById(
+"pancImageContainer"
+);
+
+const pancImage =
+document.getElementById(
+"pancImage"
+);
+
+/* =====================================================
 ESTADO
 ===================================================== */
 
@@ -1530,6 +1544,10 @@ targets.forEach(
             if (index === 1) {
                 mostrarImagemTemperos();
             }
+            
+            if (index === 5) {
+                mostrarImagemPanc();
+            }
 
 
             console.log(
@@ -1585,6 +1603,10 @@ targets.forEach(
 
             if (index === 1) {
                 esconderImagemTemperos();
+            }
+            
+            if (index === 5) {
+                esconderImagemPanc();
             }
 
 
@@ -2039,6 +2061,40 @@ if (!temperosImageContainer) {
 }
 
 temperosImageContainer.style.display =
+    "none";
+
+
+}
+
+/* =====================================================
+MOSTRAR IMAGEM PANC
+===================================================== */
+
+function mostrarImagemPanc() {
+
+
+if (!pancImageContainer) {
+    return;
+}
+
+pancImageContainer.style.display =
+    "block";
+
+
+}
+
+/* =====================================================
+ESCONDER IMAGEM PANC
+===================================================== */
+
+function esconderImagemPanc() {
+
+
+if (!pancAudioLeftButtonImageContainer) {
+    return;
+}
+
+pancImageContainer.style.display =
     "none";
 
 
