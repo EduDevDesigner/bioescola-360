@@ -262,25 +262,25 @@ body {
 
 
 .back-button {
-
-    padding:
-        9px 14px;
-
+    padding: 1px 1px; /* Reduzido o espaçamento interno */
     border: none;
-
-    border-radius: 20px;
-
-    background:
-        rgba(255,255,255,0.15);
-
+    border-radius: 40px; /* Raio dos cantos adaptado ao novo tamanho */
+    background: rgb(255, 255, 255);
     color: white;
-
+    font-size: 13px; /* Tamanho da fonte menor (caso use texto) */
     font-weight: bold;
-
     cursor: pointer;
-
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Ajuste para a imagem dentro do botão */
+.back-button img {
+    height: 80px; /* Controla a altura da imagem dentro do botão */
+    width: auto;
+    display: block;
+}
 
 /* =====================================================
    GALERIA DE MINIATURAS
@@ -728,7 +728,7 @@ body {
             class="back-button"
             type="button"
         >
-            ← Voltar
+           <img src="Imagens/btnVoltar.png" alt="Play">
         </button>
 
     </div>
@@ -763,7 +763,7 @@ body {
             class="back-button"
             type="button"
         >
-            ← Voltar
+             <img src="Imagens/btnVoltar.png" alt="Play">
         </button>
 
     </div>
