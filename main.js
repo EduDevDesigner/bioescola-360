@@ -505,6 +505,25 @@ abacaxi: {
         "./Video/Abacaxi_Curiosidades_270.webm"
 
 },
+ 
+/* -------------------------------------------------
+   AMORA
+------------------------------------------------- */    
+amora: {
+
+    nome:
+        "AMORA",
+
+    historia:
+        "./Video/Amora.webm",
+
+    caracteristicas:
+        "./Video/Amora_Caracteristicas_270.webm",
+
+    curiosidades:
+        "./Video/Amora_Curiosidades_270.webm"
+
+},   
 
 
 /* -------------------------------------------------
