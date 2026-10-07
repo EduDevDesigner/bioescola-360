@@ -525,6 +525,25 @@ amora: {
 
 },   
 
+/* -------------------------------------------------
+   CACAU
+------------------------------------------------- */    
+cacau: {
+
+    nome:
+        "CACAU",
+
+    historia:
+        "./Video/Cacau.webm",
+
+    caracteristicas:
+        "./Video/Cacau_Caracteristicas_270.webm",
+
+    curiosidades:
+        "./Video/Cacau_Curiosidades_270.webm"
+
+},   
+    
 
 /* -------------------------------------------------
    PEIXINHO DA HORTA
