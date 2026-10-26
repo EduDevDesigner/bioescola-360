@@ -615,57 +615,87 @@ function obterEspecieAtual() {
 }
 
 /* =====================================================
+   FECHAR SOMENTE O PAINEL DO VÍDEO
+===================================================== */
+
+function fecharVideoEspecie() {
+    if (speciesContent) {
+        speciesContent.style.display = "none";
+        speciesContent.setAttribute("aria-hidden", "true");
+    }
+
+    if (speciesVideo) {
+        speciesVideo.pause();
+        speciesVideo.removeAttribute("src");
+        speciesVideo.load();
+    }
+
+    especieAtual = null;
+
+    document
+        .querySelectorAll(".species-video-buttons button")
+        .forEach(button => {
+            button.classList.remove("btn-ativo");
+        });
+}
+
+/* Botão X dentro do painel do vídeo */
+if (closeSpeciesButton) {
+    closeSpeciesButton.type = "button";
+
+    closeSpeciesButton.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        fecharVideoEspecie();
+    });
+}
+
+/* =====================================================
    FECHAR ESPÉCIE
 ===================================================== */
 
 function fecharConteudoEspecie() {
 
-    if (!speciesContent) {
-        return;
+    // 1. Fechar o painel e parar o vídeo.
+    fecharVideoEspecie();
+
+    // 2. Parar todos os áudios.
+    pararTodosAudios();
+
+    // 3. Esconder as imagens das categorias.
+    esconderImagemFolhosas();
+    esconderImagemTemperos();
+    esconderImagemPanc();
+
+    // 4. Esconder os botões e fechar os menus.
+    esconderBotoesInteracao();
+    fecharTodosDropdowns();
+
+    // 5. Fechar o menu lateral, se estiver aberto.
+    menuOpen = false;
+    document.body.classList.remove("menu-open");
+
+    if (menuToggleButton) {
+        menuToggleButton.innerHTML = "☰";
     }
 
+    // 6. Limpar a track ativa.
+    activeTrack = -1;
 
-    speciesContent.style.display =
-        "none";
+    // 7. LIBERAR O RECONHECIMENTO DE OUTRAS TRACKS.
+    trackConteudoBloqueado = false;
 
+    // 8. Esconder o botão de fechar.
+    closeTrackContentButton.style.display = "none";
 
-    speciesContent.setAttribute(
-        "aria-hidden",
-        "true"
+    // 9. Mostrar novamente a mensagem inicial.
+    if (message) {
+        message.classList.remove("hidden");
+    }
+
+    console.log(
+        "Conteúdo fechado. Reconhecimento de tracks liberado."
     );
-
-
-    if (speciesVideo) {
-
-        speciesVideo.pause();
-
-        speciesVideo.removeAttribute(
-            "src"
-        );
-
-        speciesVideo.load();
-
-    }
-
-
-    especieAtual =
-        null;
-
-
-    document
-        .querySelectorAll(
-            ".species-video-buttons button"
-        )
-        .forEach(
-            button => {
-
-                button.classList.remove(
-                    "btn-ativo"
-                );
-
-            }
-        );
-
 }
 
 
@@ -677,13 +707,6 @@ if (closeSpeciesButton) {
     );
 
 }
-
-
-// Ligar o botão fixo ✕ FECHAR
-closeTrackContentButton.addEventListener(
-    "click",
-    fecharConteudoEspecie
-);
 
 
 
