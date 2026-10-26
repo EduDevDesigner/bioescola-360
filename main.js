@@ -22,6 +22,44 @@ let activeTrack = -1;
 let especieAtual = null;
 let menuOpen = false;
 
+let trackConteudoBloqueado = false;
+
+/* =====================================================
+BOTÃO FIXO PARA FECHAR O CONTEÚDO DA TRACK
+===================================================== */
+
+const closeTrackContentButton = document.createElement("button");
+
+closeTrackContentButton.id = "closeTrackContentButton";
+closeTrackContentButton.type = "button";
+closeTrackContentButton.textContent = "✕ FECHAR";
+
+closeTrackContentButton.setAttribute(
+    "aria-label",
+    "Fechar conteúdo e liberar reconhecimento de tracks"
+);
+
+closeTrackContentButton.style.cssText = `
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 10000;
+    display: none;
+    padding: 12px 16px;
+    border: 0;
+    border-radius: 10px;
+    background: #b42318;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    box-shadow: 0 3px 12px rgba(0,0,0,.3);
+    cursor: pointer;
+    touch-action: manipulation;
+`;
+
+document.body.appendChild(closeTrackContentButton);
+
 /* =====================================================
    SOM DOS BOTÕES
 ===================================================== */
@@ -577,33 +615,87 @@ function obterEspecieAtual() {
 }
 
 /* =====================================================
-   FECHAR ESPÉCIE
-   Essa função é acionada pelo botão FECHAR.
+FECHAR CONTEÚDO DA ESPÉCIE
 ===================================================== */
 
 function fecharConteudoEspecie() {
-    if (!speciesContent) {
-        return;
+
+    // Fechar o painel de conteúdo
+    if (speciesContent) {
+        speciesContent.style.display = "none";
+        speciesContent.setAttribute("aria-hidden", "true");
     }
 
-    speciesContent.style.display = "none";
-
-    speciesContent.setAttribute("aria-hidden", "true");
-
+    // Parar e limpar o vídeo
     if (speciesVideo) {
         speciesVideo.pause();
         speciesVideo.removeAttribute("src");
         speciesVideo.load();
     }
 
+    // Limpar a espécie selecionada
     especieAtual = null;
 
-    document.querySelectorAll(".species-video-buttons button")
+    // Remover estado ativo dos botões de vídeo
+    document
+        .querySelectorAll(".species-video-buttons button")
         .forEach(button => {
             button.classList.remove("btn-ativo");
         });
+
+    // Ocultar imagens associadas às tracks
+    esconderImagemFolhosas();
+    esconderImagemTemperos();
+    esconderImagemPanc();
+
+    // Ocultar os botões e fechar os menus
+    esconderBotoesInteracao();
+    fecharTodosDropdowns();
+
+    // Parar áudios
+    pararTodosAudios();
+
+    // Liberar uma nova track
+    activeTrack = -1;
+    trackConteudoBloqueado = false;
+
+    // Fechar o menu lateral
+    menuOpen = false;
+    document.body.classList.remove("menu-open");
+
+    if (menuToggleButton) {
+        menuToggleButton.innerHTML = "☰";
+        menuToggleButton.style.display = "";
+    }
+
+    // Voltar a mostrar a mensagem de orientação
+    if (message) {
+        message.classList.remove("hidden");
+    }
+
+    // Ocultar o botão fixo de fechar
+    if (closeTrackContentButton) {
+        closeTrackContentButton.style.display = "none";
+    }
+
+    console.log(
+        "Conteúdo fechado. Reconhecimento liberado."
+    );
 }
 
+// Ligar o botão original de fechar, se existir
+if (closeSpeciesButton) {
+    closeSpeciesButton.addEventListener(
+        "click",
+        fecharConteudoEspecie
+    );
+}
+
+// Ligar o botão fixo ✕ FECHAR
+closeTrackContentButton.addEventListener(
+    "click",
+    fecharConteudoEspecie
+);
 /* =====================================================
    BOTÃO FECHAR ESPÉCIE
 ===================================================== */
@@ -629,14 +721,12 @@ if (speciesVideo) {
 }
 
 /* =====================================================
-   TRACKS
+TRACKS — RECONHECIMENTO CONTROLADO
 ===================================================== */
 
-const targets = document.querySelectorAll("[mindar-image-target]");
-
-/* =====================================================
-   TRACK ENCONTRADA E TRACK PERDIDA
-===================================================== */
+const targets = document.querySelectorAll(
+    "[mindar-image-target]"
+);
 
 targets.forEach((target, index) => {
 
@@ -646,6 +736,18 @@ targets.forEach((target, index) => {
 
     target.addEventListener("targetFound", () => {
 
+        // Se já existe conteúdo aberto, ignorar novas tracks
+        if (trackConteudoBloqueado) {
+            return;
+        }
+
+        // Bloquear o reconhecimento de outras tracks
+        trackConteudoBloqueado = true;
+
+        // Mostrar o botão de fechamento
+        closeTrackContentButton.style.display = "block";
+
+        // Mostrar a imagem correspondente à categoria
         if (index === 0) {
             mostrarImagemFolhosas();
         }
@@ -660,38 +762,50 @@ targets.forEach((target, index) => {
 
         console.log("TRACK ENCONTRADA:", index);
 
+        // Registrar a track atual
         activeTrack = index;
 
+        // Ocultar a mensagem inicial
         if (message) {
             message.classList.add("hidden");
         }
 
+        // Mostrar os botões da categoria reconhecida
         mostrarBotoesTrack(index);
+
+        // Fechar menus suspensos anteriores
         fecharTodosDropdowns();
 
-        /*
-         * Não chamar fecharConteudoEspecie() aqui.
-         * Assim, reconhecer uma track não fecha
-         * um conteúdo que já esteja aberto.
-         */
-
+        // Registrar a track visitada
         registrarTrack(index);
+
     });
 
-   /* =========================================
-   TRACK PERDIDA
-   Mantém o conteúdo aberto na tela
-========================================= */
 
-target.addEventListener("targetLost", () => {
-    console.log("Track perdida. Mantendo conteúdo aberto:", index);
+    /* -----------------------------------------------
+       TRACK PERDIDA
+       NÃO FECHAR O CONTEÚDO
+    ------------------------------------------------ */
 
-    // Não ocultar imagens ou vídeos.
-    // Não esconder os botões de interação.
-    // Não fechar menus.
-    // Não alterar activeTrack.
-    // Não fechar o painel de conteúdo.
-});
+    target.addEventListener("targetLost", () => {
+
+        console.log(
+            "Track perdida. Mantendo conteúdo aberto:",
+            index
+        );
+
+        /*
+         * Não ocultar imagens.
+         * Não ocultar botões.
+         * Não fechar vídeos.
+         * Não fechar menus.
+         * Não alterar activeTrack.
+         * Não liberar trackConteudoBloqueado.
+         *
+         * O conteúdo só será encerrado pelo botão ✕ FECHAR.
+         */
+
+    });
 
 });
 
