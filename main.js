@@ -678,61 +678,20 @@ targets.forEach((target, index) => {
         registrarTrack(index);
     });
 
-    /* -----------------------------------------------
-       TRACK PERDIDA
-       O conteúdo da espécie permanece aberto.
-    ------------------------------------------------ */
+   /* =========================================
+   TRACK PERDIDA
+   Mantém o conteúdo aberto na tela
+========================================= */
 
-    target.addEventListener("targetLost", () => {
+target.addEventListener("targetLost", () => {
+    console.log("Track perdida. Mantendo conteúdo aberto:", index);
 
-        if (index === 0) {
-            esconderImagemFolhosas();
-        }
-
-        if (index === 1) {
-            esconderImagemTemperos();
-        }
-
-        if (index === 5) {
-            esconderImagemPanc();
-        }
-
-        console.log("TRACK PERDIDA:", index);
-
-        if (activeTrack === index) {
-            activeTrack = -1;
-        }
-
-        /*
-         * Só mostra a mensagem inicial se o painel
-         * de uma espécie não estiver aberto.
-         */
-
-        if (
-            message &&
-            (!speciesContent ||
-                speciesContent.style.display !== "block")
-        ) {
-            message.classList.remove("hidden");
-        }
-
-        esconderBotoesInteracao();
-        fecharTodosDropdowns();
-
-        menuOpen = false;
-
-        document.body.classList.remove("menu-open");
-
-        if (menuToggleButton) {
-            menuToggleButton.innerHTML = "☰";
-            menuToggleButton.style.display = "none";
-        }
-
-        /*
-         * Não fechar o conteúdo da espécie.
-         * Não chamar fecharConteudoEspecie().
-         */
-    });
+    // Não ocultar imagens ou vídeos.
+    // Não esconder os botões de interação.
+    // Não fechar menus.
+    // Não alterar activeTrack.
+    // Não fechar o painel de conteúdo.
+});
 
 });
 
