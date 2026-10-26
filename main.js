@@ -683,13 +683,7 @@ function fecharConteudoEspecie() {
     );
 }
 
-// Ligar o botão original de fechar, se existir
-if (closeSpeciesButton) {
-    closeSpeciesButton.addEventListener(
-        "click",
-        fecharConteudoEspecie
-    );
-}
+
 
 
 /* =====================================================
