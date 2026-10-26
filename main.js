@@ -1,1643 +1,689 @@
 /* =====================================================
-BIOESCOLA 360°
-SISTEMA PRINCIPAL DE REALIDADE AUMENTADA
+   BIOESCOLA 360° — SISTEMA PRINCIPAL DE REALIDADE AUMENTADA
 ===================================================== */
 
-/* =====================================================
-ELEMENTOS PRINCIPAIS
-===================================================== */
+const scene = document.getElementById("arScene");
+const message = document.getElementById("track-message");
+const loadingMessage = document.getElementById("loadingMessage");
+const errorMessage = document.getElementById("errorMessage");
+const errorText = document.getElementById("errorText");
+const retryButton = document.getElementById("retryButton");
 
-const scene =
-document.getElementById("arScene");
+const folhosasImageContainer = document.getElementById("folhosasImageContainer");
+const folhosasImage = document.getElementById("folhosasImage");
 
-const message =
-document.getElementById("track-message");
+const temperosImageContainer = document.getElementById("temperosImageContainer");
+const temperosImage = document.getElementById("temperosImage");
 
-const loadingMessage =
-document.getElementById("loadingMessage");
-
-const errorMessage =
-document.getElementById("errorMessage");
-
-const errorText =
-document.getElementById("errorText");
-
-const retryButton =
-document.getElementById("retryButton");
-
-/* =====================================================
-IMAGEM HTML — FOLHOSAS
-===================================================== */
-
-const folhosasImageContainer =
-document.getElementById(
-"folhosasImageContainer"
-);
-
-const folhosasImage =
-document.getElementById(
-"folhosasImage"
-);
-
-/* =====================================================
-IMAGEM HTML — TEMPEROS E ERVAS AROMÁTICAS
-===================================================== */
-
-const temperosImageContainer =
-document.getElementById(
-"temperosImageContainer"
-);
-
-const temperosImage =
-document.getElementById(
-"temperosImage"
-);
-
-/* =====================================================
-IMAGEM HTML — PANC
-===================================================== */
-
-const pancImageContainer =
-document.getElementById(
-"pancImageContainer"
-);
-
-const pancImage =
-document.getElementById(
-"pancImage"
-);
-
-/* =====================================================
-ESTADO
-===================================================== */
+const pancImageContainer = document.getElementById("pancImageContainer");
+const pancImage = document.getElementById("pancImage");
 
 let activeTrack = -1;
-
 let especieAtual = null;
-
 let menuOpen = false;
 
 /* =====================================================
-SOM DOS BOTÕES
+   SOM DOS BOTÕES
 ===================================================== */
 
-const clickSound =
-document.getElementById("clickSound");
+const clickSound = document.getElementById("clickSound");
 
 function tocarClick() {
+    if (!clickSound) return;
 
-
-if (!clickSound) {
-    return;
-}
-
-clickSound.currentTime = 0;
-
-clickSound.play()
-    .catch(() => {
-        /*
-            O áudio é opcional.
-            Se o arquivo não existir,
-            não interrompe a aplicação.
-        */
-    });
-
-
+    clickSound.currentTime = 0;
+    clickSound.play().catch(() => {});
 }
 
 /* =====================================================
-ÁUDIOS DAS CATEGORIAS
+   ÁUDIOS DAS CATEGORIAS
 ===================================================== */
 
-const audioFolhosas =
-document.getElementById("audioFolhosas");
-
-const audioTemperos =
-document.getElementById("audioTemperos");
-
-const audioFrutos =
-document.getElementById("audioFrutos");
-
-const audioFrutas =
-document.getElementById("audioFrutas");
-
-const audioMedicinais =
-document.getElementById("audioMedicinais");
-
-const audioPanc =
-document.getElementById("audioPanc");
+const audioFolhosas = document.getElementById("audioFolhosas");
+const audioTemperos = document.getElementById("audioTemperos");
+const audioFrutos = document.getElementById("audioFrutos");
+const audioFrutas = document.getElementById("audioFrutas");
+const audioMedicinais = document.getElementById("audioMedicinais");
+const audioPanc = document.getElementById("audioPanc");
 
 /* =====================================================
-BOTÕES DAS CATEGORIAS
+   BOTÕES DAS CATEGORIAS
 ===================================================== */
 
-const folhosaAudioLeftButton =
-document.getElementById(
-"folhosaAudioLeftButton"
-);
+const folhosaAudioLeftButton = document.getElementById("folhosaAudioLeftButton");
+const folhosaAudioRightButton = document.getElementById("folhosaAudioRightButton");
 
-const folhosaAudioRightButton =
-document.getElementById(
-"folhosaAudioRightButton"
-);
+const temperoAudioLeftButton = document.getElementById("temperoAudioLeftButton");
+const temperoAudioRightButton = document.getElementById("temperoAudioRightButton");
 
-const temperoAudioLeftButton =
-document.getElementById(
-"temperoAudioLeftButton"
-);
+const frutoAudioLeftButton = document.getElementById("frutoAudioLeftButton");
+const frutoAudioRightButton = document.getElementById("frutoAudioRightButton");
 
-const temperoAudioRightButton =
-document.getElementById(
-"temperoAudioRightButton"
-);
+const frutaAudioLeftButton = document.getElementById("frutaAudioLeftButton");
+const frutaAudioRightButton = document.getElementById("frutaAudioRightButton");
 
-const frutoAudioLeftButton =
-document.getElementById(
-"frutoAudioLeftButton"
-);
+const medicinalAudioLeftButton = document.getElementById("medicinalAudioLeftButton");
+const medicinalAudioRightButton = document.getElementById("medicinalAudioRightButton");
 
-const frutoAudioRightButton =
-document.getElementById(
-"frutoAudioRightButton"
-);
-
-const frutaAudioLeftButton =
-document.getElementById(
-"frutaAudioLeftButton"
-);
-
-const frutaAudioRightButton =
-document.getElementById(
-"frutaAudioRightButton"
-);
-
-const medicinalAudioLeftButton =
-document.getElementById(
-"medicinalAudioLeftButton"
-);
-
-const medicinalAudioRightButton =
-document.getElementById(
-"medicinalAudioRightButton"
-);
-
-const pancAudioLeftButton =
-document.getElementById(
-"pancAudioLeftButton"
-);
-
-const pancAudioRightButton =
-document.getElementById(
-"pancAudioRightButton"
-);
+const pancAudioLeftButton = document.getElementById("pancAudioLeftButton");
+const pancAudioRightButton = document.getElementById("pancAudioRightButton");
 
 /* =====================================================
-MENU
+   MENU
 ===================================================== */
 
-const menuToggleButton =
-document.getElementById(
-"menuToggleButton"
-);
-
-const sideMenu =
-document.getElementById(
-"sideMenu"
-);
+const menuToggleButton = document.getElementById("menuToggleButton");
+const sideMenu = document.getElementById("sideMenu");
 
 /* =====================================================
-CONTEÚDO DA ESPÉCIE
+   CONTEÚDO DA ESPÉCIE
 ===================================================== */
 
-const speciesContent =
-document.getElementById(
-"speciesContent"
-);
+const speciesContent = document.getElementById("speciesContent");
+const speciesTitle = document.getElementById("speciesTitle");
+const speciesVideo = document.getElementById("speciesVideo");
+const closeSpeciesButton = document.getElementById("closeSpeciesButton");
 
-const speciesTitle =
-document.getElementById(
-"speciesTitle"
-);
-
-const speciesVideo =
-document.getElementById(
-"speciesVideo"
-);
-
-const closeSpeciesButton =
-document.getElementById(
-"closeSpeciesButton"
-);
+const btnHistoria = document.getElementById("btnHistoria");
+const btnCaracteristicas = document.getElementById("btnCaracteristicas");
+const btnCuriosidades = document.getElementById("btnCuriosidades");
 
 /* =====================================================
-BOTÕES DO VÍDEO
-===================================================== */
-
-const btnHistoria =
-document.getElementById(
-"btnHistoria"
-);
-
-const btnCaracteristicas =
-document.getElementById(
-"btnCaracteristicas"
-);
-
-const btnCuriosidades =
-document.getElementById(
-"btnCuriosidades"
-);
-
-/* =====================================================
-DADOS DAS ESPÉCIES
+   DADOS DAS ESPÉCIES
 ===================================================== */
 
 const especies = {
-
-
-/* -------------------------------------------------
-   ALFACE
-------------------------------------------------- */
-
-alface: {
-
-    nome:
-        "ALFACE",
-
-    historia:
-        "./Video/Alface.webm",
-
-    caracteristicas:
-        "./Video/Alface_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Alface_Curiosidades_270.webm"
-
-},
-
-
-/* -------------------------------------------------
-   COUVE
-------------------------------------------------- */
-
-couve: {
-
-    nome:
-        "COUVE-MANTEIGA",
-
-    historia:
-        "./Video/Couve.webm",
-
-    caracteristicas:
-        "./Video/Couve_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Couve_Curiosidades_270.webm"
-
-},
-
-
-/* -------------------------------------------------
-   RÚCULA
-------------------------------------------------- */
-
-rucula: {
-
-    nome:
-        "RÚCULA",
-
-    historia:
-        "./Video/Rucula.webm",
-
-    caracteristicas:
-        "./Video/Rucula_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Rucula_Curiosidades_270.webm"
-
-},
-
-
-/* -------------------------------------------------
-   COENTRO
-------------------------------------------------- */
-
-coentro: {
-
-    nome:
-        "COENTRO",
-
-    historia:
-        "./Video/Coentro.webm",
-
-    caracteristicas:
-        "./Video/Coentro_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Coentro_Curiosidades_270.webm"
-
-},
-
-
-/* -------------------------------------------------
-   CEBOLINHA
-------------------------------------------------- */
-
-cebolinha: {
-
-    nome:
-        "CEBOLINHA",
-
-    historia:
-        "./Video/Cebolinha.webm",
-
-    caracteristicas:
-        "./Video/Cebolinha_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Cebolinha_Curiosidades_270.webm"
-
-},
-
-
-/* -------------------------------------------------
-   SALSA
-------------------------------------------------- */
-
-salsa: {
-
-    nome:
-        "SALSA",
-
-    historia:
-        "./Video/Salsa.webm",
-
-    caracteristicas:
-        "./Video/Salsa_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Salsa_Curiosidades_270.webm"
-
-},
-
-
-/* -------------------------------------------------
-   ALECRIM
-------------------------------------------------- */
-
-alecrim: {
-
-    nome:
-        "ALECRIM",
-
-    historia:
-        "./Video/Alecrim.webm",
-
-    caracteristicas:
-        "./Video/Alecrim_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Alecrim_Curiosidades_270.webm"
-
-},
-
-
-/* -------------------------------------------------
-   MANJERICÃO
-------------------------------------------------- */
-
-manjericao: {
-
-    nome:
-        "MANJERICÃO",
-
-    historia:
-        "./Video/Manjericao.webm",
-
-    caracteristicas:
-        "./Video/Manjericao_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Manjericao_Curiosidades_270.webm"
-
-},
-
-
-/* -------------------------------------------------
-   ORÉGANO
-------------------------------------------------- */
-
-oregano: {
-
-    nome:
-        "ORÉGANO",
-
-    historia:
-        "./Video/Oregano.webm",
-
-    caracteristicas:
-        "./Video/Oregano_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Oregano_Curiosidades_270.webm"
-
-},
-
-
-/* -------------------------------------------------
-   TOMILHO
-------------------------------------------------- */
-
-tomilho: {
-
-    nome:
-        "TOMILHO",
-
-    historia:
-        "./Video/Tomilho.webm",
-
-    caracteristicas:
-        "./Video/Tomilho_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Tomilho_Curiosidades_270.webm"
-
-},
-
-
-/* -------------------------------------------------
-   TOMATE
-------------------------------------------------- */
-
-tomate: {
-
-    nome:
-        "TOMATE",
-
-    historia:
-        "./Video/Tomate.webm",
-
-    caracteristicas:
-        "./Video/Tomate_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Tomate_Curiosidades_270.webm"
-
-},
-
-
-/* -------------------------------------------------
-   ABACAXI
-------------------------------------------------- */
-
-abacaxi: {
-
-    nome:
-        "ABACAXI",
-
-    historia:
-        "./Video/Abacaxi.webm",
-
-    caracteristicas:
-        "./Video/Abacaxi_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Abacaxi_Curiosidades_270.webm"
-
-},
- 
-/* -------------------------------------------------
-   AMORA
-------------------------------------------------- */    
-amora: {
-
-    nome:
-        "AMORA",
-
-    historia:
-        "./Video/Amora.webm",
-
-    caracteristicas:
-        "./Video/Amora_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Amora_Curiosidades_270.webm"
-
-},   
-
-/* -------------------------------------------------
-   CACAU
-------------------------------------------------- */    
-cacau: {
-
-    nome:
-        "CACAU",
-
-    historia:
-        "./Video/Cacau.webm",
-
-    caracteristicas:
-        "./Video/Cacau_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Cacau_Curiosidades_270.webm"
-
-},   
-    
-
-/* -------------------------------------------------
-   PEIXINHO DA HORTA
-------------------------------------------------- */
-
-peixinho: {
-
-    nome:
-        "PEIXINHO DA HORTA",
-
-    historia:
-        "./Video/Peixinho.webm",
-
-    caracteristicas:
-        "./Video/Peixinho_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/Peixinho_Curiosidades_270.webm"
-
-},
-
-
-/* -------------------------------------------------
-   ORA-PRO-NÓBIS
-------------------------------------------------- */
-
-oraProNobis: {
-
-    nome:
-        "ORA-PRO-NÓBIS",
-
-    historia:
-        "./Video/OraProNobis.webm",
-
-    caracteristicas:
-        "./Video/OraProNobis_Caracteristicas_270.webm",
-
-    curiosidades:
-        "./Video/OraProNobis_Curiosidades_270.webm"
-
-}
-
-
+    alface: {
+        nome: "ALFACE",
+        historia: "./Video/Alface.webm",
+        caracteristicas: "./Video/Alface_Caracteristicas_270.webm",
+        curiosidades: "./Video/Alface_Curiosidades_270.webm"
+    },
+
+    couve: {
+        nome: "COUVE-MANTEIGA",
+        historia: "./Video/Couve.webm",
+        caracteristicas: "./Video/Couve_Caracteristicas_270.webm",
+        curiosidades: "./Video/Couve_Curiosidades_270.webm"
+    },
+
+    rucula: {
+        nome: "RÚCULA",
+        historia: "./Video/Rucula.webm",
+        caracteristicas: "./Video/Rucula_Caracteristicas_270.webm",
+        curiosidades: "./Video/Rucula_Curiosidades_270.webm"
+    },
+
+    coentro: {
+        nome: "COENTRO",
+        historia: "./Video/Coentro.webm",
+        caracteristicas: "./Video/Coentro_Caracteristicas_270.webm",
+        curiosidades: "./Video/Coentro_Curiosidades_270.webm"
+    },
+
+    cebolinha: {
+        nome: "CEBOLINHA",
+        historia: "./Video/Cebolinha.webm",
+        caracteristicas: "./Video/Cebolinha_Caracteristicas_270.webm",
+        curiosidades: "./Video/Cebolinha_Curiosidades_270.webm"
+    },
+
+    salsa: {
+        nome: "SALSA",
+        historia: "./Video/Salsa.webm",
+        caracteristicas: "./Video/Salsa_Caracteristicas_270.webm",
+        curiosidades: "./Video/Salsa_Curiosidades_270.webm"
+    },
+
+    alecrim: {
+        nome: "ALECRIM",
+        historia: "./Video/Alecrim.webm",
+        caracteristicas: "./Video/Alecrim_Caracteristicas_270.webm",
+        curiosidades: "./Video/Alecrim_Curiosidades_270.webm"
+    },
+
+    manjericao: {
+        nome: "MANJERICÃO",
+        historia: "./Video/Manjericao.webm",
+        caracteristicas: "./Video/Manjericao_Caracteristicas_270.webm",
+        curiosidades: "./Video/Manjericao_Curiosidades_270.webm"
+    },
+
+    oregano: {
+        nome: "ORÉGANO",
+        historia: "./Video/Oregano.webm",
+        caracteristicas: "./Video/Oregano_Caracteristicas_270.webm",
+        curiosidades: "./Video/Oregano_Curiosidades_270.webm"
+    },
+
+    tomilho: {
+        nome: "TOMILHO",
+        historia: "./Video/Tomilho.webm",
+        caracteristicas: "./Video/Tomilho_Caracteristicas_270.webm",
+        curiosidades: "./Video/Tomilho_Curiosidades_270.webm"
+    },
+
+    tomate: {
+        nome: "TOMATE",
+        historia: "./Video/Tomate.webm",
+        caracteristicas: "./Video/Tomate_Caracteristicas_270.webm",
+        curiosidades: "./Video/Tomate_Curiosidades_270.webm"
+    },
+
+    abacaxi: {
+        nome: "ABACAXI",
+        historia: "./Video/Abacaxi.webm",
+        caracteristicas: "./Video/Abacaxi_Caracteristicas_270.webm",
+        curiosidades: "./Video/Abacaxi_Curiosidades_270.webm"
+    },
+
+    amora: {
+        nome: "AMORA",
+        historia: "./Video/Amora.webm",
+        caracteristicas: "./Video/Amora_Caracteristicas_270.webm",
+        curiosidades: "./Video/Amora_Curiosidades_270.webm"
+    },
+
+    cacau: {
+        nome: "CACAU",
+        historia: "./Video/Cacau.webm",
+        caracteristicas: "./Video/Cacau_Caracteristicas_270.webm",
+        curiosidades: "./Video/Cacau_Curiosidades_270.webm"
+    },
+
+    peixinho: {
+        nome: "PEIXINHO DA HORTA",
+        historia: "./Video/Peixinho.webm",
+        caracteristicas: "./Video/Peixinho_Caracteristicas_270.webm",
+        curiosidades: "./Video/Peixinho_Curiosidades_270.webm"
+    },
+
+    oraProNobis: {
+        nome: "ORA-PRO-NÓBIS",
+        historia: "./Video/OraProNobis.webm",
+        caracteristicas: "./Video/OraProNobis_Caracteristicas_270.webm",
+        curiosidades: "./Video/OraProNobis_Curiosidades_270.webm"
+    }
 };
 
 /* =====================================================
-CATEGORIAS
+   CATEGORIAS
 ===================================================== */
 
 const categorias = {
+    0: {
+        audio: audioFolhosas,
+        button: folhosaAudioLeftButton
+    },
 
+    1: {
+        audio: audioTemperos,
+        button: temperoAudioLeftButton
+    },
 
-0: {
+    2: {
+        audio: audioFrutos,
+        button: frutoAudioLeftButton
+    },
 
-    audio:
-        audioFolhosas,
+    3: {
+        audio: audioFrutas,
+        button: frutaAudioLeftButton
+    },
 
-    button:
-        folhosaAudioLeftButton
+    4: {
+        audio: audioMedicinais,
+        button: medicinalAudioLeftButton
+    },
 
-},
-
-
-1: {
-
-    audio:
-        audioTemperos,
-
-    button:
-        temperoAudioLeftButton
-
-},
-
-
-2: {
-
-    audio:
-        audioFrutos,
-
-    button:
-        frutoAudioLeftButton
-
-},
-
-
-3: {
-
-    audio:
-        audioFrutas,
-
-    button:
-        frutaAudioLeftButton
-
-},
-
-
-4: {
-
-    audio:
-        audioMedicinais,
-
-    button:
-        medicinalAudioLeftButton
-
-},
-
-
-5: {
-
-    audio:
-        audioPanc,
-
-    button:
-        pancAudioLeftButton
-
-}
-
-
+    5: {
+        audio: audioPanc,
+        button: pancAudioLeftButton
+    }
 };
 
 /* =====================================================
-DROPDOWNS
+   DROPDOWNS
 ===================================================== */
 
 const dropdowns = [
+    {
+        button: folhosaAudioRightButton,
+        menu: document.getElementById("folhosaSpeciesMenu"),
+        track: 0
+    },
 
+    {
+        button: temperoAudioRightButton,
+        menu: document.getElementById("temperoSpeciesMenu"),
+        track: 1
+    },
 
-{
+    {
+        button: frutoAudioRightButton,
+        menu: document.getElementById("frutoSpeciesMenu"),
+        track: 2
+    },
 
-    button:
-        folhosaAudioRightButton,
+    {
+        button: frutaAudioRightButton,
+        menu: document.getElementById("frutaSpeciesMenu"),
+        track: 3
+    },
 
-    menu:
-        document.getElementById(
-            "folhosaSpeciesMenu"
-        ),
+    {
+        button: medicinalAudioRightButton,
+        menu: document.getElementById("medicinalSpeciesMenu"),
+        track: 4
+    },
 
-    track:
-        0
-
-},
-
-
-{
-
-    button:
-        temperoAudioRightButton,
-
-    menu:
-        document.getElementById(
-            "temperoSpeciesMenu"
-        ),
-
-    track:
-        1
-
-},
-
-
-{
-
-    button:
-        frutoAudioRightButton,
-
-    menu:
-        document.getElementById(
-            "frutoSpeciesMenu"
-        ),
-
-    track:
-        2
-
-},
-
-
-{
-
-    button:
-        frutaAudioRightButton,
-
-    menu:
-        document.getElementById(
-            "frutaSpeciesMenu"
-        ),
-
-    track:
-        3
-
-},
-
-
-{
-
-    button:
-        medicinalAudioRightButton,
-
-    menu:
-        document.getElementById(
-            "medicinalSpeciesMenu"
-        ),
-
-    track:
-        4
-
-},
-
-
-{
-
-    button:
-        pancAudioRightButton,
-
-    menu:
-        document.getElementById(
-            "pancSpeciesMenu"
-        ),
-
-    track:
-        5
-
-}
-
-
+    {
+        button: pancAudioRightButton,
+        menu: document.getElementById("pancSpeciesMenu"),
+        track: 5
+    }
 ];
 
 /* =====================================================
-ESCONDER BOTÕES
+   ESCONDER BOTÕES
 ===================================================== */
 
 function esconderBotoesInteracao() {
-
-dropdowns.forEach(
-    dropdown => {
-
+    dropdowns.forEach(dropdown => {
         if (dropdown.button) {
-
-            dropdown.button.style.display =
-                "none";
-
+            dropdown.button.style.display = "none";
         }
+    });
 
-    }
-);
-
-
-Object.values(categorias)
-    .forEach(
-        categoria => {
-
-            if (categoria.button) {
-
-                categoria.button.style.display =
-                    "none";
-
-            }
-
+    Object.values(categorias).forEach(categoria => {
+        if (categoria.button) {
+            categoria.button.style.display = "none";
         }
-    );
-
-
+    });
 }
 
 /* =====================================================
-MOSTRAR BOTÕES DA TRACK
+   MOSTRAR BOTÕES DA TRACK
 ===================================================== */
 
 function mostrarBotoesTrack(index) {
+    esconderBotoesInteracao();
 
-esconderBotoesInteracao();
+    const dropdown = dropdowns[index];
+    const categoria = categorias[index];
 
+    if (categoria && categoria.button) {
+        categoria.button.style.display = "block";
+    }
 
-const dropdown =
-    dropdowns[index];
-
-const categoria =
-    categorias[index];
-
-
-if (
-    categoria &&
-    categoria.button
-) {
-
-    categoria.button.style.display =
-        "block";
-
-}
-
-
-if (
-    dropdown &&
-    dropdown.button
-) {
-
-    dropdown.button.style.display =
-        "block";
-
-}
-
-
+    if (dropdown && dropdown.button) {
+        dropdown.button.style.display = "block";
+    }
 }
 
 /* =====================================================
-FECHAR DROPDOWNS
+   FECHAR DROPDOWNS
 ===================================================== */
 
 function fecharTodosDropdowns() {
-
-
-dropdowns.forEach(
-    dropdown => {
-
+    dropdowns.forEach(dropdown => {
         if (dropdown.menu) {
-
-            dropdown.menu.classList.remove(
-                "open"
-            );
-
+            dropdown.menu.classList.remove("open");
         }
-
-    }
-);
-
-
+    });
 }
 
 /* =====================================================
-PARAR ÁUDIOS
+   PARAR ÁUDIOS
 ===================================================== */
 
 function pararTodosAudios() {
-
-
-document
-    .querySelectorAll("audio")
-    .forEach(
-        audio => {
-
-            audio.pause();
-
-            audio.currentTime = 0;
-
-        }
-    );
-
-
+    document.querySelectorAll("audio").forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+    });
 }
 
 /* =====================================================
-ÁUDIO DA CATEGORIA
+   ÁUDIO DA CATEGORIA
 ===================================================== */
 
 function tocarAudioCategoria(index) {
+    const categoria = categorias[index];
 
+    if (!categoria || !categoria.audio || !categoria.button) {
+        return;
+    }
 
-const categoria =
-    categorias[index];
+    const audio = categoria.audio;
 
-
-if (
-    !categoria ||
-    !categoria.audio ||
-    !categoria.button
-) {
-
-    return;
-
-}
-
-
-const audio =
-    categoria.audio;
-
-
-/* -----------------------------------------------
-   Para os demais áudios
------------------------------------------------- */
-
-Object.values(categorias)
-    .forEach(
-        outra => {
-
-            if (
-                outra.audio &&
-                outra.audio !== audio
-            ) {
-
-                outra.audio.pause();
-
-                outra.audio.currentTime =
-                    0;
-
-            }
-
-
-            if (
-                outra.button &&
-                outra.button !==
-                    categoria.button
-            ) {
-
-                outra.button.classList.remove(
-                    "btn-active"
-                );
-
-            }
-
+    Object.values(categorias).forEach(outra => {
+        if (outra.audio && outra.audio !== audio) {
+            outra.audio.pause();
+            outra.audio.currentTime = 0;
         }
-    );
 
+        if (outra.button && outra.button !== categoria.button) {
+            outra.button.classList.remove("btn-active");
+        }
+    });
 
-/* -----------------------------------------------
-   Tocar / pausar
------------------------------------------------- */
+    if (audio.paused) {
+        audio.play()
+            .then(() => {
+                categoria.button.classList.add("btn-active");
+            })
+            .catch(error => {
+                console.warn("Áudio não disponível:", error);
+            });
+    } else {
+        audio.pause();
+        audio.currentTime = 0;
+        categoria.button.classList.remove("btn-active");
+    }
 
-if (audio.paused) {
-
-    audio.play()
-        .then(() => {
-
-            categoria.button.classList.add(
-                "btn-active"
-            );
-
-        })
-        .catch(
-            error => {
-
-                console.warn(
-                    "Áudio não disponível:",
-                    error
-                );
-
-            }
-        );
-
-}
-
-else {
-
-    audio.pause();
-
-    audio.currentTime =
-        0;
-
-    categoria.button.classList.remove(
-        "btn-active"
-    );
-
-}
-
-
-audio.onended =
-    () => {
-
-        categoria.button.classList.remove(
-            "btn-active"
-        );
-
+    audio.onended = () => {
+        categoria.button.classList.remove("btn-active");
     };
-
-
 }
 
 /* =====================================================
-EVENTOS DOS BOTÕES CONHEÇA
+   EVENTOS DOS BOTÕES CONHEÇA
 ===================================================== */
 
 const botoesConheca = [
-
-{
-    button: folhosaAudioLeftButton,
-    track: 0
-},
-
-{
-    button: temperoAudioLeftButton,
-    track: 1
-},
-
-{
-    button: frutoAudioLeftButton,
-    track: 2
-},
-
-{
-    button: frutaAudioLeftButton,
-    track: 3
-},
-
-{
-    button: medicinalAudioLeftButton,
-    track: 4
-},
-
-{
-    button: pancAudioLeftButton,
-    track: 5
-}
-
-
+    { button: folhosaAudioLeftButton, track: 0 },
+    { button: temperoAudioLeftButton, track: 1 },
+    { button: frutoAudioLeftButton, track: 2 },
+    { button: frutaAudioLeftButton, track: 3 },
+    { button: medicinalAudioLeftButton, track: 4 },
+    { button: pancAudioLeftButton, track: 5 }
 ];
 
-botoesConheca.forEach(
-item => {
-
-
+botoesConheca.forEach(item => {
     if (!item.button) {
         return;
     }
 
-
-    item.button.addEventListener(
-        "click",
-        () => {
-
-            if (
-                activeTrack !==
-                item.track
-            ) {
-
-                return;
-
-            }
-
-
-            tocarAudioCategoria(
-                item.track
-            );
-
+    item.button.addEventListener("click", () => {
+        if (activeTrack !== item.track) {
+            return;
         }
-    );
 
-}
-
-
-);
+        tocarAudioCategoria(item.track);
+    });
+});
 
 /* =====================================================
-EVENTOS DOS DROPDOWNS
+   EVENTOS DOS DROPDOWNS
 ===================================================== */
 
-dropdowns.forEach(
-dropdown => {
-
-    if (
-        !dropdown.button ||
-        !dropdown.menu
-    ) {
-
+dropdowns.forEach(dropdown => {
+    if (!dropdown.button || !dropdown.menu) {
         return;
-
     }
 
+    dropdown.button.addEventListener("click", event => {
+        event.stopPropagation();
 
-    dropdown.button.addEventListener(
-        "click",
-        event => {
-
-            event.stopPropagation();
-
-
-            if (
-                activeTrack !==
-                dropdown.track
-            ) {
-
-                return;
-
-            }
-
-
-            dropdowns.forEach(
-                outro => {
-
-                    if (
-                        outro !== dropdown &&
-                        outro.menu
-                    ) {
-
-                        outro.menu.classList.remove(
-                            "open"
-                        );
-
-                    }
-
-                }
-            );
-
-
-            dropdown.menu.classList.toggle(
-                "open"
-            );
-
+        if (activeTrack !== dropdown.track) {
+            return;
         }
-    );
 
-}
+        dropdowns.forEach(outro => {
+            if (outro !== dropdown && outro.menu) {
+                outro.menu.classList.remove("open");
+            }
+        });
 
-
-);
+        dropdown.menu.classList.toggle("open");
+    });
+});
 
 /* =====================================================
-SELEÇÃO DE ESPÉCIE
+   SELEÇÃO DE ESPÉCIE
 ===================================================== */
 
-document
-.querySelectorAll(".species-btn")
-.forEach(
-button => {
+document.querySelectorAll(".species-btn").forEach(button => {
+    button.addEventListener("click", event => {
+        event.stopPropagation();
 
-        button.addEventListener(
-            "click",
-            event => {
+        const especie = button.dataset.species;
 
-                event.stopPropagation();
-
-
-                const especie =
-                    button.dataset.species;
-
-
-                fecharTodosDropdowns();
-
-
-                abrirEspecie(
-                    especie
-                );
-
-            }
-        );
-
-    }
-);
-
+        fecharTodosDropdowns();
+        abrirEspecie(especie);
+    });
+});
 
 /* =====================================================
-ABRIR ESPÉCIE
+   ABRIR ESPÉCIE
 ===================================================== */
 
 function abrirEspecie(especie) {
+    const dados = especies[especie];
 
-const dados =
-    especies[especie];
+    if (!dados) {
+        console.warn("Espécie não cadastrada:", especie);
+        return;
+    }
 
+    especieAtual = especie;
 
-/* -----------------------------------------------
-   Verifica se existe
------------------------------------------------- */
+    if (speciesTitle) {
+        speciesTitle.innerText = dados.nome;
+    }
 
-if (!dados) {
+    if (speciesContent) {
+        speciesContent.style.display = "block";
+        speciesContent.setAttribute("aria-hidden", "false");
+    }
 
-    console.warn(
-        "Espécie não cadastrada:",
-        especie
-    );
+    if (speciesVideo) {
+        speciesVideo.pause();
+        speciesVideo.removeAttribute("src");
+        speciesVideo.load();
+    }
 
-    return;
-
-}
-
-
-/* -----------------------------------------------
-   Guarda espécie atual
------------------------------------------------- */
-
-especieAtual =
-    especie;
-
-
-/* -----------------------------------------------
-   Título
------------------------------------------------- */
-
-if (speciesTitle) {
-
-    speciesTitle.innerText =
-        dados.nome;
-
-}
-
-
-/* -----------------------------------------------
-   Mostra container
------------------------------------------------- */
-
-if (speciesContent) {
-
-    speciesContent.style.display =
-        "block";
-
-
-    speciesContent.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-}
-
-
-/* -----------------------------------------------
-   NÃO INICIA NENHUM VÍDEO AUTOMATICAMENTE
-   O vídeo permanece parado até o usuário
-   clicar em um dos três botões.
------------------------------------------------- */
-
-if (speciesVideo) {
-
-    speciesVideo.pause();
-
-    speciesVideo.removeAttribute(
-        "src"
-    );
-
-    speciesVideo.load();
-
-}
-
-
-/* -----------------------------------------------
-   Remove estado ativo dos botões
------------------------------------------------- */
-
-document
-    .querySelectorAll(
-        ".species-video-buttons button"
-    )
-    .forEach(
-        btn => {
-
-            btn.classList.remove(
-                "btn-ativo"
-            );
-
-        }
-    );
-
-
+    document.querySelectorAll(".species-video-buttons button")
+        .forEach(btn => {
+            btn.classList.remove("btn-ativo");
+        });
 }
 
 /* =====================================================
-TROCAR VÍDEO
+   TROCAR VÍDEO
 ===================================================== */
 
-function trocarVideo(
-videoSrc,
-botao
-) {
+function trocarVideo(videoSrc, botao) {
+    if (!speciesVideo || !videoSrc) {
+        return;
+    }
 
-if (
-    !speciesVideo ||
-    !videoSrc
-) {
+    document.querySelectorAll(".species-video-buttons button")
+        .forEach(btn => {
+            btn.classList.remove("btn-ativo");
+        });
 
-    return;
+    if (botao) {
+        botao.classList.add("btn-ativo");
+    }
 
-}
+    speciesVideo.pause();
+    speciesVideo.removeAttribute("src");
+    speciesVideo.load();
 
+    speciesVideo.src = videoSrc;
+    speciesVideo.load();
 
-document
-    .querySelectorAll(
-        ".species-video-buttons button"
-    )
-    .forEach(
-        btn => {
+    const promessa = speciesVideo.play();
 
-            btn.classList.remove(
-                "btn-ativo"
-            );
-
-        }
-    );
-
-
-if (botao) {
-
-    botao.classList.add(
-        "btn-ativo"
-    );
-
-}
-
-
-speciesVideo.pause();
-
-
-speciesVideo.removeAttribute(
-    "src"
-);
-
-
-speciesVideo.load();
-
-
-speciesVideo.src =
-    videoSrc;
-
-
-speciesVideo.load();
-
-
-const promessa =
-    speciesVideo.play();
-
-
-if (promessa) {
-
-    promessa.catch(
-        error => {
-
-            console.warn(
-                "O vídeo não iniciou automaticamente:",
-                error
-            );
-
-        }
-    );
-
-}
-
-
+    if (promessa) {
+        promessa.catch(error => {
+            console.warn("O vídeo não iniciou automaticamente:", error);
+        });
+    }
 }
 
 /* =====================================================
-BOTÕES DO VÍDEO
+   BOTÕES DO VÍDEO
 ===================================================== */
 
 if (btnHistoria) {
-
-btnHistoria.addEventListener(
-    "click",
-    () => {
-
-        const dados =
-            obterEspecieAtual();
+    btnHistoria.addEventListener("click", () => {
+        const dados = obterEspecieAtual();
 
         if (!dados) {
             return;
         }
 
-        trocarVideo(
-            dados.historia,
-            btnHistoria
-        );
-
-    }
-);
-
-
+        trocarVideo(dados.historia, btnHistoria);
+    });
 }
 
 if (btnCaracteristicas) {
-
-
-btnCaracteristicas.addEventListener(
-    "click",
-    () => {
-
-        const dados =
-            obterEspecieAtual();
+    btnCaracteristicas.addEventListener("click", () => {
+        const dados = obterEspecieAtual();
 
         if (!dados) {
             return;
         }
 
-        trocarVideo(
-            dados.caracteristicas,
-            btnCaracteristicas
-        );
-
-    }
-);
-
-
+        trocarVideo(dados.caracteristicas, btnCaracteristicas);
+    });
 }
 
 if (btnCuriosidades) {
-
-
-btnCuriosidades.addEventListener(
-    "click",
-    () => {
-
-        const dados =
-            obterEspecieAtual();
+    btnCuriosidades.addEventListener("click", () => {
+        const dados = obterEspecieAtual();
 
         if (!dados) {
             return;
         }
 
-        trocarVideo(
-            dados.curiosidades,
-            btnCuriosidades
-        );
-
-    }
-);
-
-
+        trocarVideo(dados.curiosidades, btnCuriosidades);
+    });
 }
 
 /* =====================================================
-OBTER ESPÉCIE
+   OBTER ESPÉCIE
 ===================================================== */
 
 function obterEspecieAtual() {
+    if (!especieAtual) {
+        return null;
+    }
 
-
-if (!especieAtual) {
-
-    return null;
-
-}
-
-
-return especies[
-    especieAtual
-];
-
-
+    return especies[especieAtual];
 }
 
 /* =====================================================
-FECHAR ESPÉCIE
+   FECHAR ESPÉCIE
+   Essa função é acionada pelo botão FECHAR.
 ===================================================== */
 
 function fecharConteudoEspecie() {
+    if (!speciesContent) {
+        return;
+    }
 
-if (!speciesContent) {
-    return;
-}
+    speciesContent.style.display = "none";
 
+    speciesContent.setAttribute("aria-hidden", "true");
 
-speciesContent.style.display =
-    "none";
+    if (speciesVideo) {
+        speciesVideo.pause();
+        speciesVideo.removeAttribute("src");
+        speciesVideo.load();
+    }
 
+    especieAtual = null;
 
-speciesContent.setAttribute(
-    "aria-hidden",
-    "true"
-);
-
-
-if (speciesVideo) {
-
-    speciesVideo.pause();
-
-    speciesVideo.removeAttribute(
-        "src"
-    );
-
-    speciesVideo.load();
-
-}
-
-
-especieAtual =
-    null;
-
-
-document
-    .querySelectorAll(
-        ".species-video-buttons button"
-    )
-    .forEach(
-        button => {
-
-            button.classList.remove(
-                "btn-ativo"
-            );
-
-        }
-    );
-
-
-}
-
-if (closeSpeciesButton) {
-
-
-closeSpeciesButton.addEventListener(
-    "click",
-    fecharConteudoEspecie
-);
-
-
+    document.querySelectorAll(".species-video-buttons button")
+        .forEach(button => {
+            button.classList.remove("btn-ativo");
+        });
 }
 
 /* =====================================================
-ERRO DE VÍDEO
+   BOTÃO FECHAR ESPÉCIE
+===================================================== */
+
+if (closeSpeciesButton) {
+    closeSpeciesButton.addEventListener(
+        "click",
+        fecharConteudoEspecie
+    );
+}
+
+/* =====================================================
+   ERRO DE VÍDEO
 ===================================================== */
 
 if (speciesVideo) {
-
-
-speciesVideo.addEventListener(
-    "error",
-    () => {
-
+    speciesVideo.addEventListener("error", () => {
         console.error(
             "Erro ao carregar vídeo:",
             speciesVideo.currentSrc
         );
-
-    }
-);
-
-
+    });
 }
 
 /* =====================================================
-TRACKS
+   TRACKS
 ===================================================== */
 
-const targets =
-document.querySelectorAll(
-"[mindar-image-target]"
-);
+const targets = document.querySelectorAll("[mindar-image-target]");
 
 /* =====================================================
-TRACK ENCONTRADA
+   TRACK ENCONTRADA E TRACK PERDIDA
 ===================================================== */
 
-targets.forEach(
-(target, index) => {
+targets.forEach((target, index) => {
 
-    target.addEventListener(
-        "targetFound",
-        () => {
+    /* -----------------------------------------------
+       TRACK ENCONTRADA
+    ------------------------------------------------ */
 
-            if (index === 0) {
-                mostrarImagemFolhosas();
-            }
+    target.addEventListener("targetFound", () => {
 
-
-            if (index === 1) {
-                mostrarImagemTemperos();
-            }
-            
-            if (index === 5) {
-                mostrarImagemPanc();
-            }
-
-
-            console.log(
-                "TRACK ENCONTRADA:",
-                index
-            );
-
-
-            activeTrack =
-                index;
-
-
-            if (message) {
-
-                message.classList.add(
-                    "hidden"
-                );
-
-            }
-
-
-            mostrarBotoesTrack(
-                index
-            );
-
-
-            fecharTodosDropdowns();
-
-
-            fecharConteudoEspecie();
-
-
-            registrarTrack(
-                index
-            );
-
+        if (index === 0) {
+            mostrarImagemFolhosas();
         }
-    );
 
+        if (index === 1) {
+            mostrarImagemTemperos();
+        }
 
-    /* =================================================
+        if (index === 5) {
+            mostrarImagemPanc();
+        }
+
+        console.log("TRACK ENCONTRADA:", index);
+
+        activeTrack = index;
+
+        if (message) {
+            message.classList.add("hidden");
+        }
+
+        mostrarBotoesTrack(index);
+        fecharTodosDropdowns();
+
+        /*
+         * Não chamar fecharConteudoEspecie() aqui.
+         * Assim, reconhecer uma track não fecha
+         * um conteúdo que já esteja aberto.
+         */
+
+        registrarTrack(index);
+    });
+
+    /* -----------------------------------------------
        TRACK PERDIDA
-    ================================================== */
+       O conteúdo da espécie permanece aberto.
+    ------------------------------------------------ */
 
-/* =================================================
-   TRACK PERDIDA
-   Mantém o conteúdo aberto na tela
-================================================== */
-
-target.addEventListener(
-    "targetLost",
-    () => {
+    target.addEventListener("targetLost", () => {
 
         if (index === 0) {
             esconderImagemFolhosas();
@@ -1651,483 +697,238 @@ target.addEventListener(
             esconderImagemPanc();
         }
 
-        console.log(
-            "TRACK PERDIDA:",
-            index
-        );
+        console.log("TRACK PERDIDA:", index);
 
         if (activeTrack === index) {
             activeTrack = -1;
         }
 
         /*
-         * A mensagem inicial pode reaparecer,
-         * mas não fecha o conteúdo da espécie.
+         * Só mostra a mensagem inicial se o painel
+         * de uma espécie não estiver aberto.
          */
-        if (message) {
+
+        if (
+            message &&
+            (!speciesContent ||
+                speciesContent.style.display !== "block")
+        ) {
             message.classList.remove("hidden");
         }
 
-        /*
-         * Esconde os botões de interação da track.
-         */
         esconderBotoesInteracao();
-
-        /*
-         * Fecha os dropdowns, mas mantém
-         * o conteúdo da espécie na tela.
-         */
         fecharTodosDropdowns();
-
-        /*
-         * IMPORTANTE:
-         * Não chamar fecharConteudoEspecie().
-         * Não parar os áudios automaticamente.
-         */
 
         menuOpen = false;
 
-        document.body.classList.remove(
-            "menu-open"
-        );
+        document.body.classList.remove("menu-open");
 
         if (menuToggleButton) {
             menuToggleButton.innerHTML = "☰";
-
-            menuToggleButton.style.display =
-                "none";
+            menuToggleButton.style.display = "none";
         }
 
-    }
-);
+        /*
+         * Não fechar o conteúdo da espécie.
+         * Não chamar fecharConteudoEspecie().
+         */
+    });
 
-
-}
-
-
-);
+});
 
 /* =====================================================
-MENU
+   MENU
 ===================================================== */
 
 if (menuToggleButton) {
+    menuToggleButton.addEventListener("click", () => {
 
-
-menuToggleButton.addEventListener(
-    "click",
-    () => {
-
-        menuOpen =
-            !menuOpen;
-
+        menuOpen = !menuOpen;
 
         if (menuOpen) {
-
-            document.body.classList.add(
-                "menu-open"
-            );
-
-
-            menuToggleButton.innerHTML =
-                "✕";
-
-
+            document.body.classList.add("menu-open");
+            menuToggleButton.innerHTML = "✕";
             fecharTodosDropdowns();
-
+        } else {
+            document.body.classList.remove("menu-open");
+            menuToggleButton.innerHTML = "☰";
         }
-
-        else {
-
-            document.body.classList.remove(
-                "menu-open"
-            );
-
-
-            menuToggleButton.innerHTML =
-                "☰";
-
-        }
-
-    }
-);
-
-
+    });
 }
 
 /* =====================================================
-CONTADOR
+   CONTADOR
 ===================================================== */
 
-const progressCount =
-document.getElementById(
-"progressCount"
-);
+const progressCount = document.getElementById("progressCount");
+const finalButtonTop = document.getElementById("finalButtonTop");
 
-const finalButtonTop =
-document.getElementById(
-"finalButtonTop"
-);
-
-const visitedTracks =
-new Set();
-
-const totalTracks =
-6;
+const visitedTracks = new Set();
+const totalTracks = 6;
 
 function registrarTrack(index) {
 
-
-if (
-    visitedTracks.has(index)
-) {
-
-    return;
-
-}
-
-
-visitedTracks.add(
-    index
-);
-
-
-if (progressCount) {
-
-    progressCount.innerText =
-        visitedTracks.size;
-
-}
-
-
-if (
-    visitedTracks.size >=
-    totalTracks
-) {
-
-    if (finalButtonTop) {
-
-        finalButtonTop.style.display =
-            "block";
-
+    if (visitedTracks.has(index)) {
+        return;
     }
 
-}
+    visitedTracks.add(index);
 
+    if (progressCount) {
+        progressCount.innerText = visitedTracks.size;
+    }
 
+    if (visitedTracks.size >= totalTracks) {
+        if (finalButtonTop) {
+            finalButtonTop.style.display = "block";
+        }
+    }
 }
 
 /* =====================================================
-BOTÃO QUIZ
+   BOTÃO QUIZ
 ===================================================== */
 
 if (finalButtonTop) {
-
-
-finalButtonTop.addEventListener(
-    "click",
-    () => {
-
-        window.location.href =
-            "quiz.html";
-
-    }
-);
-
-
+    finalButtonTop.addEventListener("click", () => {
+        window.location.href = "quiz.html";
+    });
 }
 
 /* =====================================================
-CLIQUE DOS BOTÕES
+   CLIQUE DOS BOTÕES
 ===================================================== */
 
-document
-.querySelectorAll("button")
-.forEach(
-button => {
-
-
-        button.addEventListener(
-            "click",
-            tocarClick
-        );
-
-    }
-);
-
+document.querySelectorAll("button").forEach(button => {
+    button.addEventListener("click", tocarClick);
+});
 
 /* =====================================================
-EVENTOS DO MINDAR
+   EVENTOS DO MINDAR
 ===================================================== */
 
 if (scene) {
 
-
-/* -------------------------------------------------
-   MINDAR PRONTO
-------------------------------------------------- */
-
-scene.addEventListener(
-    "arReady",
-    () => {
-
-        console.log(
-            "MindAR iniciado com sucesso."
-        );
-
+    scene.addEventListener("arReady", () => {
+        console.log("MindAR iniciado com sucesso.");
 
         if (loadingMessage) {
-
-            loadingMessage.style.display =
-                "none";
-
+            loadingMessage.style.display = "none";
         }
+    });
 
-    }
-);
-
-
-/* -------------------------------------------------
-   MINDAR ERRO
-------------------------------------------------- */
-
-scene.addEventListener(
-    "arError",
-    event => {
-
-        console.error(
-            "Erro do MindAR:",
-            event
-        );
-
+    scene.addEventListener("arError", event => {
+        console.error("Erro do MindAR:", event);
 
         if (loadingMessage) {
-
-            loadingMessage.style.display =
-                "none";
-
+            loadingMessage.style.display = "none";
         }
-
 
         if (errorMessage) {
-
-            errorMessage.style.display =
-                "flex";
-
+            errorMessage.style.display = "flex";
         }
 
-
         if (errorText) {
-
             errorText.innerText =
                 "Não foi possível iniciar a câmera.\n\n" +
                 "Verifique se o navegador possui permissão para usar a câmera.";
-
         }
+    });
 
-    }
-);
-
-
-/* -------------------------------------------------
-   CÂMERA PRONTA
-------------------------------------------------- */
-
-scene.addEventListener(
-    "camera-init",
-    () => {
-
-        console.log(
-            "Câmera inicializada."
-        );
-
+    scene.addEventListener("camera-init", () => {
+        console.log("Câmera inicializada.");
 
         if (loadingMessage) {
-
-            loadingMessage.style.display =
-                "none";
-
+            loadingMessage.style.display = "none";
         }
+    });
 
-    }
-);
-
-
-/* -------------------------------------------------
-   ERRO DE CÂMERA
-------------------------------------------------- */
-
-scene.addEventListener(
-    "camera-error",
-    event => {
-
-        console.error(
-            "Erro de câmera:",
-            event
-        );
-
+    scene.addEventListener("camera-error", event => {
+        console.error("Erro de câmera:", event);
 
         if (loadingMessage) {
-
-            loadingMessage.style.display =
-                "none";
-
+            loadingMessage.style.display = "none";
         }
-
 
         if (errorMessage) {
-
-            errorMessage.style.display =
-                "flex";
-
+            errorMessage.style.display = "flex";
         }
 
-
         if (errorText) {
-
             errorText.innerText =
                 "O navegador não conseguiu acessar a câmera.\n\n" +
                 "Verifique a permissão da câmera.";
-
         }
-
-    }
-);
-
-
+    });
 }
 
 /* =====================================================
-BOTÃO TENTAR NOVAMENTE
+   BOTÃO TENTAR NOVAMENTE
 ===================================================== */
 
 if (retryButton) {
-
-retryButton.addEventListener(
-    "click",
-    () => {
-
+    retryButton.addEventListener("click", () => {
         window.location.reload();
-
-    }
-);
-
-
+    });
 }
 
 /* =====================================================
-INICIALIZAÇÃO
+   INICIALIZAÇÃO
 ===================================================== */
 
 esconderBotoesInteracao();
 
-console.log(
-"BIOESCOLA 360° carregado."
-);
-
-console.log(
-"Targets encontrados:",
-targets.length
-);
+console.log("BIOESCOLA 360° carregado.");
+console.log("Targets encontrados:", targets.length);
 
 /* =====================================================
-MOSTRAR IMAGEM FOLHOSAS
+   MOSTRAR E ESCONDER IMAGENS DAS CATEGORIAS
 ===================================================== */
 
 function mostrarImagemFolhosas() {
+    if (!folhosasImageContainer) {
+        return;
+    }
 
-
-if (!folhosasImageContainer) {
-    return;
+    folhosasImageContainer.style.display = "block";
 }
-
-folhosasImageContainer.style.display =
-    "block";
-
-
-}
-
-/* =====================================================
-ESCONDER IMAGEM FOLHOSAS
-===================================================== */
 
 function esconderImagemFolhosas() {
+    if (!folhosasImageContainer) {
+        return;
+    }
 
-
-if (!folhosasImageContainer) {
-    return;
+    folhosasImageContainer.style.display = "none";
 }
-
-folhosasImageContainer.style.display =
-    "none";
-
-
-}
-
-/* =====================================================
-MOSTRAR IMAGEM TEMPEROS
-===================================================== */
 
 function mostrarImagemTemperos() {
+    if (!temperosImageContainer) {
+        return;
+    }
 
-
-if (!temperosImageContainer) {
-    return;
+    temperosImageContainer.style.display = "block";
 }
-
-temperosImageContainer.style.display =
-    "block";
-
-
-}
-
-/* =====================================================
-ESCONDER IMAGEM TEMPEROS
-===================================================== */
 
 function esconderImagemTemperos() {
+    if (!temperosImageContainer) {
+        return;
+    }
 
-
-if (!temperosImageContainer) {
-    return;
+    temperosImageContainer.style.display = "none";
 }
-
-temperosImageContainer.style.display =
-    "none";
-
-
-}
-
-/* =====================================================
-MOSTRAR IMAGEM PANC
-===================================================== */
 
 function mostrarImagemPanc() {
+    if (!pancImageContainer) {
+        return;
+    }
 
-
-if (!pancImageContainer) {
-    return;
+    pancImageContainer.style.display = "block";
 }
-
-pancImageContainer.style.display =
-    "block";
-
-
-}
-
-/* =====================================================
-ESCONDER IMAGEM PANC
-===================================================== */
 
 function esconderImagemPanc() {
+    if (!pancImageContainer) {
+        return;
+    }
 
-
-if (!pancImageContainer) {
-    return;
-}
-
-pancImageContainer.style.display =
-    "none";
-
-
+    pancImageContainer.style.display = "none";
 }
