@@ -692,6 +692,12 @@ if (closeSpeciesButton) {
 
 }
 
+// Ligar o botão fixo ✕ FECHAR
+closeTrackContentButton.addEventListener(
+    "click",
+    fecharConteudoEspecie
+);
+
 
 
 /* =====================================================
