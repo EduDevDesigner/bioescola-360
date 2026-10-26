@@ -32,7 +32,7 @@ const closeTrackContentButton = document.createElement("button");
 
 closeTrackContentButton.id = "closeTrackContentButton";
 closeTrackContentButton.type = "button";
-closeTrackContentButton.textContent = "✕ FECHAR";
+closeTrackContentButton.textContent = "✕";
 
 closeTrackContentButton.setAttribute(
     "aria-label",
@@ -48,7 +48,7 @@ closeTrackContentButton.style.cssText = `
     padding: 12px 16px;
     border: 0;
     border-radius: 10px;
-    background: #b42318;
+    background: #000000;
     color: #ffffff;
     font-size: 16px;
     font-weight: 700;
