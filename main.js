@@ -718,7 +718,7 @@ if (closeSpeciesButton) {
 
 
 /* =====================================================
-   BOTÃO FECHAR ESPÉCIE
+   BOTÃO FECHAR GERAL
 ===================================================== */
 
 if (closeTrackContentButton) {
@@ -728,8 +728,47 @@ if (closeTrackContentButton) {
         event.preventDefault();
         event.stopPropagation();
 
-        // Fecha somente o conteúdo da espécie.
+        // 1. Fecha o painel da espécie e interrompe o vídeo.
         fecharConteudoEspecie();
+
+        // 2. Interrompe todos os áudios.
+        pararTodosAudios();
+
+        // 3. Esconde as imagens das categorias.
+        esconderImagemFolhosas();
+        esconderImagemTemperos();
+        esconderImagemPanc();
+
+        // 4. Esconde os botões de interação.
+        esconderBotoesInteracao();
+
+        // 5. Fecha todos os menus suspensos.
+        fecharTodosDropdowns();
+
+        // 6. Fecha o menu lateral, se estiver aberto.
+        menuOpen = false;
+        document.body.classList.remove("menu-open");
+
+        if (menuToggleButton) {
+            menuToggleButton.innerHTML = "☰";
+        }
+
+        // 7. Limpa a track ativa.
+        activeTrack = -1;
+        especieAtual = null;
+
+        // 8. Libera o reconhecimento de novas tracks.
+        trackConteudoBloqueado = false;
+
+        // 9. Esconde o botão fixo de fechar.
+        closeTrackContentButton.style.display = "none";
+
+        // 10. Mostra novamente a mensagem inicial.
+        if (message) {
+            message.classList.remove("hidden");
+        }
+
+        console.log("Conteúdo fechado. Leitura de novas tracks liberada.");
     });
 }
 
