@@ -701,10 +701,15 @@ closeTrackContentButton.addEventListener(
 ===================================================== */
 
 if (closeSpeciesButton) {
-    closeSpeciesButton.addEventListener(
-        "click",
-        fecharConteudoEspecie
-    );
+    closeSpeciesButton.setAttribute("type", "button");
+
+    closeSpeciesButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        // Fecha somente o conteúdo da espécie.
+        fecharConteudoEspecie();
+    });
 }
 
 /* =====================================================
