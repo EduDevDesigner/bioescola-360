@@ -683,12 +683,20 @@ function fecharConteudoEspecie() {
     );
 }
 
+if (closeSpeciesButton) {
+
+    closeSpeciesButton.addEventListener(
+        "click",
+        fecharConteudoEspecie
+    );
+
+}
 
 
 
 /* =====================================================
    BOTÃO FECHAR ESPÉCIE
-===================================================== */
+=====================================================
 
 if (closeSpeciesButton) {
     closeSpeciesButton.setAttribute("type", "button");
@@ -700,7 +708,7 @@ if (closeSpeciesButton) {
         // Fecha somente o conteúdo da espécie.
         fecharConteudoEspecie();
     });
-}
+} */
 
 /* =====================================================
    ERRO DE VÍDEO
