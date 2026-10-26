@@ -1630,83 +1630,77 @@ targets.forEach(
        TRACK PERDIDA
     ================================================== */
 
-    target.addEventListener(
-        "targetLost",
-        () => {
+/* =================================================
+   TRACK PERDIDA
+   Mantém o conteúdo aberto na tela
+================================================== */
 
-            if (index === 0) {
-                esconderImagemFolhosas();
-            }
+target.addEventListener(
+    "targetLost",
+    () => {
 
-
-            if (index === 1) {
-                esconderImagemTemperos();
-            }
-            
-            if (index === 5) {
-                esconderImagemPanc();
-            }
-
-
-            console.log(
-                "TRACK PERDIDA:",
-                index
-            );
-
-
-            if (
-                activeTrack ===
-                index
-            ) {
-
-                activeTrack =
-                    -1;
-
-            }
-
-
-            if (message) {
-
-                message.classList.remove(
-                    "hidden"
-                );
-
-            }
-
-
-            esconderBotoesInteracao();
-
-
-            fecharTodosDropdowns();
-
-
-            fecharConteudoEspecie();
-
-
-            pararTodosAudios();
-
-
-            menuOpen =
-                false;
-
-
-            document.body.classList.remove(
-                "menu-open"
-            );
-
-
-            if (menuToggleButton) {
-
-                menuToggleButton.innerHTML =
-                    "☰";
-
-                menuToggleButton.style.display =
-                    "none";
-
-            }
-
+        if (index === 0) {
+            esconderImagemFolhosas();
         }
-    );
+
+        if (index === 1) {
+            esconderImagemTemperos();
+        }
+
+        if (index === 5) {
+            esconderImagemPanc();
+        }
+
+        console.log(
+            "TRACK PERDIDA:",
+            index
+        );
+
+        if (activeTrack === index) {
+            activeTrack = -1;
+        }
+
+        /*
+         * A mensagem inicial pode reaparecer,
+         * mas não fecha o conteúdo da espécie.
+         */
+        if (message) {
+            message.classList.remove("hidden");
+        }
+
+        /*
+         * Esconde os botões de interação da track.
+         */
+        esconderBotoesInteracao();
+
+        /*
+         * Fecha os dropdowns, mas mantém
+         * o conteúdo da espécie na tela.
+         */
+        fecharTodosDropdowns();
+
+        /*
+         * IMPORTANTE:
+         * Não chamar fecharConteudoEspecie().
+         * Não parar os áudios automaticamente.
+         */
+
+        menuOpen = false;
+
+        document.body.classList.remove(
+            "menu-open"
+        );
+
+        if (menuToggleButton) {
+            menuToggleButton.innerHTML = "☰";
+
+            menuToggleButton.style.display =
+                "none";
+        }
+
+    }
+);
+
 
 }
 
