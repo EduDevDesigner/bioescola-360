@@ -656,47 +656,54 @@ if (closeSpeciesButton) {
 
 function fecharConteudoEspecie() {
 
-    // 1. Fechar o painel e parar o vídeo.
-    fecharVideoEspecie();
-
-    // 2. Parar todos os áudios.
-    pararTodosAudios();
-
-    // 3. Esconder as imagens das categorias.
-    esconderImagemFolhosas();
-    esconderImagemTemperos();
-    esconderImagemPanc();
-
-    // 4. Esconder os botões e fechar os menus.
-    esconderBotoesInteracao();
-    fecharTodosDropdowns();
-
-    // 5. Fechar o menu lateral, se estiver aberto.
-    menuOpen = false;
-    document.body.classList.remove("menu-open");
-
-    if (menuToggleButton) {
-        menuToggleButton.innerHTML = "☰";
+    if (!speciesContent) {
+        return;
     }
 
-    // 6. Limpar a track ativa.
-    activeTrack = -1;
 
-    // 7. LIBERAR O RECONHECIMENTO DE OUTRAS TRACKS.
-    trackConteudoBloqueado = false;
+    speciesContent.style.display =
+        "none";
 
-    // 8. Esconder o botão de fechar.
-    closeTrackContentButton.style.display = "none";
 
-    // 9. Mostrar novamente a mensagem inicial.
-    if (message) {
-        message.classList.remove("hidden");
-    }
-
-    console.log(
-        "Conteúdo fechado. Reconhecimento de tracks liberado."
+    speciesContent.setAttribute(
+        "aria-hidden",
+        "true"
     );
+
+
+    if (speciesVideo) {
+
+        speciesVideo.pause();
+
+        speciesVideo.removeAttribute(
+            "src"
+        );
+
+        speciesVideo.load();
+
+    }
+
+
+    especieAtual =
+        null;
+
+
+    document
+        .querySelectorAll(
+            ".species-video-buttons button"
+        )
+        .forEach(
+            button => {
+
+                button.classList.remove(
+                    "btn-ativo"
+                );
+
+            }
+        );
+
 }
+
 
 
 if (closeSpeciesButton) {
