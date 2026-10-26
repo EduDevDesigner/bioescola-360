@@ -615,73 +615,59 @@ function obterEspecieAtual() {
 }
 
 /* =====================================================
-FECHAR CONTEÚDO DA ESPÉCIE
+   FECHAR ESPÉCIE
 ===================================================== */
 
 function fecharConteudoEspecie() {
 
-    // Fechar o painel de conteúdo
-    if (speciesContent) {
-        speciesContent.style.display = "none";
-        speciesContent.setAttribute("aria-hidden", "true");
+    if (!speciesContent) {
+        return;
     }
 
-    // Parar e limpar o vídeo
-    if (speciesVideo) {
-        speciesVideo.pause();
-        speciesVideo.removeAttribute("src");
-        speciesVideo.load();
-    }
 
-    // Limpar a espécie selecionada
-    especieAtual = null;
+    speciesContent.style.display =
+        "none";
 
-    // Remover estado ativo dos botões de vídeo
-    document
-        .querySelectorAll(".species-video-buttons button")
-        .forEach(button => {
-            button.classList.remove("btn-ativo");
-        });
 
-    // Ocultar imagens associadas às tracks
-    esconderImagemFolhosas();
-    esconderImagemTemperos();
-    esconderImagemPanc();
-
-    // Ocultar os botões e fechar os menus
-    esconderBotoesInteracao();
-    fecharTodosDropdowns();
-
-    // Parar áudios
-    pararTodosAudios();
-
-    // Liberar uma nova track
-    activeTrack = -1;
-    trackConteudoBloqueado = false;
-
-    // Fechar o menu lateral
-    menuOpen = false;
-    document.body.classList.remove("menu-open");
-
-    if (menuToggleButton) {
-        menuToggleButton.innerHTML = "☰";
-        menuToggleButton.style.display = "";
-    }
-
-    // Voltar a mostrar a mensagem de orientação
-    if (message) {
-        message.classList.remove("hidden");
-    }
-
-    // Ocultar o botão fixo de fechar
-    if (closeTrackContentButton) {
-        closeTrackContentButton.style.display = "none";
-    }
-
-    console.log(
-        "Conteúdo fechado. Reconhecimento liberado."
+    speciesContent.setAttribute(
+        "aria-hidden",
+        "true"
     );
+
+
+    if (speciesVideo) {
+
+        speciesVideo.pause();
+
+        speciesVideo.removeAttribute(
+            "src"
+        );
+
+        speciesVideo.load();
+
+    }
+
+
+    especieAtual =
+        null;
+
+
+    document
+        .querySelectorAll(
+            ".species-video-buttons button"
+        )
+        .forEach(
+            button => {
+
+                button.classList.remove(
+                    "btn-ativo"
+                );
+
+            }
+        );
+
 }
+
 
 if (closeSpeciesButton) {
 
@@ -691,6 +677,7 @@ if (closeSpeciesButton) {
     );
 
 }
+
 
 // Ligar o botão fixo ✕ FECHAR
 closeTrackContentButton.addEventListener(
