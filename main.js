@@ -689,19 +689,19 @@ closeTrackContentButton.addEventListener(
 
 /* =====================================================
    BOTÃO FECHAR ESPÉCIE
-=====================================================
+===================================================== */
 
-if (closeSpeciesButton) {
-    closeSpeciesButton.setAttribute("type", "button");
+if (closeTrackContentButton) {
+    closeTrackContentButton.setAttribute("type", "button");
 
-    closeSpeciesButton.addEventListener("click", (event) => {
+    closeTrackContentButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
 
         // Fecha somente o conteúdo da espécie.
         fecharConteudoEspecie();
     });
-} */
+}
 
 /* =====================================================
    ERRO DE VÍDEO
